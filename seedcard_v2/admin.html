@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SEED CARD 管理パネル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f2f2f7;--white:#fff;--text:#1d1d1f;--text2:#3a3a3c;--text3:#86868b;
+  --border:rgba(60,60,67,.12);--accent:#9b87d6;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-bd:#bbf7d0;
+  --red:#e11d48;--red-bg:#fff1f2;--red-bd:#fecdd3;
+  --orange:#ea580c;--orange-bg:#fff7ed;--orange-bd:#fed7aa;
+  --jp:'Noto Sans JP',sans-serif;--en:'Inter',sans-serif;
+}
+body{font-family:var(--jp);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── ログイン ── */
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-wrap{width:100%;max-width:340px;text-align:center}
+.login-logo{font-family:var(--en);font-size:28px;font-weight:700;letter-spacing:.1em;background:linear-gradient(135deg,#e0c3fc,#8ec5fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2px}
+.login-sub{font-size:12px;color:var(--text3);letter-spacing:.1em;margin-bottom:36px;text-transform:uppercase;font-family:var(--en)}
+.login-card{background:var(--white);border-radius:20px;padding:28px 24px;box-shadow:0 2px 20px rgba(0,0,0,.07)}
+.login-label{font-size:12px;color:var(--text3);font-weight:600;letter-spacing:.06em;text-align:left;margin-bottom:7px}
+.login-input{display:block;width:100%;padding:14px 16px;border:1.5px solid #e5e5ea;border-radius:12px;font-size:15px;font-family:var(--jp);color:var(--text);background:#fff;outline:none;transition:border-color .18s;-webkit-appearance:none;margin-bottom:14px}
+.login-input:focus{border-color:var(--accent)}
+.login-btn{display:block;width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;font-family:var(--jp);cursor:pointer;transition:opacity .15s}
+.login-btn:active{opacity:.8}
+#loginMsg{margin-top:14px;font-size:13px;color:var(--red);min-height:18px}
+
+/* ── ヘッダー ── */
+.header{background:var(--white);border-bottom:.5px solid var(--border);padding:0 16px;display:flex;align-items:center;gap:10px;height:52px;position:sticky;top:0;z-index:200}
+.header-logo{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.1em;background:linear-gradient(135deg,#c8a8f0,#7ec8f8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-title{font-size:13px;font-weight:600;color:var(--text2);flex:1}
+.header-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;font-family:var(--jp);cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--text2);transition:opacity .15s}
+.header-btn:active{opacity:.7}
+.header-updated{font-size:10px;color:var(--text3);font-family:var(--en)}
+
+/* ── タブバー ── */
+.tab-bar{background:var(--white);border-bottom:.5px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:12px 14px;font-size:13px;font-weight:500;color:var(--text3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:var(--jp);display:flex;align-items:center;gap:5px}
+.tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;background:var(--accent);color:#fff;border-radius:99px;font-size:10px;font-weight:700;font-family:var(--en)}
+.badge:empty{display:none}
+
+/* ── タブコンテンツ ── */
+.tab-pane{display:none;padding:16px 16px 80px}
+.tab-pane.on{display:block}
+
+/* ── 申請カード（審査・発送タブ） ── */
+.card{background:var(--white);border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.card-head{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--border)}
+.card-head-left{display:flex;flex-direction:column;gap:2px}
+.card-person{font-size:15px;font-weight:600}
+.card-ts{font-size:11px;color:var(--text3)}
+.card-body{padding:0 16px}
+.info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:.5px solid var(--border);font-size:13px;gap:8px}
+.info-row:last-child{border-bottom:none}
+.info-lbl{color:var(--text3);flex-shrink:0;min-width:64px}
+.info-val{color:var(--text);text-align:right;flex:1;word-break:break-all}
+
+/* ── 精子データグリッド ── */
+.sperm-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:12px 0}
+.sperm-item{background:#f9f8ff;border-radius:10px;padding:9px 11px}
+.sperm-lbl{font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--text3);text-transform:uppercase;margin-bottom:3px}
+.sperm-val{font-size:18px;font-weight:700;font-family:var(--en);line-height:1.1}
+.sperm-val .unit{font-size:10px;font-weight:400;color:var(--text3);margin-left:2px}
+.pass-val{color:#16a34a}.fail-val{color:#e11d48}.ok-val{color:var(--accent)}
+.who-note{font-size:9px;color:var(--text3);margin-top:2px}
+
+/* ── アクションボタン ── */
+.card-actions{padding:12px 16px;display:flex;gap:8px;border-top:.5px solid var(--border)}
+.btn-ng{flex:1;padding:12px 8px;background:var(--red-bg);color:var(--red);border:1.5px solid var(--red-bd);border-radius:10px;font-size:13px;font-weight:600;font-family:var(--jp);cursor:pointer}
+.btn-ok{flex:1;padding:12px 8px;background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-bd);border-radius:10px;font-size:13px;font-weight:600;font-family:var(--jp);cursor:pointer}
+.btn-ship{flex:1;padding:13px 8px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;font-family:var(--jp);cursor:pointer}
+button:disabled{opacity:.4;cursor:default!important}
+
+/* ── ステータスバッジ ── */
+.st{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap}
+.st-pending{background:var(--orange-bg);color:var(--orange)}
+.st-ok{background:var(--green-bg);color:var(--green)}
+.st-ng{background:var(--red-bg);color:var(--red)}
+.st-wait{background:#f5f5f7;color:var(--text3);border:1px solid var(--border)}
+
+/* ── 会員一覧（アコーディオン） ── */
+.member-card{background:var(--white);border-radius:16px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.mr-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none;-webkit-user-select:none}
+.mr-header:active{background:#fafafa}
+.m-no{font-family:var(--en);font-size:10px;font-weight:700;color:var(--text3);margin-bottom:1px;letter-spacing:.03em}
+.m-info{flex:1;min-width:0}
+.m-name{font-size:14px;font-weight:500}
+.m-expiry{font-size:11px;color:var(--text3);margin-top:2px}
+.m-expiry.warn{color:var(--orange)}.m-expiry.over{color:var(--red);font-weight:600}
+.m-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;max-width:100px}
+.mr-chevron{font-size:20px;color:var(--text3);flex-shrink:0;transition:transform .22s;line-height:1;margin-left:4px}
+.mr-chevron.open{transform:rotate(90deg)}
+
+/* ── 会員詳細パネル ── */
+.mr-detail{display:none;border-top:.5px solid var(--border)}
+.mr-detail.open{display:block}
+.det-body{padding:16px}
+.det-sec{margin-bottom:18px}
+.det-sec:last-of-type{margin-bottom:0}
+.det-sec-title{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:.5px solid var(--border)}
+.det-row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.det-field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.det-field:last-child{margin-bottom:0}
+.det-lbl{font-size:11px;font-weight:600;color:var(--text3)}
+.det-input{padding:10px 12px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:var(--jp);color:var(--text);background:#fff;outline:none;transition:border-color .18s;width:100%;-webkit-appearance:none}
+.det-input:focus{border-color:var(--accent)}
+.det-ro{background:#f9f9fb;padding:10px 12px;border-radius:10px;font-size:13px;color:var(--text2);min-height:38px;display:flex;align-items:center}
+.det-ro a{color:var(--accent);text-decoration:none;word-break:break-all;font-size:11px}
+.btn-save{display:block;width:100%;margin-top:18px;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;font-family:var(--jp);cursor:pointer;transition:opacity .15s}
+.btn-save:active{opacity:.8}
+.btn-save:disabled{opacity:.4;cursor:default}
+.btn-del{display:block;width:100%;margin-top:10px;padding:12px;background:transparent;color:var(--red);border:1.5px solid var(--red-bd);border-radius:12px;font-size:13px;font-weight:600;font-family:var(--jp);cursor:pointer;transition:opacity .15s}
+.btn-del:active{opacity:.7}
+.btn-del:disabled{opacity:.4;cursor:default}
+
+/* ── セクション見出し ── */
+.sec-title{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;padding:18px 0 8px;display:flex;align-items:center;gap:8px}
+.sec-count{font-size:10px;background:#f0ebff;color:var(--accent);padding:2px 8px;border-radius:99px;font-family:var(--en);font-weight:700}
+.st-pay{background:#eff6ff;color:#2563eb;}
+
+/* ── エンプティ ── */
+.empty{padding:60px 20px;text-align:center;color:var(--text3)}
+.empty-icon{font-size:36px;margin-bottom:12px}
+
+/* ── トースト ── */
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(80px);padding:11px 22px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;z-index:500;pointer-events:none;white-space:nowrap;background:rgba(22,22,24,.95);color:#fff}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.ok{background:rgba(22,163,74,.95)}
+.toast.err{background:rgba(225,29,72,.95)}
+
+/* ── ローディング ── */
+.loading{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:400}
+.spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .65s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── 確認モーダル ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.on{display:flex}
+.modal{background:var(--white);border-radius:22px 22px 0 0;padding:28px 24px 36px;width:100%;max-width:480px}
+.modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:8px}
+.modal-body{font-size:14px;color:var(--text2);text-align:center;line-height:1.6;margin-bottom:24px}
+.modal-name{font-weight:700;color:var(--text)}
+.modal-btns{display:flex;gap:10px}
+.modal-cancel{flex:1;padding:14px;background:#f5f5f7;color:var(--text2);border:none;border-radius:12px;font-size:15px;font-weight:600;font-family:var(--jp);cursor:pointer}
+.modal-confirm{flex:2;padding:14px;border:none;border-radius:12px;font-size:15px;font-weight:600;font-family:var(--jp);cursor:pointer;color:#fff}
+.modal-confirm.danger{background:var(--red)}
+.modal-confirm.success{background:var(--green)}
+.modal-confirm.primary{background:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- ログイン画面 -->
+<div id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-logo">SEED CARD</div>
+    <div class="login-sub">Admin Panel</div>
+    <div class="login-card">
+      <div class="login-label">管理者パスワード</div>
+      <input type="password" id="adminKey" class="login-input" placeholder="パスワードを入力" autocomplete="current-password">
+      <button class="login-btn" id="loginBtn" onclick="login()">ログイン</button>
+      <div id="loginMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- メイン画面 -->
+<div id="mainScreen" style="display:none">
+
+  <div class="header">
+    <span class="header-logo">SEED CARD</span>
+    <span class="header-title">管理パネル</span>
+    <span class="header-updated" id="updatedAt"></span>
+    <button class="header-btn" onclick="loadData()">↺ 更新</button>
+    <button class="header-btn" onclick="downloadCSV()" style="color:var(--green);border-color:var(--green-bd)">⬇ CSV</button>
+    <button class="header-btn" onclick="logout()">ログアウト</button>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab on" data-tab="progress" onclick="switchTab(this)">進行中<span class="badge" id="b-progress"></span></button>
+    <button class="tab"    data-tab="renewal"  onclick="switchTab(this)">更新対応中<span class="badge" id="b-renewal"></span></button>
+    <button class="tab"    data-tab="members"  onclick="switchTab(this)">会員一覧</button>
+  </div>
+
+  <div class="tab-pane on" id="pane-progress"></div>
+  <div class="tab-pane"    id="pane-renewal"></div>
+  <div class="tab-pane"    id="pane-members"></div>
+
+</div>
+
+<div class="loading" id="loading"><div class="spinner"></div></div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-body"  id="modalBody"></div>
+    <div class="modal-btns">
+      <button class="modal-cancel"  onclick="closeModal()">キャンセル</button>
+      <button class="modal-confirm" id="modalConfirm">実行する</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var API = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
+var WHO = {volume:1.4, concentration:16, total:39, morphology:4};
+var _key = '';
+var _data = null;
+var _memberMap = {};
+
+(function(){
+  var s = sessionStorage.getItem('sc_admin_key');
+  if(s){ _key=s; showMain(); loadData(); }
+})();
+
+document.getElementById('adminKey').addEventListener('keydown', function(e){ if(e.key==='Enter') login(); });
+
+// ─── 認証 ───
+function login(){
+  var k = document.getElementById('adminKey').value.trim();
+  if(!k){ setLoginMsg('パスワードを入力してください。'); return; }
+  var btn=document.getElementById('loginBtn');
+  btn.disabled=true; btn.textContent='確認中…';
+  showLoading();
+  apiCall('admin_get',{key:k}).then(function(d){
+    hideLoading(); btn.disabled=false; btn.textContent='ログイン';
+    if(d.error==='unauthorized'){ setLoginMsg('パスワードが違います。'); return; }
+    if(d.error){ setLoginMsg('エラーが発生しました。'); return; }
+    _key=k; sessionStorage.setItem('sc_admin_key',k);
+    showMain(); _data=d; renderAll(d);
+  }).catch(function(){ hideLoading(); btn.disabled=false; btn.textContent='ログイン'; setLoginMsg('通信エラーが発生しました。'); });
+}
+function logout(){
+  sessionStorage.removeItem('sc_admin_key'); _key='';
+  document.getElementById('mainScreen').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('adminKey').value=''; setLoginMsg('');
+}
+function showMain(){ document.getElementById('loginScreen').style.display='none'; document.getElementById('mainScreen').style.display='block'; }
+function setLoginMsg(m){ document.getElementById('loginMsg').textContent=m; }
+
+// ─── データ ───
+function loadData(){
+  showLoading();
+  apiCall('admin_get',{key:_key}).then(function(d){
+    hideLoading();
+    if(d.error){ showToast('データ取得エラー','err'); return; }
+    _data=d; renderAll(d);
+    document.getElementById('updatedAt').textContent=now();
+    showToast('データを更新しました','ok');
+  }).catch(function(){ hideLoading(); showToast('通信エラー','err'); });
+}
+
+// ─── タブ ───
+function switchTab(btn){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('on');});
+  btn.classList.add('on');
+  document.getElementById('pane-'+btn.dataset.tab).classList.add('on');
+}
+
+// ─── 全タブ描画 ───
+function renderAll(d){
+  var reviewing   = d.initial.filter(function(r){return r.result==='審査中';});
+  var waitPayment = d.initial.filter(function(r){return r.result==='合格'&&r.payment==='支払い待ち';});
+  var waitShip    = d.initial.filter(function(r){return r.shipping==='発送待ち';});
+  var rnReview    = d.renewal.filter(function(r){return !r.result||r.result==='審査中';});
+  var rnWaitPay   = d.renewal.filter(function(r){return r.result==='合格';});
+  var members     = d.initial.filter(function(r){return r.memberNo;})
+                              .sort(function(a,b){return parseInt(a.memberNo)-parseInt(b.memberNo);});
+  document.getElementById('b-progress').textContent = (reviewing.length+waitShip.length)||'';
+  document.getElementById('b-renewal').textContent  = rnReview.length||'';
+  renderProgress(reviewing, waitPayment, waitShip);
+  renderRenewal(rnReview, rnWaitPay);
+  renderMembers(members, d.renewal);
+}
+
+// ─── 進行中（審査中・支払い待ち・発送待ち） ───
+function renderProgress(reviewing, waitPayment, waitShip){
+  var el=document.getElementById('pane-progress');
+  var html='';
+  if(reviewing.length){
+    html+='<div class="sec-title">審査中 <span class="sec-count">'+reviewing.length+'件</span></div>';
+    html+=reviewing.map(function(r){
+      return '<div class="card" id="ic-'+r.row+'">'
+        +'<div class="card-head"><div class="card-head-left"><div class="card-person">'+esc(r.name)+'</div><div class="card-ts">申請 '+esc(r.ts)+'</div></div><span class="st st-pending">審査中</span></div>'
+        +'<div class="card-body">'
+          +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
+          +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">〒'+esc(r.postal)+'<br>'+esc(r.address)+'</span></div>'
+          +spermGrid(r)
+          +photoBlock(r.photo)
+        +'</div>'
+        +'<div class="card-actions">'
+          +'<button class="btn-ng" onclick="confirmResult('+r.row+',\'不合格\',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">不合格</button>'
+          +'<button class="btn-ok" onclick="confirmResult('+r.row+',\'合格\',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">合格にする</button>'
+        +'</div>'
+        +'<div style="padding:0 16px 12px;border-top:.5px solid var(--border)">'
+          +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">申請を削除する</button>'
+        +'</div>'
+      +'</div>';
+    }).join('');
+  }
+  if(waitPayment.length){
+    html+='<div class="sec-title">💳 支払い待ち <span class="sec-count">'+waitPayment.length+'件</span></div>';
+    html+=waitPayment.map(function(r){
+      return '<div class="card" id="pc-'+r.row+'">'
+        +'<div class="card-head"><div class="card-head-left"><div class="card-person">'+esc(r.name)+'</div><div class="card-ts">合格通知済み</div></div><span class="st st-pay">支払い待ち</span></div>'
+        +'<div class="card-body">'
+          +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
+          +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">〒'+esc(r.postal)+'<br>'+esc(r.address)+'</span></div>'
+        +'</div>'
+        +'<div style="padding:8px 16px 12px">'
+          +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'pc-'+r.row+'\')">申請を削除する</button>'
+        +'</div>'
+      +'</div>';
+    }).join('');
+  }
+  if(waitShip.length){
+    html+='<div class="sec-title">📦 発送待ち <span class="sec-count">'+waitShip.length+'件</span></div>';
+    html+=waitShip.map(function(r){
+      return '<div class="card" id="sc-'+r.row+'">'
+        +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div></div><span class="st st-pending">発送待ち</span></div>'
+        +'<div class="card-body">'
+          +'<div class="info-row"><span class="info-lbl">郵便番号</span><span class="info-val">〒'+esc(r.postal)+'</span></div>'
+          +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">'+esc(r.address)+'</span></div>'
+          +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
+        +'</div>'
+        +'<div class="card-actions">'
+          +'<button class="btn-ship" onclick="confirmShipping('+r.row+',\''+esc2(r.name)+'\',\'sc-'+r.row+'\')">📦&nbsp;発送済みにする</button>'
+        +'</div>'
+        +'<div style="padding:0 16px 12px;border-top:.5px solid var(--border)">'
+          +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'sc-'+r.row+'\')">申請を削除する</button>'
+        +'</div>'
+      +'</div>';
+    }).join('');
+  }
+  if(!html) html=empty('✓','進行中の案件はありません');
+  el.innerHTML=html;
+}
+
+// ─── 更新対応中（審査中・合格支払い待ち） ───
+function renderRenewal(reviewing, waitPayment){
+  var el=document.getElementById('pane-renewal');
+  var html='';
+  if(reviewing.length){
+    html+='<div class="sec-title">審査中 <span class="sec-count">'+reviewing.length+'件</span></div>';
+    html+=reviewing.map(function(r){
+      return '<div class="card" id="rc-'+r.row+'">'
+        +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div><div class="card-ts">更新申請 '+esc(r.ts)+'</div></div><span class="st st-pending">更新審査中</span></div>'
+        +'<div class="card-body">'+spermGrid(r)+photoBlock(r.photo)+'</div>'
+        +'<div class="card-actions">'
+          +'<button class="btn-ng" onclick="confirmRenewal('+r.row+',\'不合格\',\''+esc2(r.name)+'\',\'rc-'+r.row+'\')">不合格</button>'
+          +'<button class="btn-ok" onclick="confirmRenewal('+r.row+',\'合格\',\''+esc2(r.name)+'\',\'rc-'+r.row+'\')">合格にする</button>'
+        +'</div>'
+      +'</div>';
+    }).join('');
+  }
+  if(waitPayment.length){
+    html+='<div class="sec-title">💳 支払い待ち <span class="sec-count">'+waitPayment.length+'件</span></div>';
+    html+=waitPayment.map(function(r){
+      return '<div class="card">'
+        +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div><div class="card-ts">更新合格通知済み</div></div><span class="st st-pay">支払い待ち</span></div>'
+      +'</div>';
+    }).join('');
+  }
+  if(!html) html=empty('↺','更新対応中の案件はありません');
+  el.innerHTML=html;
+}
+
+// ─── 会員一覧（アコーディオン） ───
+function renderMembers(list, renewals){
+  _memberMap={};
+  var el=document.getElementById('pane-members');
+  if(!list.length){el.innerHTML=empty('👥','会員データがありません');return;}
+
+  var rmap={};
+  renewals.forEach(function(r){if(r.memberNo)rmap[r.memberNo]=(r.result||'審査中');});
+
+  el.innerHTML=list.map(function(r){
+    _memberMap[r.row]=r;
+    var days=expiryDays(r.expiryDate);
+    var exCls=days===null?'':days<0?'over':days<=90?'warn':'';
+    var exLabel=r.expiryDate
+      ?'認定期限 '+esc(r.expiryDate)+(days!==null&&days<0?' ⚠️':days!==null&&days<=90?' (残'+days+'日)':'')
+      :'認定期限 ─';
+
+    var shipBadge=r.shipping==='発送済み'?'<span class="st st-ok">発送済み</span>'
+                 :r.shipping==='発送待ち'?'<span class="st st-pending">発送待ち</span>':'';
+    var renBadge=rmap[r.memberNo]
+      ?'<span class="st '+(rmap[r.memberNo]==='合格'?'st-ok':'st-pending')+'">更新'+rmap[r.memberNo]+'</span>':'';
+
+    return '<div class="member-card" id="mr-'+r.row+'">'
+      // ヘッダー（常時表示）
+      +'<div class="mr-header" onclick="toggleMember('+r.row+')">'
+        +'<div class="m-info">'
+          +'<div class="m-no">No.'+pad(r.memberNo)+'</div>'
+          +'<div class="m-name">'+esc(r.name)+'</div>'
+          +'<div class="m-expiry '+exCls+'">'+exLabel+'</div>'
+        +'</div>'
+        +'<div class="m-badges">'+shipBadge+renBadge+'</div>'
+        +'<span class="mr-chevron" id="chv-'+r.row+'">›</span>'
+      +'</div>'
+      // 詳細パネル（アコーディオン）
+      +'<div class="mr-detail" id="mrd-'+r.row+'">'
+        +'<div class="det-body">'
+
+          // ─ 認定情報 ─
+          +'<div class="det-sec">'
+            +'<div class="det-sec-title">認定情報</div>'
+            +'<div class="det-row2">'
+              +'<div class="det-field"><div class="det-lbl">会員番号</div><div class="det-ro">No.'+pad(r.memberNo)+'</div></div>'
+              +'<div class="det-field"><div class="det-lbl">認定日</div><div class="det-ro">'+(esc(r.certDate)||'─')+'</div></div>'
+            +'</div>'
+            +'<div class="det-field"><div class="det-lbl">認定期限</div><input class="det-input" id="f-expiry-'+r.row+'" type="text" value="'+esc(r.expiryDate)+'" placeholder="例: 2026年12月31日"></div>'
+          +'</div>'
+
+          // ─ 連絡先 ─
+          +'<div class="det-sec">'
+            +'<div class="det-sec-title">連絡先・個人情報</div>'
+            +'<div class="det-row2">'
+              +'<div class="det-field"><div class="det-lbl">氏名</div><input class="det-input" id="f-name-'+r.row+'" type="text" value="'+esc(r.name)+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">ローマ字</div><input class="det-input" id="f-romaji-'+r.row+'" type="text" value="'+esc(r.nameRomaji)+'"></div>'
+            +'</div>'
+            +'<div class="det-field"><div class="det-lbl">メールアドレス</div><input class="det-input" id="f-email-'+r.row+'" type="email" value="'+esc(r.email)+'"></div>'
+            +'<div class="det-row2">'
+              +'<div class="det-field"><div class="det-lbl">郵便番号</div><input class="det-input" id="f-postal-'+r.row+'" type="text" value="'+esc(r.postal)+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">住所</div><input class="det-input" id="f-address-'+r.row+'" type="text" value="'+esc(r.address)+'"></div>'
+            +'</div>'
+          +'</div>'
+
+          // ─ 検査データ ─
+          +'<div class="det-sec">'
+            +'<div class="det-sec-title">検査データ</div>'
+            +'<div class="det-row2">'
+              +'<div class="det-field"><div class="det-lbl">精液量 <span style="color:var(--text3);font-weight:400">（基準 1.4mL以上）</span></div><input class="det-input" id="f-vol-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.volume||'')+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">精子濃度 <span style="color:var(--text3);font-weight:400">（基準 16M/mL以上）</span></div><input class="det-input" id="f-conc-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.concentration||'')+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">総精子数 <span style="color:var(--text3);font-weight:400">（基準 39M以上）</span></div><input class="det-input" id="f-total-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.total||'')+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">正常形態率 <span style="color:var(--text3);font-weight:400">（基準 4%以上）</span></div><input class="det-input" id="f-morph-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.morphology||'')+'"></div>'
+            +'</div>'
+          +'</div>'
+
+          // ─ 発送・カード ─
+          +'<div class="det-sec">'
+            +'<div class="det-sec-title">発送・カード情報</div>'
+            +'<div class="det-row2">'
+              +'<div class="det-field"><div class="det-lbl">発送状況</div><div class="det-ro">'+(r.shipping||'─')+'</div></div>'
+              +'<div class="det-field"><div class="det-lbl">支払い状況</div><div class="det-ro">'+(r.payment||'─')+'</div></div>'
+            +'</div>'
+            +(r.cardUrl?'<div class="det-field"><div class="det-lbl">カードURL</div><div class="det-ro"><a href="'+esc(r.cardUrl)+'" target="_blank">'+esc(r.cardUrl)+'</a></div></div>':'')
+            +'<div class="det-field"><div class="det-lbl">申請日時</div><div class="det-ro">'+esc(r.ts)+'</div></div>'
+          +'</div>'
+
+          // ─ 保存・削除ボタン ─
+          +'<button class="btn-save" id="save-'+r.row+'" onclick="saveMember('+r.row+')">変更を保存する</button>'
+          +'<button class="btn-del"  id="del-'+r.row+'"  onclick="confirmDelete('+r.row+',\''+esc2(r.name)+'\')">このメンバーを削除する</button>'
+
+        +'</div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+// ─── アコーディオン開閉 ───
+function toggleMember(row){
+  var det=document.getElementById('mrd-'+row);
+  var chv=document.getElementById('chv-'+row);
+  var open=det.classList.toggle('open');
+  chv.classList.toggle('open',open);
+}
+
+// ─── 会員情報保存 ───
+function saveMember(row){
+  var name       = document.getElementById('f-name-'+row).value.trim();
+  var nameRomaji = document.getElementById('f-romaji-'+row).value.trim();
+  var email      = document.getElementById('f-email-'+row).value.trim();
+  var postal     = document.getElementById('f-postal-'+row).value.trim();
+  var address    = document.getElementById('f-address-'+row).value.trim();
+  var expiryDate = document.getElementById('f-expiry-'+row).value.trim();
+  var volume     = document.getElementById('f-vol-'+row).value.trim();
+  var concentration = document.getElementById('f-conc-'+row).value.trim();
+  var total      = document.getElementById('f-total-'+row).value.trim();
+  var morphology = document.getElementById('f-morph-'+row).value.trim();
+
+  if(!name){showToast('氏名は必須です','err');return;}
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast('メールアドレスを確認してください','err');return;}
+
+  showModal(
+    '情報を保存しますか？',
+    '<span class="modal-name">No.'+pad(_memberMap[row]&&_memberMap[row].memberNo||0)+'&nbsp;'+esc(name)+'</span> の情報を更新します。',
+    'primary',
+    function(){
+      var btn=document.getElementById('save-'+row);
+      btn.disabled=true; btn.textContent='保存中…';
+      showLoading();
+      apiCall('admin_updatemember',{
+        key:_key, row:row,
+        name:name, nameRomaji:nameRomaji, email:email,
+        postal:postal, address:address, expiryDate:expiryDate,
+        volume:volume, concentration:concentration, total:total, morphology:morphology
+      }).then(function(d){
+        hideLoading(); btn.disabled=false; btn.textContent='変更を保存する';
+        if(d.error){showToast('エラー: '+d.error,'err');return;}
+        if(_memberMap[row]){
+          _memberMap[row].name=name; _memberMap[row].nameRomaji=nameRomaji;
+          _memberMap[row].email=email; _memberMap[row].postal=postal;
+          _memberMap[row].address=address; _memberMap[row].expiryDate=expiryDate;
+          _memberMap[row].volume=parseFloat(volume)||0;
+          _memberMap[row].concentration=parseFloat(concentration)||0;
+          _memberMap[row].total=parseFloat(total)||0;
+          _memberMap[row].morphology=parseFloat(morphology)||0;
+          var mn=document.querySelector('#mr-'+row+' .m-name');
+          if(mn) mn.textContent=name;
+        }
+        showToast('保存しました','ok');
+      }).catch(function(){hideLoading(); btn.disabled=false; btn.textContent='変更を保存する'; showToast('通信エラー','err');});
+    }
+  );
+}
+
+// ─── メンバー削除 ───
+function confirmDelete(row, name){
+  var no = _memberMap[row] && _memberMap[row].memberNo ? pad(_memberMap[row].memberNo) : '????';
+  showModal(
+    'メンバーを削除しますか？',
+    'No.<span class="modal-name">'+no+'&nbsp;'+esc(name)+'</span> のスプレッドシート上のデータを完全に削除します。<br><br><strong style="color:var(--red)">この操作は取り消せません。</strong>',
+    'danger',
+    function(){
+      var btn=document.getElementById('del-'+row);
+      if(btn){btn.disabled=true;btn.textContent='削除中…';}
+      showLoading();
+      apiCall('admin_deletemember',{key:_key,row:row})
+        .then(function(d){
+          hideLoading();
+          if(d.error){showToast('エラー: '+d.error,'err');if(btn){btn.disabled=false;btn.textContent='このメンバーを削除する';}return;}
+          showToast(name+' を削除しました','ok');
+          loadData();
+        })
+        .catch(function(){hideLoading();showToast('通信エラー','err');if(btn){btn.disabled=false;btn.textContent='このメンバーを削除する';}});
+    }
+  );
+}
+
+// ─── 審査・発送アクション ───
+function confirmResult(row,result,name,cardId){
+  var isPass=result==='合格';
+  showModal(isPass?'合格にしますか？':'不合格にしますか？',
+    '<span class="modal-name">'+esc(name)+'</span> の審査を「'+result+'」に変更します。'+(isPass?'<br>決済メールが自動送信されます。':'<br>不合格通知メールが送信されます。'),
+    isPass?'success':'danger',
+    function(){doAction('admin_setresult',{row:row,result:result},cardId,'審査結果を「'+result+'」に設定しました',true);});
+}
+function confirmShipping(row,name,cardId){
+  showModal('発送済みにしますか？',
+    '<span class="modal-name">'+esc(name)+'</span> を「発送済み」に変更します。<br>発送完了メールが自動送信されます。',
+    'success',
+    function(){doAction('admin_setshipping',{row:row},cardId,'発送済みに設定しました',true);});
+}
+function confirmDeleteProgress(row,name,cardId){
+  showModal(
+    '申請を削除しますか？',
+    '<span class="modal-name">'+esc(name)+'</span> の申請データを削除します。<br><br><strong style="color:var(--red)">この操作は取り消せません。</strong>',
+    'danger',
+    function(){
+      doAction('admin_deletemember',{row:row},cardId,'申請を削除しました',true);
+    }
+  );
+}
+function confirmRenewal(row,result,name,cardId){
+  var isPass=result==='合格';
+  showModal(isPass?'更新を合格にしますか？':'更新を不合格にしますか？',
+    '<span class="modal-name">'+esc(name)+'</span> の更新審査を「'+result+'」に変更します。'+(isPass?'<br>更新決済メールが自動送信されます。':'<br>不合格通知メールが送信されます。'),
+    isPass?'success':'danger',
+    function(){doAction('admin_setrenewalresult',{row:row,result:result},cardId,'更新審査を「'+result+'」に設定しました',true);});
+}
+
+// ─── モーダル ───
+function showModal(title,body,type,onConfirm){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalBody').innerHTML=body;
+  var btn=document.getElementById('modalConfirm');
+  btn.className='modal-confirm '+(type||'primary');
+  btn.textContent='実行する';
+  btn.onclick=function(){closeModal();onConfirm();};
+  document.getElementById('modalBg').classList.add('on');
+}
+function closeModal(){document.getElementById('modalBg').classList.remove('on');}
+
+// ─── API実行 ───
+function doAction(action,params,cardId,msg,reload){
+  var el=document.getElementById(cardId);
+  if(el) el.querySelectorAll('button').forEach(function(b){b.disabled=true;});
+  showLoading();
+  apiCall(action,Object.assign({key:_key},params)).then(function(d){
+    hideLoading();
+    if(d.error){showToast('エラー: '+d.error,'err');if(el)el.querySelectorAll('button').forEach(function(b){b.disabled=false;});return;}
+    showToast(msg,'ok');
+    if(el){el.style.transition='opacity .3s';el.style.opacity='0';setTimeout(function(){el.remove();if(reload)loadData();},350);}
+    else if(reload){loadData();}
+  }).catch(function(){hideLoading();showToast('通信エラー','err');if(el)el.querySelectorAll('button').forEach(function(b){b.disabled=false;});});
+}
+
+// ─── 検査証画像ブロック ───
+function photoBlock(url){
+  if(!url) return '<div class="info-row"><span class="info-lbl">検査証</span><span class="info-val" style="color:var(--text3)">画像なし</span></div>';
+  return '<div style="padding:10px 0 4px">'
+    +'<div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px">検査証画像</div>'
+    +'<img src="'+esc(url)+'" style="width:66%;max-width:320px;border-radius:10px;display:block;cursor:pointer" onclick="window.open(\''+esc(url)+'\',\'_blank\')" onerror="this.style.display=\'none\';document.getElementById(\'ph-lnk-'+Date.now()+'\').style.display=\'block\'">'
+    +'<a href="'+esc(url)+'" target="_blank" style="display:none;color:var(--accent);font-size:12px">📄 画像を開く</a>'
+  +'</div>';
+}
+
+// ─── 精子データグリッド ───
+function spermGrid(r){
+  return '<div class="sperm-grid">'
+    +si('精液量',   r.volume,        'mL',   WHO.volume)
+    +si('精子濃度', r.concentration, 'M/mL', WHO.concentration)
+    +si('総精子数', r.total,         'M',    WHO.total)
+    +si('正常形態率',r.morphology,   '%',    WHO.morphology)
+  +'</div>';
+}
+function si(lbl,val,unit,thr){
+  var v=parseFloat(val)||0;
+  var cls=v===0?'ok-val':v>=thr?'pass-val':'fail-val';
+  return '<div class="sperm-item"><div class="sperm-lbl">'+lbl+'</div>'
+    +'<div class="sperm-val '+cls+'">'+(v||'─')+'<span class="unit">'+unit+'</span></div>'
+    +'<div class="who-note">基準 '+thr+unit+'以上</div></div>';
+}
+
+// ─── CSVダウンロード ───
+function downloadCSV(){
+  if(!_data||!_data.initial||!_data.initial.length){
+    showToast('先にデータを読み込んでください','err'); return;
+  }
+
+  var headers = [
+    '会員番号','氏名','ローマ字','メールアドレス',
+    '郵便番号','住所',
+    '認定日','認定期限','発送状況','支払い状況',
+    '精液量(mL)','精子濃度(M/mL)','総精子数(M)','正常形態率(%)',
+    'カードURL','申請日時'
+  ];
+
+  var members = _data.initial
+    .filter(function(r){ return r.memberNo; })
+    .sort(function(a,b){ return parseInt(a.memberNo)-parseInt(b.memberNo); });
+
+  var rows = members.map(function(r){
+    return [
+      pad(r.memberNo),
+      r.name        || '',
+      r.nameRomaji  || '',
+      r.email       || '',
+      r.postal      || '',
+      r.address     || '',
+      r.certDate    || '',
+      r.expiryDate  || '',
+      r.shipping    || '',
+      r.payment     || '',
+      r.volume      || '',
+      r.concentration || '',
+      r.total       || '',
+      r.morphology  || '',
+      r.cardUrl     || '',
+      r.ts          || ''
+    ].map(function(v){
+      var s = String(v);
+      // カンマ・改行・ダブルクォートを含む場合はクォートで囲む
+      if(s.indexOf(',')>=0 || s.indexOf('"')>=0 || s.indexOf('\n')>=0){
+        s = '"' + s.replace(/"/g,'""') + '"';
+      }
+      return s;
+    }).join(',');
+  });
+
+  // BOM付きUTF-8でExcelでも文字化けしない
+  var csv = '﻿' + headers.join(',') + '\n' + rows.join('\n');
+  var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  var ts   = new Date();
+  var fname = 'seedcard_members_'
+    + ts.getFullYear()
+    + String(ts.getMonth()+1).padStart(2,'0')
+    + String(ts.getDate()).padStart(2,'0')
+    + '.csv';
+  a.href=url; a.download=fname; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  showToast(members.length+'件をダウンロードしました','ok');
+}
+
+// ─── APIコール ───
+function apiCall(action,params){
+  var qs='?action='+encodeURIComponent(action);
+  Object.keys(params).forEach(function(k){qs+='&'+encodeURIComponent(k)+'='+encodeURIComponent(params[k]);});
+  return fetch(API+qs).then(function(r){return r.json();});
+}
+
+// ─── ユーティリティ ───
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc2(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,'\\\'');}
+function pad(n){var v=parseInt(n)||0; return v>0?String(v):'——';}
+function now(){var d=new Date();return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+'更新';}
+function empty(icon,msg){return '<div class="empty"><div class="empty-icon">'+icon+'</div>'+msg+'</div>';}
+function expiryDays(s){
+  if(!s)return null;
+  try{var d=new Date(s.replace(/年|月/g,'-').replace('日',''));return Math.ceil((d-new Date())/86400000);}
+  catch(e){return null;}
+}
+var _tt=null;
+function showToast(msg,type){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+(type||'')+' on';
+  if(_tt)clearTimeout(_tt);
+  _tt=setTimeout(function(){t.classList.remove('on');},2600);
+}
+function showLoading(){document.getElementById('loading').style.display='flex';}
+function hideLoading(){document.getElementById('loading').style.display='none';}
+document.getElementById('modalBg').addEventListener('click',function(e){if(e.target===this)closeModal();});
+</script>
+</body>
+</html>

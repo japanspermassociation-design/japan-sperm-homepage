@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>SEED CARD | 日本精子協会</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f2f2f7; --white:#fff;
+      --primary:#0d2d52; --accent:#9b87d6; --green:#16a34a;
+      --text:#1d1d1f; --text2:#3a3a3c; --text3:#86868b;
+      --border:#e5e5ea; --red:#e11d48;
+      --grad:linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 100%);
+      --shadow:0 2px 20px rgba(0,0,0,.06);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+    /* ── HEADER（申請・マイページ画面用） ── */
+    .hdr{background:var(--white);border-bottom:.5px solid var(--border);padding:0 16px;display:flex;align-items:center;gap:10px;height:50px;position:sticky;top:0;z-index:100;display:none}
+    .hdr.show{display:flex}
+    .hdr-logo{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hdr-back{margin-left:auto;background:none;border:1.5px solid var(--border);color:var(--text2);padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-family:'Noto Sans JP',sans-serif;font-weight:600}
+
+    /* ── SCREENS ── */
+    .screen{display:none;padding-bottom:40px}
+    .screen.active{display:block}
+
+    /* ── TOP / LOGIN（login.html スタイル） ── */
+    #s-top{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px}
+    #s-top.active{display:flex}
+    .wrap{width:100%;max-width:360px;text-align:center}
+    .lbadge{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:14px}
+    .brand{font-family:'Inter',sans-serif;font-size:34px;font-weight:700;letter-spacing:.1em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+    .lsub{font-size:13px;color:var(--text3);margin-bottom:28px;letter-spacing:.05em}
+    /* 新規申請ボタン */
+    .btn-apply-top{display:block;width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:600;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-bottom:12px;letter-spacing:.04em;transition:opacity .18s}
+    .btn-apply-top:active{opacity:.8}
+    .btn-login-top{display:block;width:100%;padding:15px;background:#fff;color:var(--accent);border:1.5px solid var(--accent);border-radius:14px;font-size:15px;font-weight:600;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-bottom:0;letter-spacing:.04em;transition:opacity .18s}
+    .btn-login-top:active{opacity:.8}
+    /* ログインカード */
+    .lcard{background:var(--white);border-radius:20px;padding:28px 24px;box-shadow:var(--shadow)}
+    .login-tabs{display:flex;background:#f5f5f7;border-radius:10px;padding:3px;margin-bottom:20px}
+    .login-tab{flex:1;padding:9px 8px;border:none;background:transparent;border-radius:8px;font-size:13px;font-weight:500;font-family:'Noto Sans JP',sans-serif;cursor:pointer;color:var(--text3);transition:all .18s}
+    .login-tab.on{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.09);font-weight:600}
+    .card-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+    .card-desc{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:18px}
+    .inp{display:block;width:100%;padding:14px 15px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'Noto Sans JP',sans-serif;color:var(--text);background:#fff;outline:none;transition:border-color .18s;-webkit-appearance:none;margin-bottom:10px}
+    .inp:focus{border-color:var(--accent)}
+    .lbtn{display:block;width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;font-family:'Noto Sans JP',sans-serif;cursor:pointer;letter-spacing:.04em;transition:opacity .18s}
+    .lbtn:active{opacity:.75}
+    .lbtn:disabled{opacity:.45;cursor:default}
+    .lbtn-outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent);margin-top:0}
+    .lmsg{margin-top:14px;font-size:13px;line-height:1.7;padding:12px 14px;border-radius:10px;display:none}
+    .lmsg.success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+    .lmsg.error{background:#fff1f2;color:#9f1239;border:1px solid #fecdd3}
+    .divider{margin:20px 0;border:none;border-top:1px solid var(--border)}
+    .nfc-note{font-size:12px;color:var(--text3);line-height:1.7}
+    .nfc-note strong{color:var(--text);font-weight:500}
+
+    /* ── 申請・マイページ共通カード ── */
+    .card{background:var(--white);border-radius:14px;box-shadow:var(--shadow);margin:14px 14px;padding:20px}
+    .card-hd{font-size:17px;font-weight:700;color:var(--primary);margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+
+    /* ── フォームフィールド ── */
+    .field{margin-bottom:14px}
+    .field label{display:block;font-size:11px;font-weight:700;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
+    .req{color:var(--red);margin-left:3px}
+    .field input,.field select{width:100%;padding:12px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:'Noto Sans JP',sans-serif;color:var(--text);background:#fff;outline:none;transition:.15s;-webkit-appearance:none}
+    .field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(155,135,214,.12)}
+    .field-row{display:flex;gap:10px}
+    .field-row .field{flex:1}
+    .field-hint{font-size:11px;color:var(--text3);margin-top:4px}
+    .sec-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;padding:14px 0 8px;border-bottom:.5px solid var(--border);margin-bottom:12px}
+
+    /* ── 数値グリッド（精液データ） ── */
+    .sperm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+    .sperm-cell{background:#f9f8ff;border-radius:10px;padding:10px 12px}
+    .sperm-cell label{display:block;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+    .sperm-cell input{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:9px 10px;font-size:15px;font-family:'Noto Sans JP',sans-serif;color:var(--text);background:#fff;outline:none;-webkit-appearance:none;transition:.15s}
+    .sperm-cell input:focus{border-color:var(--accent)}
+    .sperm-cell .unit{font-size:10px;color:var(--text3);margin-top:3px}
+
+    /* ── ファイルドロップ ── */
+    .file-drop{border:2px dashed var(--border);border-radius:10px;padding:22px 14px;text-align:center;cursor:pointer;transition:.15s;background:#fafbfc}
+    .file-drop:hover,.file-drop.has{border-color:#9b87d6;background:#f5f0ff}
+    .fd-icon{font-size:28px;margin-bottom:5px}
+    .fd-lbl{font-size:13px;color:var(--text3)}
+    .fd-name{font-size:12px;color:#9b87d6;font-weight:700;margin-top:4px}
+    .fd-img{max-width:100%;max-height:160px;border-radius:8px;margin-top:10px;object-fit:contain}
+    input[type=file]{display:none}
+
+    /* ── ボタン ── */
+    .btn{display:block;width:100%;padding:14px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;border:none;text-align:center;font-family:'Noto Sans JP',sans-serif;transition:.15s}
+    .btn:active{transform:scale(.98)}
+    .btn.primary{background:var(--accent);color:#fff}
+    .btn.green{background:var(--green);color:#fff}
+    .btn.outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+
+    /* ── ポリシー ── */
+    .policy-box{background:#f8fafc;border:1.5px solid var(--border);border-radius:8px;padding:13px;font-size:12px;color:var(--text3);height:110px;overflow-y:auto;line-height:1.75;margin-bottom:10px}
+    .check-lbl{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:16px}
+    .check-lbl input{width:18px;height:18px;accent-color:var(--accent)}
+
+    /* ── 会員証カード ── */
+    .memcard{background:linear-gradient(135deg,var(--primary) 0%,#1a4a7a 55%,#0f6b5a 100%);border-radius:16px;padding:24px 20px;color:#fff;position:relative;overflow:hidden;margin:14px 14px 4px}
+    .memcard::before{content:'';position:absolute;top:-50px;right:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.05)}
+    .mc-org{font-size:10px;opacity:.55;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+    .mc-title{font-family:'Inter',sans-serif;font-size:20px;font-weight:900;letter-spacing:.14em;margin-bottom:16px}
+    .mc-name{font-size:19px;font-weight:700}
+    .mc-no{font-size:12px;opacity:.65;margin-top:2px}
+    .mc-exp{position:absolute;bottom:20px;right:20px;font-size:11px;opacity:.65;text-align:right}
+    .mc-exp b{display:block;font-size:15px;font-weight:700;opacity:1;margin-top:1px}
+
+    /* ── バッジ ── */
+    .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+    .badge::before{content:'●';font-size:8px}
+    .b-pend{background:#fef3c7;color:#92400e}
+    .b-ok{background:#d1fae5;color:#065f46}
+    .b-ng{background:#fee2e2;color:#991b1b}
+
+    /* ── 情報行 ── */
+    .irow{display:flex;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+    .irow:last-child{border-bottom:none}
+    .ilbl{color:var(--text3);font-size:11px;font-weight:700;width:68px;flex-shrink:0;padding-top:2px}
+    .ival{color:var(--text);flex:1;line-height:1.5;word-break:break-all}
+
+    /* ── お知らせ ── */
+    .notice{background:#eff6ff;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:var(--text2);margin-bottom:13px;line-height:1.65}
+    .notice.ok{background:#f0fdf4;border-color:var(--green)}
+    .notice.warn{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+    .divider2{height:1px;background:var(--border);margin:16px 0}
+
+    /* ── 完了 ── */
+    .done-wrap{text-align:center;padding:50px 24px}
+    .done-icon{font-size:56px;margin-bottom:16px}
+    .done-title{font-size:21px;font-weight:800;color:var(--primary);margin-bottom:10px}
+    .done-msg{font-size:14px;color:var(--text2);line-height:1.85;white-space:pre-wrap;margin-bottom:26px}
+
+    /* ── トースト・ローディング ── */
+    #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a2332;color:#fff;padding:11px 20px;border-radius:24px;font-size:13px;font-weight:600;z-index:9999;transition:.25s;pointer-events:none;white-space:nowrap;opacity:0}
+    #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    #loading{position:fixed;inset:0;background:rgba(255,255,255,.88);display:none;align-items:center;justify-content:center;z-index:9998;flex-direction:column;gap:12px}
+    #loading.show{display:flex}
+    .spinner{width:40px;height:40px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loading-msg{font-size:13px;color:var(--text2);font-weight:600}
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー（申請・マイページ用） -->
+<header class="hdr" id="hdr">
+  <div class="hdr-logo">SEED CARD</div>
+  <button class="hdr-back" id="hdrBack" onclick="goBack()">← 戻る</button>
+</header>
+
+<div id="toast"></div>
+<div id="loading"><div class="spinner"></div><div class="loading-msg" id="loadingMsg">送信中...</div></div>
+
+<!-- ===== TOP / LOGIN ===== -->
+<div id="s-top" class="screen active">
+  <div class="wrap">
+    <div class="lbadge">一般社団法人 日本精子協会</div>
+    <div class="brand">SEED CARD</div>
+    <div class="lsub">会員マイページ</div>
+
+    <!-- 2ボタン -->
+    <button class="btn-apply-top" onclick="show('s-apply')">新規申請する</button>
+    <button class="btn-login-top" onclick="toggleLoginForm()">会員ログイン</button>
+
+    <!-- ログインフォーム（非表示→ボタンで展開） -->
+    <div id="loginFormWrap" style="display:none;margin-top:14px">
+      <div class="lcard">
+        <div class="login-tabs">
+          <button class="login-tab on" id="tabEmail" onclick="switchTab('email')">メールアドレス</button>
+          <button class="login-tab"    id="tabNo"    onclick="switchTab('no')">会員番号</button>
+        </div>
+
+        <div id="formEmail">
+          <div class="card-title">メールアドレスでログイン</div>
+          <p class="card-desc">認定時に登録したメールアドレスを入力してください。ログイン用のリンクをお送りします。</p>
+          <input type="email" class="inp" id="emailInput" placeholder="メールアドレス" autocomplete="email" inputmode="email">
+          <button class="lbtn" id="sendBtn" onclick="sendMagicEmail()">ログインリンクを送信</button>
+          <div class="lmsg" id="msg"></div>
+        </div>
+
+        <div id="formNo" style="display:none">
+          <div class="card-title">会員番号でログイン</div>
+          <p class="card-desc">会員番号を入力してください。登録メールアドレスにログインリンクをお送りします。</p>
+          <input type="text" class="inp" id="memberNoInput" placeholder="例：202600777" inputmode="numeric" maxlength="9">
+          <button class="lbtn" id="sendNoBtn" onclick="sendMagicNo()">ログインリンクを送信</button>
+          <div class="lmsg" id="noMsg"></div>
+        </div>
+
+        <hr class="divider">
+
+        <p class="nfc-note" style="margin-bottom:10px">
+          <strong>メールアドレスをお忘れの方</strong><br>
+          会員番号と氏名で照会できます。
+        </p>
+        <button class="lbtn lbtn-outline" id="forgotToggleBtn" style="font-size:13px;padding:11px;margin-bottom:0" onclick="toggleForgot()">会員番号で照会する</button>
+        <div id="forgotForm" style="display:none;margin-top:14px">
+          <input type="text" class="inp" id="forgotNo" placeholder="会員番号（例：202600777）" inputmode="numeric">
+          <input type="text" class="inp" id="forgotName" placeholder="氏名（フルネーム）">
+          <button class="lbtn" id="forgotSendBtn" style="font-size:14px;padding:13px" onclick="sendForgotEmail()">ログインリンクを送信</button>
+          <div class="lmsg" id="forgotMsg"></div>
+        </div>
+
+        <hr class="divider">
+
+        <p class="nfc-note" style="margin-bottom:10px">
+          <strong>会員番号をお忘れの方</strong><br>
+          メールアドレスで照会できます。
+        </p>
+        <button class="lbtn lbtn-outline" id="forgotNoToggleBtn" style="font-size:13px;padding:11px;margin-bottom:0" onclick="toggleForgotNo()">メールアドレスで照会する</button>
+        <div id="forgotNoForm" style="display:none;margin-top:14px">
+          <input type="email" class="inp" id="forgotNoEmail" placeholder="メールアドレス" inputmode="email">
+          <button class="lbtn" id="forgotNoSendBtn" style="font-size:14px;padding:13px" onclick="sendForgotNo()">会員番号を送信</button>
+          <div class="lmsg" id="forgotNoMsg"></div>
+        </div>
+
+        <hr class="divider">
+
+        <p class="nfc-note">
+          <strong>NFCカードをお持ちの方</strong><br>
+          カードをスマートフォンにかざすとカードページが表示されます
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 新規申請 ===== -->
+<div id="s-apply" class="screen">
+  <div class="card">
+    <div class="card-hd">新規申請フォーム</div>
+    <div class="notice">申請後、審査結果をメールでお知らせします。精液検査結果の写真と数値をご用意ください。</div>
+
+    <!-- 基本情報 -->
+    <div class="sec-lbl">基本情報</div>
+    <div class="field-row">
+      <div class="field">
+        <label>姓（漢字）<span class="req">*</span></label>
+        <input type="text" id="a-nk-sei" placeholder="山田">
+      </div>
+      <div class="field">
+        <label>名（漢字）<span class="req">*</span></label>
+        <input type="text" id="a-nk-mei" placeholder="太郎">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>姓（フリガナ）<span class="req">*</span></label>
+        <input type="text" id="a-ng-sei" placeholder="ヤマダ" oninput="autoRomaji()">
+      </div>
+      <div class="field">
+        <label>名（フリガナ）<span class="req">*</span></label>
+        <input type="text" id="a-ng-mei" placeholder="タロウ" oninput="autoRomaji()">
+      </div>
+    </div>
+    <div class="field">
+      <label>生年月日<span class="req">*</span></label>
+      <input type="date" id="a-dob" max="2007-01-01">
+    </div>
+    <div class="field">
+      <label>メールアドレス<span class="req">*</span></label>
+      <input type="email" id="a-em" placeholder="example@email.com" inputmode="email">
+    </div>
+    <div class="field">
+      <label>電話番号<span class="req">*</span></label>
+      <input type="tel" id="a-tel" placeholder="09012345678" inputmode="tel">
+    </div>
+
+    <!-- 住所 -->
+    <div class="sec-lbl">住所</div>
+    <div class="field-row">
+      <div class="field" style="flex:0 0 130px">
+        <label>郵便番号<span class="req">*</span></label>
+        <input type="text" id="a-zip" placeholder="1234567" maxlength="8" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label>都道府県</label>
+        <select id="a-pref">
+          <option value="">選択</option>
+          <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>市区町村・番地<span class="req">*</span></label>
+      <input type="text" id="a-ad1" placeholder="渋谷区道玄坂1-2-3">
+    </div>
+    <div class="field">
+      <label>建物名・部屋番号</label>
+      <input type="text" id="a-ad2" placeholder="シードマンション101">
+    </div>
+
+    <!-- 精液検査データ -->
+    <div class="sec-lbl">精液検査データ（任意）</div>
+    <div class="notice" style="font-size:12px">WHO 2021年基準（第5パーセンタイル）：精液量 1.4mL以上 ／ 精子濃度 1,600万/mL以上 ／ 総精子数 3,900万以上 ／ 正常形態率 4%以上</div>
+    <div class="sperm-grid">
+      <div class="sperm-cell">
+        <label>精液量</label>
+        <input type="number" id="a-vol" placeholder="例: 1.4" step="0.1" min="0">
+        <div class="unit">mL</div>
+      </div>
+      <div class="sperm-cell">
+        <label>精子濃度</label>
+        <input type="number" id="a-conc" placeholder="例: 1600" step="0.1" min="0">
+        <div class="unit">万/mL</div>
+      </div>
+      <div class="sperm-cell">
+        <label>総精子数</label>
+        <input type="number" id="a-total" placeholder="例: 3900" step="0.1" min="0">
+        <div class="unit">万</div>
+      </div>
+      <div class="sperm-cell">
+        <label>正常形態率</label>
+        <input type="number" id="a-morph" placeholder="例: 4" step="0.1" min="0">
+        <div class="unit">%</div>
+      </div>
+    </div>
+
+    <!-- 写真 -->
+    <div class="sec-lbl">検査証写真</div>
+    <div class="field">
+      <label>精液検査結果（写真）<span class="req">*</span></label>
+      <div class="file-drop" id="fd-apply" onclick="document.getElementById('fi-apply').click()">
+        <div class="fd-icon">📋</div>
+        <div class="fd-lbl">タップして写真を選択</div>
+        <div class="fd-name" id="fn-apply"></div>
+        <img id="fp-apply" class="fd-img" style="display:none">
+      </div>
+      <input type="file" id="fi-apply" accept="image/*" onchange="onFileChange('apply')">
+    </div>
+
+    <!-- ポリシー -->
+    <div class="divider2"></div>
+    <div class="policy-box">
+      <strong>プライバシーポリシー</strong><br><br>
+      一般社団法人 日本精子協会（以下「当協会」）は、会員の個人情報を以下の方針に基づき適切に管理します。<br><br>
+      <strong>1. 収集する情報</strong><br>氏名、生年月日、メールアドレス、電話番号、住所、精液検査結果<br><br>
+      <strong>2. 利用目的</strong><br>SEED CARDの発行・管理、審査連絡、更新手続きのみに使用します。<br><br>
+      <strong>3. 第三者提供</strong><br>法令に基づく場合を除き、第三者への提供は行いません。<br><br>
+      <strong>4. 安全管理</strong><br>適切なセキュリティ対策を講じ、個人情報の漏洩防止に努めます。
+    </div>
+    <label class="check-lbl">
+      <input type="checkbox" id="a-agree">
+      プライバシーポリシーに同意します
+    </label>
+    <button class="btn primary" onclick="submitApply()">申請する</button>
+  </div>
+</div>
+
+<!-- ===== マイページ ===== -->
+<div id="s-mypage" class="screen">
+  <div class="memcard">
+    <div class="mc-org">一般社団法人 日本精子協会</div>
+    <div class="mc-title">SEED CARD</div>
+    <div class="mc-name" id="mc-name">——</div>
+    <div class="mc-no"   id="mc-no">No. ——</div>
+    <div class="mc-exp">有効期限<b id="mc-exp">——</b></div>
+  </div>
+  <div class="card" style="margin-top:4px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <span style="font-weight:700;font-size:14px">ステータス</span>
+      <span class="badge b-pend" id="mp-badge">——</span>
+    </div>
+    <div id="mp-msg" style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:6px"></div>
+    <div id="mp-warn" class="notice warn" style="display:none;margin-bottom:0">申請から<b>30日以内</b>にお手続きがない場合、申請は自動的に削除されます。</div>
+  </div>
+  <div class="card" id="renew-cta" style="display:none">
+    <div class="card-hd">更新申請</div>
+    <div class="notice warn">有効期限が近づいています。更新申請を行ってください。</div>
+    <button class="btn green" onclick="show('s-renew')">更新申請をする →</button>
+  </div>
+  <div class="card">
+    <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.05em;margin-bottom:2px">登録情報</div>
+    <div id="mp-info"></div>
+  </div>
+  <div style="padding:0 14px 20px">
+    <button class="btn outline" onclick="logout()" style="font-size:13px">ログアウト</button>
+  </div>
+</div>
+
+<!-- ===== 更新申請 ===== -->
+<div id="s-renew" class="screen">
+  <div class="card">
+    <div class="card-hd">更新申請フォーム</div>
+    <div class="notice ok">最新の精液検査結果をアップロードしてください。氏名・会員番号は登録済みのものが自動で適用されます。</div>
+    <div class="field">
+      <label>精液検査結果（写真）<span class="req">*</span></label>
+      <div class="file-drop" id="fd-renew" onclick="document.getElementById('fi-renew').click()">
+        <div class="fd-icon">📋</div>
+        <div class="fd-lbl">タップして写真を選択</div>
+        <div class="fd-name" id="fn-renew"></div>
+        <img id="fp-renew" class="fd-img" style="display:none">
+      </div>
+      <input type="file" id="fi-renew" accept="image/*" onchange="onFileChange('renew')">
+    </div>
+    <button class="btn green" onclick="submitRenew()" style="margin-top:8px">更新申請する</button>
+  </div>
+</div>
+
+<!-- ===== 完了 ===== -->
+<div id="s-done" class="screen">
+  <div class="card">
+    <div class="done-wrap">
+      <div class="done-icon" id="done-icon">✅</div>
+      <div class="done-title" id="done-title">完了しました</div>
+      <div class="done-msg"  id="done-msg"></div>
+      <button class="btn outline" style="max-width:200px;margin:0 auto" onclick="show('s-top')">トップへ戻る</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var GAS = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
+
+// ===== ROUTING =====
+var backMap = {'s-apply':'s-top','s-mypage':'s-top','s-renew':'s-mypage','s-done':'s-top'};
+function show(id) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  var hdr = document.getElementById('hdr');
+  var back = document.getElementById('hdrBack');
+  if (id === 's-top') { hdr.classList.remove('show'); }
+  else { hdr.classList.add('show'); back.style.display = backMap[id] ? 'block' : 'none'; }
+  window.scrollTo(0, 0);
+}
+function goBack() {
+  var cur = document.querySelector('.screen.active');
+  if (cur) show(backMap[cur.id] || 's-top');
+}
+
+// ===== UTILS =====
+function toast(m, dur) {
+  var t = document.getElementById('toast');
+  t.textContent = m; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, dur || 3000);
+}
+function loading(on, msg) {
+  document.getElementById('loading').classList.toggle('show', on);
+  if (msg) document.getElementById('loadingMsg').textContent = msg;
+}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function showLMsg(id, type, text) {
+  var el = document.getElementById(id);
+  el.className = 'lmsg ' + type;
+  el.textContent = text;
+  el.style.display = 'block';
+}
+function clearLMsg(id) { var el=document.getElementById(id); if(el) el.style.display='none'; }
+
+function get(p) {
+  var qs = Object.keys(p).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(p[k]||''); }).join('&');
+  return fetch(GAS + '?' + qs).then(function(r){ return r.json(); });
+}
+function post(p) {
+  return fetch(GAS, {
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:Object.keys(p).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(p[k]||''); }).join('&')
+  }).then(function(r){ return r.json(); });
+}
+
+// ===== FILE UPLOAD =====
+function onFileChange(form) {
+  var file = document.getElementById('fi-'+form).files[0];
+  if (!file) return;
+  document.getElementById('fn-'+form).textContent = file.name;
+  document.getElementById('fd-'+form).classList.add('has');
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = document.getElementById('fp-'+form);
+    img.src = e.target.result; img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function resizeImage(file) {
+  return new Promise(function(resolve, reject) {
+    var MAX = 1400;
+    var img = new Image();
+    var url = URL.createObjectURL(file);
+    img.onload = function() {
+      URL.revokeObjectURL(url);
+      var w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
+      var canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', 0.82).split(',')[1]);
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+function toBase64(file) {
+  if (file.type.indexOf('image') >= 0) return resizeImage(file);
+  return new Promise(function(resolve,reject){
+    var r = new FileReader();
+    r.onload = function(e){ resolve(e.target.result.split(',')[1]); };
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+// ===== フリガナ → ローマ字 自動変換 =====
+function kanaToRomaji(kana) {
+  var map = {
+    'キャ':'KYA','キュ':'KYU','キョ':'KYO','シャ':'SHA','シュ':'SHU','ショ':'SHO',
+    'チャ':'CHA','チュ':'CHU','チョ':'CHO','ニャ':'NYA','ニュ':'NYU','ニョ':'NYO',
+    'ヒャ':'HYA','ヒュ':'HYU','ヒョ':'HYO','ミャ':'MYA','ミュ':'MYU','ミョ':'MYO',
+    'リャ':'RYA','リュ':'RYU','リョ':'RYO','ギャ':'GYA','ギュ':'GYU','ギョ':'GYO',
+    'ジャ':'JA','ジュ':'JU','ジョ':'JO','ビャ':'BYA','ビュ':'BYU','ビョ':'BYO',
+    'ピャ':'PYA','ピュ':'PYU','ピョ':'PYO',
+    'ア':'A','イ':'I','ウ':'U','エ':'E','オ':'O',
+    'カ':'KA','キ':'KI','ク':'KU','ケ':'KE','コ':'KO',
+    'サ':'SA','シ':'SHI','ス':'SU','セ':'SE','ソ':'SO',
+    'タ':'TA','チ':'CHI','ツ':'TSU','テ':'TE','ト':'TO',
+    'ナ':'NA','ニ':'NI','ヌ':'NU','ネ':'NE','ノ':'NO',
+    'ハ':'HA','ヒ':'HI','フ':'FU','ヘ':'HE','ホ':'HO',
+    'マ':'MA','ミ':'MI','ム':'MU','メ':'ME','モ':'MO',
+    'ヤ':'YA','ユ':'YU','ヨ':'YO',
+    'ラ':'RA','リ':'RI','ル':'RU','レ':'RE','ロ':'RO',
+    'ワ':'WA','ヲ':'WO','ン':'N',
+    'ガ':'GA','ギ':'GI','グ':'GU','ゲ':'GE','ゴ':'GO',
+    'ザ':'ZA','ジ':'JI','ズ':'ZU','ゼ':'ZE','ゾ':'ZO',
+    'ダ':'DA','デ':'DE','ド':'DO',
+    'バ':'BA','ビ':'BI','ブ':'BU','ベ':'BE','ボ':'BO',
+    'パ':'PA','ピ':'PI','プ':'PU','ペ':'PE','ポ':'PO',
+    '　':' ',' ':' ','・':' '
+  };
+  var res = '', i = 0;
+  while (i < kana.length) {
+    if (i+1 < kana.length && map[kana[i]+kana[i+1]]) { res += map[kana[i]+kana[i+1]]; i += 2; }
+    else if (map[kana[i]]) { res += map[kana[i]]; i++; }
+    else { i++; }
+  }
+  return res.trim();
+}
+var _autoRomaji = '';
+function autoRomaji() {
+  var seiEl = document.getElementById('a-ng-sei');
+  var meiEl = document.getElementById('a-ng-mei');
+  var seiR = seiEl ? kanaToRomaji(seiEl.value) : '';
+  var meiR = meiEl ? kanaToRomaji(meiEl.value) : '';
+  // カード券面は「名 姓」順 (例: TARO YAMADA)
+  _autoRomaji = (meiR && seiR) ? meiR + ' ' + seiR : (meiR || seiR);
+}
+
+// ===== LOGIN TABS =====
+function switchTab(t) {
+  document.getElementById('tabEmail').classList.toggle('on', t==='email');
+  document.getElementById('tabNo').classList.toggle('on', t==='no');
+  document.getElementById('formEmail').style.display = t==='email' ? '' : 'none';
+  document.getElementById('formNo').style.display    = t==='no'    ? '' : 'none';
+  clearLMsg('msg'); clearLMsg('noMsg');
+}
+
+// ===== MAGIC LINK =====
+function sendMagicEmail() {
+  var em = document.getElementById('emailInput').value.trim();
+  if (!em || !em.includes('@')) { showLMsg('msg','error','メールアドレスを正しく入力してください。'); return; }
+  var btn = document.getElementById('sendBtn');
+  btn.disabled = true; btn.textContent = '送信中…'; clearLMsg('msg');
+  get({ action:'sendmagiclink', email:em }).then(function(d){
+    btn.disabled = false;
+    if (d.ok || d.success) { showLMsg('msg','success','ログインリンクを ' + em + ' に送信しました。\nメールをご確認ください（迷惑メールフォルダもご確認ください）。'); btn.textContent = '送信しました'; }
+    else if (d.error==='not_found') { showLMsg('msg','error','このメールアドレスは登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
+    else if (d.error==='rate_limit') { showLMsg('msg','error','短時間に何度もリクエストされました。10分後に再度お試しください。'); btn.textContent = 'ログインリンクを送信'; }
+    else { showLMsg('msg','error','送信に失敗しました。しばらくしてからお試しください。'); btn.textContent = 'ログインリンクを送信'; }
+  }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('msg','error','通信エラーが発生しました。'); });
+}
+document.getElementById('emailInput').addEventListener('keydown', function(e){ if(e.key==='Enter') sendMagicEmail(); });
+
+function sendMagicNo() {
+  var no = document.getElementById('memberNoInput').value.trim().replace(/[^0-9]/g,'');
+  if (!no) { showLMsg('noMsg','error','会員番号を入力してください。'); return; }
+  var btn = document.getElementById('sendNoBtn');
+  btn.disabled = true; btn.textContent = '送信中…'; clearLMsg('noMsg');
+  get({ action:'sendmagicbymemberno', memberNo:no }).then(function(d){
+    btn.disabled = false;
+    if (d.ok || d.success) { showLMsg('noMsg','success','登録メールアドレスにログインリンクを送信しました。'); btn.textContent = '送信しました'; }
+    else if (d.error==='not_found') { showLMsg('noMsg','error','この会員番号は登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
+    else if (d.error==='rate_limit') { showLMsg('noMsg','error','短時間に何度もリクエストされました。10分後にお試しください。'); btn.textContent = 'ログインリンクを送信'; }
+    else { showLMsg('noMsg','error','送信に失敗しました。'); btn.textContent = 'ログインリンクを送信'; }
+  }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('noMsg','error','通信エラーが発生しました。'); });
+}
+
+function toggleLoginForm() {
+  var w = document.getElementById('loginFormWrap');
+  var btn = document.querySelector('.btn-login-top');
+  var open = w.style.display !== 'none';
+  w.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '会員ログイン' : '× 閉じる';
+}
+
+function toggleForgot() {
+  var f = document.getElementById('forgotForm');
+  var open = f.style.display !== 'none';
+  f.style.display = open ? 'none' : 'block';
+  document.getElementById('forgotToggleBtn').textContent = open ? '会員番号で照会する' : '閉じる';
+}
+function sendForgotEmail() {
+  var no = document.getElementById('forgotNo').value.trim().replace(/^0+/,'');
+  var name = document.getElementById('forgotName').value.trim();
+  if (!no || !name) { showLMsg('forgotMsg','error','会員番号と氏名を両方入力してください。'); return; }
+  var btn = document.getElementById('forgotSendBtn');
+  btn.disabled = true; btn.textContent = '照会中…'; clearLMsg('forgotMsg');
+  get({ action:'lookupbymember', memberNo:no, name:name }).then(function(d){
+    btn.disabled = false;
+    if (d.ok || d.success) { showLMsg('forgotMsg','success','登録メールアドレスにログインリンクを送信しました。'); btn.textContent = '送信しました'; }
+    else if (d.error==='not_found') { showLMsg('forgotMsg','error','会員番号または氏名が一致しません。'); btn.textContent = 'ログインリンクを送信'; }
+    else { showLMsg('forgotMsg','error','送信に失敗しました。'); btn.textContent = 'ログインリンクを送信'; }
+  }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('forgotMsg','error','通信エラーが発生しました。'); });
+}
+
+function toggleForgotNo() {
+  var f = document.getElementById('forgotNoForm');
+  var open = f.style.display !== 'none';
+  f.style.display = open ? 'none' : 'block';
+  document.getElementById('forgotNoToggleBtn').textContent = open ? 'メールアドレスで照会する' : '閉じる';
+}
+function sendForgotNo() {
+  var em = document.getElementById('forgotNoEmail').value.trim();
+  if (!em || !em.includes('@')) { showLMsg('forgotNoMsg','error','メールアドレスを正しく入力してください。'); return; }
+  var btn = document.getElementById('forgotNoSendBtn');
+  btn.disabled = true; btn.textContent = '照会中…'; clearLMsg('forgotNoMsg');
+  get({ action:'sendmemberno', email:em }).then(function(d){
+    btn.disabled = false;
+    if (d.ok || d.success) { showLMsg('forgotNoMsg','success','会員番号を ' + em + ' に送信しました。'); btn.textContent = '送信しました'; }
+    else if (d.error==='not_found') { showLMsg('forgotNoMsg','error','このメールアドレスは登録されていません。'); btn.textContent = '会員番号を送信'; }
+    else { showLMsg('forgotNoMsg','error','送信に失敗しました。'); btn.textContent = '会員番号を送信'; }
+  }).catch(function(){ btn.disabled=false; btn.textContent='会員番号を送信'; showLMsg('forgotNoMsg','error','通信エラーが発生しました。'); });
+}
+
+// ===== AUTO LOGIN (URLトークン) =====
+(function(){
+  var token = new URLSearchParams(location.search).get('token');
+  if (token) {
+    loading(true, '認証中...');
+    get({ action:'verifytoken', token:token }).then(function(r){
+      loading(false);
+      if (r.ok && r.email) {
+        sessionStorage.setItem('sc_em', r.email);
+        history.replaceState({}, '', location.pathname);
+        loadMyPage(r.email);
+      } else { toast('リンクの有効期限が切れています'); show('s-top'); }
+    }).catch(function(){ loading(false); toast('認証エラー'); show('s-top'); });
+  } else {
+    var stored = sessionStorage.getItem('sc_em');
+    if (stored) loadMyPage(stored);
+  }
+})();
+
+// ===== MYPAGE =====
+function loadMyPage(email) {
+  loading(true, '読み込み中...');
+  get({ action:'getmemberbyemail', email:email }).then(function(r){
+    loading(false);
+    if (!r.ok || !r.member) { show('s-top'); return; }
+    var m = r.member;
+    sessionStorage.setItem('sc_em', email);
+    document.getElementById('mc-name').textContent = m.nameKanji || '——';
+    document.getElementById('mc-no').textContent   = 'No. ' + (m.memberNo || '——');
+    document.getElementById('mc-exp').textContent  = m.expireDate || '——';
+    var showWarn = (m.status === '審査中' || m.status === '支払い待ち');
+    document.getElementById('mp-warn').style.display = showWarn ? '' : 'none';
+    var sc = { '審査中':['b-pend','申請を受け付けました。現在審査中です。結果はメールでお知らせします。'],
+               '支払い待ち':['b-pend','審査に通過しました。入金案内メールをご確認のうえお手続きください。'],
+               '発送待ち':['b-pend','お支払いを確認しました。カードを準備・発送します。'],
+               '有効':['b-ok','カードは有効です。'],
+               '更新審査中':['b-pend','更新申請を受け付けました。審査中です。'],
+               '期限切れ':['b-ng','カードの有効期限が切れています。更新申請をしてください。'] };
+    var cfg = sc[m.status] || ['b-pend', m.status||''];
+    var badge = document.getElementById('mp-badge');
+    badge.className = 'badge ' + cfg[0]; badge.textContent = m.status || '——';
+    document.getElementById('mp-msg').textContent = cfg[1];
+    document.getElementById('renew-cta').style.display = (m.status==='期限切れ'||m.status==='有効') ? '' : 'none';
+    var rows = [['フリガナ',m.nameKana],['メール',email],['電話',m.tel],['住所',m.address]];
+    document.getElementById('mp-info').innerHTML = rows.filter(function(r){ return r[1]; }).map(function(r){
+      return '<div class="irow"><span class="ilbl">'+esc(r[0])+'</span><span class="ival">'+esc(r[1])+'</span></div>';
+    }).join('');
+    show('s-mypage');
+  }).catch(function(){ loading(false); toast('データ取得エラー'); });
+}
+function logout() {
+  sessionStorage.removeItem('sc_em');
+  show('s-top');
+  toast('ログアウトしました');
+}
+
+// ===== 新規申請 =====
+async function submitApply() {
+  var nkSei = document.getElementById('a-nk-sei').value.trim();
+  var nkMei = document.getElementById('a-nk-mei').value.trim();
+  var nk    = nkSei + (nkMei ? '　' + nkMei : '');
+  var ngSei = document.getElementById('a-ng-sei').value.trim();
+  var ngMei = document.getElementById('a-ng-mei').value.trim();
+  var ng    = ngSei + (ngMei ? '　' + ngMei : '');
+  var dob = document.getElementById('a-dob').value;
+  var em  = document.getElementById('a-em').value.trim();
+  var tel = document.getElementById('a-tel').value.trim();
+  var zip = document.getElementById('a-zip').value.trim();
+  var pref= document.getElementById('a-pref').value;
+  var ad1 = document.getElementById('a-ad1').value.trim();
+  var ad2 = document.getElementById('a-ad2').value.trim();
+  var vol  = document.getElementById('a-vol').value.trim();
+  var conc = document.getElementById('a-conc').value.trim();
+  var tot  = document.getElementById('a-total').value.trim();
+  var morph= document.getElementById('a-morph').value.trim();
+  var file = document.getElementById('fi-apply').files[0];
+  var agree= document.getElementById('a-agree').checked;
+
+  if (!nkSei || !nkMei)       { toast('氏名（漢字）の姓と名を入力してください'); return; }
+  if (!ngSei || !ngMei)       { toast('フリガナの姓と名を入力してください'); return; }
+  if (!dob)                   { toast('生年月日を入力してください'); return; }
+  if (!em || !em.includes('@')){ toast('メールアドレスを入力してください'); return; }
+  if (!tel)                   { toast('電話番号を入力してください'); return; }
+  if (!ad1)                   { toast('住所を入力してください'); return; }
+  if (!file)                  { toast('検査証の写真を選択してください'); return; }
+  if (!agree)                 { toast('プライバシーポリシーへの同意が必要です'); return; }
+
+  loading(true, '申請送信中...');
+  try {
+    var b64 = await toBase64(file);
+    var address = (pref||'') + ad1 + (ad2 ? ' '+ad2 : '');
+    var r = await post({
+      action:'submitapply',
+      nameKanji:nk, nameKana:ng, nameRomaji:_autoRomaji, dob:dob,
+      email:em, tel:tel, zip:zip, address:address,
+      volume:vol, concentration:conc, total:tot, morphology:morph,
+      photoData:b64, photoName:file.name
+    });
+    loading(false);
+    if (r.ok) {
+      document.getElementById('done-icon').textContent = '✅';
+      document.getElementById('done-title').textContent = '申請が完了しました';
+      document.getElementById('done-msg').textContent = 'ご申請ありがとうございます。\n審査結果は ' + em + ' にメールでお知らせします。\n\n審査には数日かかる場合があります。';
+      show('s-done');
+    } else { toast('エラー: ' + (r.error||'申請失敗')); }
+  } catch(e) { loading(false); toast('通信エラーが発生しました'); }
+}
+
+// ===== 更新申請 =====
+async function submitRenew() {
+  var email = sessionStorage.getItem('sc_em');
+  if (!email) { toast('ログインしてください'); show('s-top'); return; }
+  var file = document.getElementById('fi-renew').files[0];
+  if (!file) { toast('検査結果の写真を選択してください'); return; }
+  loading(true, '更新申請送信中...');
+  try {
+    var b64 = await toBase64(file);
+    var r = await post({ action:'submitrenew', email:email, photoData:b64, photoName:file.name });
+    loading(false);
+    if (r.ok) {
+      document.getElementById('done-icon').textContent = '✅';
+      document.getElementById('done-title').textContent = '更新申請が完了しました';
+      document.getElementById('done-msg').textContent = '更新申請を受け付けました。\n審査結果はメールでお知らせします。';
+      show('s-done');
+    } else { toast('エラー: ' + (r.error||'申請失敗')); }
+  } catch(e) { loading(false); toast('通信エラーが発生しました'); }
+}
+</script>
+</body>
+</html>

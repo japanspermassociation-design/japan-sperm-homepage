@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>SEED CARD｜認定</title>
+<meta property="og:title" content="SEED CARD｜一般社団法人 日本精子協会 認定">
+<meta property="og:description" content="精子の資格「SEED CARD」を取得しました。精子のチカラで、輝く未来を作る。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SEED CARD｜一般社団法人 日本精子協会 認定">
+<meta name="twitter:description" content="精子の資格「SEED CARD」を取得しました。精子のチカラで、輝く未来を作る。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f2f2f7;
+  --white:#ffffff;
+  --text:#1d1d1f;
+  --text2:#3a3a3c;
+  --text3:#86868b;
+  --border:rgba(60,60,67,.12);
+  --grad-purple:linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 100%);
+  --grad-soft:linear-gradient(135deg,#ffffff 0%,#f0ebff 100%);
+  --accent:#9b87d6;
+  --jp:'Noto Sans JP',sans-serif;
+  --sf:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+  --en:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--jp);
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+.grad{background:var(--grad-purple);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.container{max-width:480px;margin:0 auto;padding:0 16px}
+
+/* ─── ヘッダー（究極にミニマル） ─── */
+.top-status{
+  font-family:var(--en);font-size:10.5px;font-weight:600;
+  letter-spacing:.18em;color:var(--text3);
+  text-align:center;
+  padding:32px 0 16px;
+  text-transform:uppercase;
+}
+
+/* ─── ウェルカム ─── */
+.welcome{padding:56px 16px 8px}
+.welcome h1{
+  font-family:var(--sf);
+  font-size:38px;font-weight:600;letter-spacing:-.025em;
+  line-height:1.05;
+  color:var(--text);
+}
+.welcome h1 .grad-name{
+  display:block;
+  background:var(--grad-purple);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-top:4px;
+}
+.member-since{
+  margin-top:14px;
+  font-family:var(--en);font-size:11px;font-weight:500;
+  letter-spacing:.18em;color:var(--text3);
+  text-transform:uppercase;
+}
+
+/* ─── カードビジュアル ─── */
+.card-stage{
+  margin:36px 0 0;
+  padding:0;
+  display:flex;justify-content:center;
+}
+
+.card-main{
+  width:100%;aspect-ratio:340/214;
+  border-radius:18px;
+  background:var(--grad-soft);
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 44px rgba(0,0,0,.1),0 4px 10px rgba(0,0,0,.06);
+}
+.card-main svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* カード下のキャプション */
+.card-caption{
+  text-align:center;
+  margin-top:18px;
+  font-family:var(--en);font-size:10px;font-weight:600;
+  letter-spacing:.22em;color:var(--text3);
+  text-transform:uppercase;
+}
+
+/* ─── セクション共通（iOS設定風bento） ─── */
+.section{
+  padding:0;
+  margin-bottom:28px;
+}
+.section-header{
+  margin-bottom:8px;
+  padding:0 16px;
+}
+.section-h{
+  font-family:var(--sf);
+  font-size:13px;font-weight:600;
+  letter-spacing:.04em;
+  color:var(--text3);
+  text-transform:uppercase;
+  line-height:1.3;
+}
+.section-sub{
+  font-size:12px;color:var(--text3);
+  margin-top:6px;letter-spacing:.005em;line-height:1.55;
+  padding:0;text-transform:none;font-weight:400;
+}
+
+/* bento本体 */
+.bento{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+}
+/* 検査データ専用：ライトグラデーション背景 */
+.bento.gradient-bento{
+  background:linear-gradient(135deg,#f0e8ff 0%,#e8f0ff 100%);
+}
+
+/* ─── 情報リスト（bento内） ─── */
+.info-list,
+.data-list,
+.privacy-list{
+  display:flex;flex-direction:column;
+}
+.info-row,
+.data-row,
+.privacy-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;
+  border-bottom:.5px solid var(--border);
+  min-height:44px;
+}
+.data-row{padding:13px 16px}
+.info-row:last-child,
+.data-row:last-child,
+.privacy-row:last-child{border-bottom:none}
+
+.info-row{font-size:15px}
+.info-row .l{color:var(--text);font-weight:400;letter-spacing:.005em}
+.info-row .v{
+  font-family:var(--sf);
+  color:var(--text3);font-weight:400;
+  letter-spacing:-.005em;
+}
+
+/* ─── 検査データリスト ─── */
+.data-name-block{display:flex;flex-direction:column;line-height:1.2}
+.data-row .name{
+  font-size:15px;color:var(--text);font-weight:400;
+  letter-spacing:.005em;
+}
+.data-row .who-base{
+  font-size:11px;color:var(--text3);font-weight:400;
+  letter-spacing:.005em;margin-top:3px;
+}
+.data-row .val{
+  font-family:var(--sf);
+  font-size:16px;font-weight:600;
+  color:var(--text);
+  letter-spacing:-.01em;
+}
+.data-row .val .unit{
+  font-size:12px;font-weight:500;
+  color:var(--text3);
+  margin-left:4px;letter-spacing:.005em;
+}
+
+/* ─── プライバシー設定 ─── */
+.privacy-row{
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.privacy-row .lbl{
+  font-size:15px;color:var(--text);font-weight:400;
+  letter-spacing:.005em;
+}
+
+/* ─── アップデートボタン（独立bento） ─── */
+.update-card{
+  display:flex;align-items:center;gap:14px;
+  width:100%;padding:14px 16px;
+  background:#fff;
+  border-radius:14px;
+  cursor:pointer;
+  transition:transform .15s,background .15s;
+  text-decoration:none;
+  min-height:60px;
+}
+.update-card:active{transform:scale(.985);background:#f5f5f7}
+.update-card .icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--grad-purple);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 3px 10px rgba(155,135,214,.3);
+}
+.update-card .icon svg{width:18px;height:18px;color:#fff;stroke-width:2.2}
+.update-card .text{flex:1;line-height:1.3}
+.update-card .text .ttl{
+  font-family:var(--sf);
+  font-size:15px;font-weight:500;color:var(--text);
+  letter-spacing:-.005em;margin-bottom:2px;
+}
+.update-card .text .sub{
+  font-size:12px;color:var(--text3);
+  letter-spacing:.005em;line-height:1.4;
+}
+.update-card .price{
+  font-family:var(--sf);
+  font-size:16px;font-weight:600;
+  color:var(--text);letter-spacing:-.01em;
+  flex-shrink:0;
+}
+
+/* ─── トグルスイッチ ─── */
+.toggle{
+  width:46px;height:28px;border-radius:99px;
+  background:rgba(120,120,128,.16);
+  position:relative;transition:background .25s;
+  flex-shrink:0;
+}
+.toggle.on{background:var(--grad-purple)}
+.toggle-knob{
+  position:absolute;top:2px;left:2px;
+  width:24px;height:24px;border-radius:50%;
+  background:#fff;
+  box-shadow:0 3px 8px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.1);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.toggle.on .toggle-knob{transform:translateX(18px)}
+
+/* ─── ウォレットボタン ─── */
+.wallet-stack{
+  display:flex;flex-direction:column;gap:10px;
+  align-items:center;
+  margin-top:6px;
+}
+.wallet-btn{
+  display:block;width:100%;max-width:230px;
+  cursor:pointer;text-decoration:none;
+  transition:transform .15s,opacity .15s;
+  background:transparent;border:none;padding:0;line-height:0;
+}
+.wallet-btn:active{transform:scale(.97);opacity:.92}
+.wallet-btn svg{
+  width:100%;height:auto;display:block;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
+}
+
+/* ─── シェアセクション ─── */
+.share-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  margin-bottom:30px;
+  padding:8px 0;
+}
+.share-btn{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;
+  padding:8px 0;
+  background:transparent;
+  border-radius:0;
+  cursor:pointer;
+  transition:transform .15s,opacity .15s;
+  text-decoration:none;
+  position:relative;
+}
+.share-btn:active{transform:scale(.94);opacity:.8}
+.share-btn .ico{
+  width:56px;height:56px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.1);
+}
+.share-btn .ico svg{width:26px;height:26px}
+.share-btn .name{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:50%;
+  transform:translateX(-50%);
+  font-size:11px;font-weight:500;
+  color:var(--text);letter-spacing:.01em;
+  white-space:nowrap;
+}
+.ico-x{background:#000;color:#fff}
+.ico-line{background:#06c755;color:#fff}
+.ico-fb{background:#1877f2;color:#fff}
+.ico-copy{
+  background:#f0f0f3;color:var(--text2);
+  box-shadow:none;
+}
+.ico-copy svg{width:22px;height:22px}
+
+/* シェア文章プレビュー */
+.share-preview{
+  background:#fff;
+  border-radius:14px;
+  padding:16px 18px;
+}
+.share-preview-card{
+  margin:6px auto 18px;
+  width:63%;max-width:252px;
+  aspect-ratio:340/214;
+  border-radius:10px;overflow:hidden;
+  background:linear-gradient(135deg,#fff,#f5f0ff);
+  box-shadow:0 6px 18px rgba(155,135,214,.16),0 2px 5px rgba(0,0,0,.04);
+  position:relative;
+}
+.share-preview-card svg{position:absolute;inset:0;width:100%;height:100%}
+.share-preview-note{
+  margin:0 auto 18px;
+  font-family:var(--en);font-size:9.5px;font-weight:500;
+  letter-spacing:.05em;color:var(--text3);
+  text-align:center;
+}
+.share-preview .label{
+  font-family:var(--en);font-size:9.5px;font-weight:600;
+  letter-spacing:.18em;color:var(--text3);
+  text-transform:uppercase;margin-bottom:10px;
+}
+.share-preview .text{
+  font-size:13px;color:var(--text2);line-height:1.85;
+  letter-spacing:.005em;white-space:pre-line;
+}
+.share-preview .tag{color:var(--accent);font-weight:500}
+
+/* ─── フッター ─── */
+.footer{
+  margin-top:44px;padding:28px 0 50px;
+  border-top:.5px solid var(--border);
+  text-align:center;
+  font-size:11.5px;color:var(--text3);letter-spacing:.02em;line-height:1.85;
+}
+.footer a{color:var(--accent);text-decoration:none;font-weight:500}
+.footer .sep{margin:0 10px;opacity:.5}
+
+/* ─── カードダウンロードボタン ─── */
+.dl-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 20px;
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:99px;
+  font-size:12px;font-weight:500;
+  color:var(--text3);
+  cursor:pointer;
+  font-family:var(--jp);
+  transition:background .15s,color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.dl-btn:active{background:#f5f5f7;color:var(--text)}
+.dl-btn svg{width:13px;height:13px;flex-shrink:0}
+
+/* ─── トースト ─── */
+.toast{
+  position:fixed;left:50%;bottom:30px;
+  transform:translateX(-50%) translateY(100px);
+  background:rgba(29,29,31,.96);color:#fff;
+  padding:13px 24px;border-radius:99px;
+  font-family:var(--sf);font-size:14px;font-weight:500;
+  letter-spacing:-.005em;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  opacity:0;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .35s;
+  z-index:200;pointer-events:none;
+  display:flex;align-items:center;gap:8px;
+  backdrop-filter:blur(20px);
+}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+.toast svg{width:16px;height:16px;color:#7eb8e4}
+
+/* ─── レスポンシブ調整 ─── */
+@media(max-width:380px){
+  .container{padding:0 20px}
+  .welcome h1{font-size:32px}
+  .section-h{font-size:20px}
+}
+
+/* ─── A. パーセンタイルバッジ ─── */
+.pct-badge{
+  display:inline-flex;align-items:center;
+  background:linear-gradient(135deg,#c8a8f0,#7ec8f8);
+  border-radius:99px;padding:2px 8px;
+  font-family:var(--sf);font-size:10px;font-weight:700;
+  color:#fff;letter-spacing:.02em;white-space:nowrap;
+  opacity:0;transition:opacity .4s ease;
+}
+
+/* ─── A. データ行（バー付き新レイアウト） ─── */
+.data-row{
+  padding:14px 16px 12px !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  min-height:unset !important;
+  gap:8px;
+}
+.data-row-top{display:flex;justify-content:space-between;align-items:flex-start}
+.data-val-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.data-bar-wrap{
+  position:relative;height:4px;
+  background:rgba(120,120,128,.12);
+  border-radius:99px;overflow:visible;margin-top:2px;
+}
+.data-bar-fill{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,#c8a8f0,#7ec8f8);
+  width:0%;transition:width 1.3s cubic-bezier(.34,1.1,.64,1);
+}
+.data-bar-ref{
+  position:absolute;top:-4px;
+  width:1.5px;height:12px;
+  background:rgba(150,100,220,.5);
+  border-radius:1px;transform:translateX(-50%);
+}
+.data-bar-ref::after{
+  content:'WHO';
+  position:absolute;
+  top:50%;left:3px;
+  transform:translateY(-50%);
+  font-size:7px;font-weight:700;
+  color:rgba(130,80,200,.9);white-space:nowrap;
+  font-family:var(--sf);letter-spacing:.04em;
+  background:rgba(248,244,255,.96);
+  border-radius:3px;padding:1px 3px;
+  line-height:1;
+}
+
+/* ─── C. Verifiedバッジ ─── */
+.verified-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:linear-gradient(135deg,rgba(200,168,240,.14),rgba(126,200,248,.14));
+  border:1px solid rgba(155,135,214,.28);
+  border-radius:99px;padding:4px 10px 4px 5px;
+  margin-top:10px;opacity:0;
+  animation:fadeSlideUp .45s ease 1.3s forwards;
+}
+.verified-badge svg{width:16px;height:16px;flex-shrink:0}
+.verified-badge .vbl{
+  font-family:var(--sf);font-size:11px;font-weight:600;
+  color:#9b87d6;letter-spacing:.02em;
+}
+
+/* ─── D. カード3Dフリップ ─── */
+.card-stage{perspective:900px}
+.card-3d-wrap{
+  width:100%;
+  opacity:0;
+  transform-origin:center center;
+  transform-style:preserve-3d;
+}
+.card-3d-wrap.card-on{
+  animation:cardFlip .85s cubic-bezier(.34,1.2,.64,1) forwards;
+}
+@keyframes cardFlip{
+  0%{transform:rotateY(-90deg);opacity:0}
+  25%{opacity:1}
+  100%{transform:rotateY(0deg);opacity:1}
+}
+
+/* ─── D. 認定スタンプ ─── */
+.card-stamp{
+  position:absolute;bottom:12px;right:14px;
+  opacity:0;transform:scale(3.5) rotate(-22deg);
+  transform-origin:center center;pointer-events:none;
+}
+.card-stamp.stamp-on{
+  animation:stampIn .55s cubic-bezier(.22,1.5,.36,1) forwards;
+}
+@keyframes stampIn{
+  0%{opacity:0;transform:scale(3) rotate(-18deg)}
+  55%{opacity:1;transform:scale(.88) rotate(3deg)}
+  75%{transform:scale(1.07) rotate(-1.5deg)}
+  100%{opacity:1;transform:scale(1) rotate(0deg)}
+}
+
+/* ─── D. フェードアップ共通 ─── */
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ウェルカム -->
+  <div class="welcome">
+    <h1>
+      Welcome,<span class="grad-name" id="welcomeName">.</span>
+    </h1>
+    <div class="member-since" id="memberSince">Member since </div>
+    <div class="verified-badge">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vbg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c8a8f0"/>
+            <stop offset="100%" stop-color="#7ec8f8"/>
+          </linearGradient>
+        </defs>
+        <circle cx="8" cy="8" r="8" fill="url(#vbg)"/>
+        <path d="M4 8.5 L6.5 11 L12 5.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="vbl">一般社団法人 日本精子協会　認定済み</span>
+    </div>
+  </div>
+
+  <!-- カードビジュアル -->
+  <div class="card-stage" id="cardStage">
+    <div class="card-3d-wrap" id="card3d">
+      <div class="card-main">
+        <svg viewBox="0 0 340 214" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cm1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#f0ebff"/>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="214" fill="url(#cm1)" rx="14"/>
+          <!-- 左上：SEED CARD ロゴ（黄金バランス位置 y=48） -->
+          <text x="28" y="48" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3.6" fill="#6c757d">SEED CARD</text>
+          <!-- 右上：NFCマーク（SEED CARDと水平揃え） -->
+          <g transform="translate(283.5,21) scale(1.6)">
+            <path d="M16.3 19.5C17.4 17.2 18 14.7 18 12S17.4 6.7 16.3 4.5M12.7 17.8C13.5 16 14 14 14 12S13.5 7.9 12.7 6.1M9.1 16.1C9.7 14.8 10 13.4 10 12S9.7 9.1 9.1 7.9M5.5 14.3C5.8 13.6 6 12.8 6 12S5.8 10.3 5.5 9.6" stroke="#6c757d" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </g>
+          <!-- 左下：会員番号（小さめ）+ 名前 -->
+          <text id="cardMemberNo" x="28" y="170" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="9" font-weight="500" letter-spacing="2" fill="#9aa0a8"></text>
+          <text x="28" y="190" id="cardName" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1" fill="#6c757d"></text>
+          <!-- 右下：精子マーク（下端=TARO SEISHI下端=190に揃え）-->
+          <g transform="translate(250.9,148.5) scale(0.1185)">
+            <path fill="#6c757d" d="M422.4,142.6c18.3-2.6,31.5,12.8,42.2,25.5,42.2,50.2,73.7,134,28.7,192-35.1,45.4-85.7,51.7-125,7-49.8-56.5-24-134.7,15.1-189,8.2-11.4,24.6-33.5,39.1-35.6ZM425.7,158.6c-12.5,2.1-34.4,34.6-41,45.7-31.6,52.4-46.9,125.4,11,166.2,48.5,34.1,100.4-19.4,104.2-67.6,3.6-45.2-24.2-102.4-55.3-134.1-4.7-4.8-11.9-11.3-18.9-10.2Z"/>
+          </g>
+        </svg>
+        <div class="card-stamp" id="cardStamp">
+          <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35" cy="35" r="32" fill="none" stroke="rgba(155,135,214,0.45)" stroke-width="2" stroke-dasharray="4 2.5"/>
+            <circle cx="35" cy="35" r="24" fill="none" stroke="rgba(155,135,214,0.35)" stroke-width="1.2"/>
+            <path d="M22 35 L31 44 L48 26" stroke="#9b87d6" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+            <text x="35" y="16" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="6" font-weight="700" letter-spacing="2.5" fill="rgba(155,135,214,0.85)">CERTIFIED</text>
+            <text x="35" y="59" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="5.5" font-weight="600" letter-spacing="1.5" fill="rgba(155,135,214,0.8)">精子協会認定</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- カードダウンロードボタン -->
+  <div style="text-align:center;margin-top:14px;margin-bottom:4px">
+    <button class="dl-btn" onclick="downloadCard()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      カード画像を保存
+    </button>
+  </div>
+
+  <!-- ① 認定情報 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">認定情報</div>
+    </div>
+    <div class="bento">
+      <div class="info-list">
+        <div class="info-row" id="rowName"><span class="l">氏名</span><span class="v" id="valName"></span></div>
+        <div class="info-row" id="rowNo"><span class="l">会員番号</span><span class="v" id="valNo"></span></div>
+        <div class="info-row" id="rowCertDate"><span class="l">認定日</span><span class="v" id="valCertDate"></span></div>
+        <div class="info-row" id="rowExpiry"><span class="l">認定期限</span><span class="v" id="valExpiry"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 検査データ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">検査データ</div>
+      <div class="section-sub" id="sectionLastExam">WHO 2021基準·全項目クリア · 最終検査:</div>
+    </div>
+    <div class="bento gradient-bento">
+      <div class="data-list">
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">精液量</span>
+              <span class="who-base">基準:1.4mL 以上</span>
+            </div>
+            <div class="data-val-right">
+              <span class="val"><span id="numVol">—</span><span class="unit">mL</span></span>
+              <span class="pct-badge" id="pctVol"></span>
+            </div>
+          </div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barVol"></div>
+            <div class="data-bar-ref" id="refVol"></div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">精子濃度</span>
+              <span class="who-base">基準:1,600万/mL 以上</span>
+            </div>
+            <div class="data-val-right">
+              <span class="val"><span id="numConc">—</span><span class="unit" id="unitConc">万/mL</span></span>
+              <span class="pct-badge" id="pctConc"></span>
+            </div>
+          </div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barConc"></div>
+            <div class="data-bar-ref" id="refConc"></div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">総精子数</span>
+              <span class="who-base">基準:3,900万 以上</span>
+            </div>
+            <div class="data-val-right">
+              <span class="val"><span id="numTotal">—</span><span class="unit" id="unitTotal">億</span></span>
+              <span class="pct-badge" id="pctTotal"></span>
+            </div>
+          </div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barTotal"></div>
+            <div class="data-bar-ref" id="refTotal"></div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">正常形態率</span>
+              <span class="who-base">基準:4% 以上</span>
+            </div>
+            <div class="data-val-right">
+              <span class="val"><span id="numMorph">—</span><span class="unit">%</span></span>
+              <span class="pct-badge" id="pctMorph"></span>
+            </div>
+          </div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barMorph"></div>
+            <div class="data-bar-ref" id="refMorph"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 更新ボタン -->
+    <div id="updateCardWrap" style="margin-top:10px">
+      <a id="updateCardLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdUBZGeShk0Q0Zg6JLAV7WPtTjsnkHoACp99wpSkksU2EQFCQ/viewform?usp=header" class="update-card" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+            <polyline points="21 3 21 8 16 8"/>
+            <polyline points="3 21 3 16 8 16"/>
+          </svg>
+        </div>
+        <div class="text">
+          <div class="ttl" id="updateCardTtl">検査結果を更新する</div>
+          <div class="sub" id="updateCardSub">再検査結果を反映 · 認定期限を1年延長</div>
+        </div>
+        <div class="price">¥10,000</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ③ 表示設定 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">表示設定</div>
+      <div class="section-sub">SNSシェア·認定証で表示する項目</div>
+    </div>
+    <div class="bento">
+      <div class="privacy-list">
+        <div class="privacy-row" onclick="togglePrivacy('name')">
+          <span class="lbl">氏名を表示</span>
+          <div class="toggle on" id="swName"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="privacy-row" onclick="togglePrivacy('no')">
+          <span class="lbl">会員番号を表示</span>
+          <div class="toggle on" id="swNo"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="privacy-row" onclick="togglePrivacy('certDate')">
+          <span class="lbl">認定日を表示</span>
+          <div class="toggle on" id="swCertDate"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="privacy-row" onclick="togglePrivacy('expiry')">
+          <span class="lbl">認定期限を表示</span>
+          <div class="toggle on" id="swExpiry"><div class="toggle-knob"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ シェア -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">シェアする</div>
+      <div class="section-sub">仲間と認定を共有しましょう</div>
+    </div>
+
+    <!-- 画像としてシェア -->
+    <a href="#" class="update-card" onclick="downloadCard();return false;" style="margin-bottom:10px">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </div>
+      <div class="text">
+        <div class="ttl">カード画像をダウンロードしてシェア</div>
+        <div class="sub">名前・会員番号入りの画像を保存</div>
+      </div>
+    </a>
+    <div class="share-grid">
+      <a href="#" class="share-btn" onclick="shareX(event)">
+        <div class="ico ico-x"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+      </a>
+      <a href="#" class="share-btn" onclick="shareLine(event)">
+        <div class="ico ico-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.628-.63.628h-2.386c-.345 0-.627-.285-.627-.628V8.108c0-.345.282-.63.63-.63h2.386c.345 0 .627.285.627.63 0 .349-.282.63-.63.63H17.61v1.125zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v3.756h1.756c.348 0 .629.283.629.63 0 .344-.282.628-.629.628M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></div>
+      </a>
+      <a href="#" class="share-btn" onclick="shareFacebook(event)">
+        <div class="ico ico-fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+      </a>
+    </div>
+
+    <div class="share-preview">
+      <div class="label">投稿される文章</div>
+
+      <div class="share-preview-card">
+        <svg viewBox="0 0 340 214" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="spc1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#f0ebff"/>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="214" fill="url(#spc1)" rx="14"/>
+          <text x="28" y="48" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3.6" fill="#6c757d">SEED CARD</text>
+          <g transform="translate(283.5,21) scale(1.6)">
+            <path d="M16.3 19.5C17.4 17.2 18 14.7 18 12S17.4 6.7 16.3 4.5M12.7 17.8C13.5 16 14 14 14 12S13.5 7.9 12.7 6.1M9.1 16.1C9.7 14.8 10 13.4 10 12S9.7 9.1 9.1 7.9M5.5 14.3C5.8 13.6 6 12.8 6 12S5.8 10.3 5.5 9.6" stroke="#6c757d" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </g>
+          <text id="shareCardMemberNo" x="28" y="170" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="9" font-weight="500" letter-spacing="2" fill="#9aa0a8"></text>
+          <text id="shareCardName" x="28" y="190" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1" fill="#6c757d"></text>
+          <g transform="translate(250.9,148.5) scale(0.1185)">
+            <path fill="#6c757d" d="M422.4,142.6c18.3-2.6,31.5,12.8,42.2,25.5,42.2,50.2,73.7,134,28.7,192-35.1,45.4-85.7,51.7-125,7-49.8-56.5-24-134.7,15.1-189,8.2-11.4,24.6-33.5,39.1-35.6ZM425.7,158.6c-12.5,2.1-34.4,34.6-41,45.7-31.6,52.4-46.9,125.4,11,166.2,48.5,34.1,100.4-19.4,104.2-67.6,3.6-45.2-24.2-102.4-55.3-134.1-4.7-4.8-11.9-11.3-18.9-10.2Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="text" id="shareText">精子の資格「SEED CARD」を取得しました。
+
+<span class="tag">#日本精子協会 #SEEDCARD #精子のチカラで輝く未来を作る #プレコンセプションケア #ブライダルチェック</span></div>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  <!-- ⑥ アカウント設定 -->
+  <div class="section" id="accountSection">
+    <div class="section-header">
+      <div class="section-h">アカウント設定</div>
+      <div class="section-sub">登録情報の変更</div>
+    </div>
+    <div class="bento">
+      <div class="privacy-list">
+        <div class="privacy-row" style="cursor:pointer" onclick="document.getElementById('emailChangeArea').style.display=document.getElementById('emailChangeArea').style.display==='none'?'block':'none'">
+          <span class="lbl">登録メールアドレスを変更</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div id="emailChangeArea" style="display:none;padding:16px 0 4px">
+          <input type="email" id="newEmailInput" placeholder="新しいメールアドレス" autocomplete="email"
+            style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
+          <button onclick="requestEmailChange()" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer" id="emailChangeBtn">
+            確認メールを送信
+          </button>
+          <div id="emailChangeMsg" style="display:none;margin-top:10px;font-size:12px;line-height:1.6;padding:10px 12px;border-radius:8px"></div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:0"></div>
+
+        <div class="privacy-row" style="cursor:pointer" onclick="document.getElementById('addressChangeArea').style.display=document.getElementById('addressChangeArea').style.display==='none'?'block':'none'">
+          <span class="lbl">発送先住所を変更</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div id="addressChangeArea" style="display:none;padding:16px 0 4px">
+          <input type="text" id="newPostalInput" placeholder="郵便番号（例：1040061）" inputmode="numeric"
+            style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
+          <input type="text" id="newAddressInput" placeholder="住所（都道府県から）"
+            style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
+          <button onclick="requestAddressChange()" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer" id="addressChangeBtn">
+            住所を更新する
+          </button>
+          <div id="addressChangeMsg" style="display:none;margin-top:10px;font-size:12px;line-height:1.6;padding:10px 12px;border-radius:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    一般社団法人 日本精子協会<br>
+    <a href="#">公式サイト</a><span class="sep">·</span><a href="#">サポート</a><br>
+    <a href="#" onclick="logout();return false;" style="color:var(--text3);margin-top:8px;display:inline-block;font-size:11px">ログアウト</a>
+  </div>
+
+</div>
+
+<!-- トースト -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastMsg">完了</span>
+</div>
+
+<script>
+// ─── トースト ───
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),2000);
+}
+
+// ─── プライバシートグル ───
+const state = { name: true, no: true, certDate: true, expiry: true };
+
+function togglePrivacy(field){
+  state[field] = !state[field];
+  apply();
+}
+
+function apply(){
+  // ヘッダーの名前
+  const welcomeName = document.getElementById('welcomeName');
+  const cardName = document.getElementById('cardName');
+  const valName = document.getElementById('valName');
+  const shareCardName = document.getElementById('shareCardName');
+  const shareCardMemberNo = document.getElementById('shareCardMemberNo');
+
+  if(state.name){
+    if(welcomeName) welcomeName.textContent = _mName + '.';
+    if(cardName) cardName.textContent = _mRomaji;
+    if(valName) { valName.textContent = _mName; valName.style.color = ''; }
+    document.getElementById('swName').classList.add('on');
+    if(shareCardName) shareCardName.textContent = _mRomaji;
+  } else {
+    if(welcomeName) welcomeName.textContent = 'Member.';
+    if(cardName) cardName.textContent = '';
+    if(valName) { valName.textContent = '— 非公開 —'; valName.style.color = 'var(--text3)'; }
+    document.getElementById('swName').classList.remove('on');
+    if(shareCardName) shareCardName.textContent = '';
+  }
+
+  // 会員番号
+  const valNo = document.getElementById('valNo');
+  const cardMemberNo = document.getElementById('cardMemberNo');
+  if(state.no){
+    if(valNo) { valNo.textContent = _mNoStr; valNo.style.color = ''; }
+    if(cardMemberNo) cardMemberNo.style.display = '';
+    document.getElementById('swNo').classList.add('on');
+    if(shareCardMemberNo) shareCardMemberNo.textContent = _mNoStr;
+  } else {
+    if(valNo) { valNo.textContent = '— 非公開 —'; valNo.style.color = 'var(--text3)'; }
+    if(cardMemberNo) cardMemberNo.style.display = 'none';
+    document.getElementById('swNo').classList.remove('on');
+    if(shareCardMemberNo) shareCardMemberNo.textContent = '';
+  }
+
+  // 認定日
+  const rowCert = document.getElementById('rowCertDate');
+  if(state.certDate){
+    rowCert.style.display = '';
+    document.getElementById('swCertDate').classList.add('on');
+  } else {
+    rowCert.style.display = 'none';
+    document.getElementById('swCertDate').classList.remove('on');
+  }
+
+  // 認定期限
+  const rowEx = document.getElementById('rowExpiry');
+  if(state.expiry){
+    rowEx.style.display = '';
+    document.getElementById('swExpiry').classList.add('on');
+  } else {
+    rowEx.style.display = 'none';
+    document.getElementById('swExpiry').classList.remove('on');
+  }
+}
+
+// ─── ウォレット追加 ───
+function addToAppleWallet(e){e.preventDefault();showToast('Apple Walletに追加しています...')}
+function addToGoogleWallet(e){e.preventDefault();showToast('Google Walletに追加しています...')}
+
+// ─── SNSシェア ───
+var shareUrl = window.location.href;
+const shareText = `精子の資格「SEED CARD」を取得しました。
+
+#日本精子協会 #SEEDCARD #精子のチカラで輝く未来を作る #プレコンセプションケア #ブライダルチェック`;
+
+var ASSOC_URL = 'https://www.japan-sperm.com';
+
+function shareX(e){
+  e.preventDefault();
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText), '_blank');
+}
+function shareLine(e){
+  e.preventDefault();
+  window.open('https://line.me/R/msg/text/?' + encodeURIComponent(shareText), '_blank');
+}
+function shareFacebook(e){
+  e.preventDefault();
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '&quote=' + encodeURIComponent(shareText), '_blank');
+}
+function copyLink(e){
+  e.preventDefault();
+  navigator.clipboard.writeText(shareText + '\n' + ASSOC_URL).then(function(){ showToast('文章をコピーしました'); });
+}
+
+// ─── Apps Script API URL（Netlifyからデータ取得に使用） ───
+var APPS_SCRIPT_API = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
+
+// apply()が使う表示用変数
+var _mName   = '';
+var _mRomaji = '';
+var _mNoStr  = '';
+
+function initFromMemberData(m) {
+  if (!m) { return; }
+
+  _mName   = m.name || '';
+  _mNoStr  = 'No.' + String(m.memberNo);
+  _mRomaji = m.nameRomaji ? m.nameRomaji.toUpperCase() : _mName;
+
+  // 名前
+  var nameEl = document.getElementById('welcomeName');
+  if (nameEl) { nameEl.textContent = _mName + '.'; }
+  var valNameEl = document.getElementById('valName');
+  if (valNameEl) { valNameEl.textContent = _mName; }
+  var cardNameEl = document.getElementById('cardName');
+  if (cardNameEl) { cardNameEl.textContent = _mRomaji; }
+
+  // 会員番号
+  var memberSinceEl = document.getElementById('memberSince');
+  if (memberSinceEl) { memberSinceEl.textContent = 'Member since ' + String(m.certDate).substring(0, 4); }
+  var cardNoEl = document.getElementById('cardMemberNo');
+  if (cardNoEl) { cardNoEl.textContent = _mNoStr; }
+  var valNoEl = document.getElementById('valNo');
+  if (valNoEl) { valNoEl.textContent = _mNoStr; }
+
+  // 日付
+  var certDateEl = document.getElementById('valCertDate');
+  if (certDateEl) { certDateEl.textContent = m.certDate; }
+  var expiryEl = document.getElementById('valExpiry');
+  if (expiryEl) { expiryEl.textContent = m.expiryDate; }
+  var lastExamEl = document.getElementById('sectionLastExam');
+  if (lastExamEl) { lastExamEl.textContent = 'WHO 2021基準·全項目クリア · 最終検査:' + m.certDate; }
+
+  // 精子データをDEMO_DATAに反映
+  DEMO_DATA.vol.raw      = m.vol;
+  DEMO_DATA.vol.countEnd = m.vol;
+  DEMO_DATA.morph.raw      = m.morph;
+  DEMO_DATA.morph.countEnd = m.morph;
+
+  // スプレッドシートのあらゆる入力形式を「万」単位に正規化する
+  // 対応形式: "11000"(万), "110"(百万), "1.1"(億), "1"(億),
+  //           "110000000"(生数値), "1億1000万", "6600万", "1.1億" など
+  function toWan(v) {
+    var s = String(v || '').replace(/[,，\s　]/g, '');
+    if (!s || s === '0') return 0;
+    // 日本語表記（億・万の文字がある場合）
+    if (/[億万]/.test(s)) {
+      var om = s.match(/([0-9.]+)\s*億/); var mm = s.match(/([0-9.]+)\s*万/);
+      return Math.round((om ? parseFloat(om[1]) * 10000 : 0) + (mm ? parseFloat(mm[1]) : 0));
+    }
+    var n = parseFloat(s);
+    if (isNaN(n) || n <= 0) return 0;
+    if (n >= 1000000) return Math.round(n / 10000); // 生数値 → 万
+    if (n >= 1000)    return Math.round(n);          // 万単位（例:11000）
+    if (n >= 10)      return Math.round(n * 100);    // 百万単位（例:110）
+    return Math.round(n * 10000);                    // 億単位（例:1.1, 1）
+  }
+
+  // 精子濃度：万/mLまたは億/mLで表示
+  var concWan = toWan(m.conc);
+  DEMO_DATA.conc.raw = concWan / 100;
+  var unitConcEl = document.getElementById('unitConc');
+  if (concWan < 10000) {
+    DEMO_DATA.conc.countEnd = concWan;
+    DEMO_DATA.conc.fmt = function(n) { return Math.round(n).toLocaleString(); };
+    if (unitConcEl) unitConcEl.textContent = '万/mL';
+  } else {
+    DEMO_DATA.conc.countEnd = concWan / 10000;
+    DEMO_DATA.conc.fmt = function(n) { return n.toFixed(1); };
+    if (unitConcEl) unitConcEl.textContent = '億/mL';
+  }
+
+  // 総精子数：万または億で表示
+  var totalWan = toWan(m.total);
+  DEMO_DATA.total.raw = totalWan / 100;
+  var unitTotalEl = document.getElementById('unitTotal');
+  if (totalWan < 10000) {
+    DEMO_DATA.total.countEnd = totalWan;
+    DEMO_DATA.total.fmt = function(n) { return Math.round(n).toLocaleString(); };
+    if (unitTotalEl) unitTotalEl.textContent = '万';
+  } else {
+    DEMO_DATA.total.countEnd = totalWan / 10000;
+    DEMO_DATA.total.fmt = function(n) { return n.toFixed(1); };
+    if (unitTotalEl) unitTotalEl.textContent = '億';
+  }
+
+  // 更新ボタン：フォームURLに氏名・会員番号を事前入力
+  (function() {
+    var wrap = document.getElementById('updateCardWrap');
+    var link = document.getElementById('updateCardLink');
+    var ttl  = document.getElementById('updateCardTtl');
+    var sub  = document.getElementById('updateCardSub');
+    if (!wrap) return;
+
+    var now    = new Date();
+    var expiry = m.expiryDate ? new Date(m.expiryDate) : null;
+    var diffMs = expiry ? expiry - now : null;
+    var diffDays = diffMs !== null ? Math.ceil(diffMs / 86400000) : null;
+
+    var today = new Date(); today.setHours(0,0,0,0);
+    var newExpiry = new Date(today); newExpiry.setFullYear(newExpiry.getFullYear() + 1);
+    var newExpiryStr = newExpiry.getFullYear() + '年' + (newExpiry.getMonth()+1) + '月' + newExpiry.getDate() + '日';
+
+    if (diffDays !== null && diffDays < 0) {
+      // 期限切れ
+      ttl.textContent = '認定期限が切れています';
+      sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます';
+      if (link) { link.style.background = 'linear-gradient(135deg,#fff1f2,#fff8f0)'; link.style.borderLeft = '3px solid #f43f5e'; }
+    } else if (diffDays !== null && diffDays <= 30) {
+      ttl.textContent = '検査結果を更新する（期限まで' + diffDays + '日）';
+      sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます · お早めに';
+    } else {
+      ttl.textContent = '検査結果を更新する';
+      sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます（更新日から1年）';
+    }
+
+    if (link) link.href = 'https://myseedcard.japan-sperm.com/portal.html';
+  })();
+
+  // シェアプレビューカードにも名前・番号を反映
+  apply();
+
+  // カードスタジオ用にセッション保存
+  try { sessionStorage.setItem('sc_member', JSON.stringify(m)); } catch(e) {}
+}
+
+// ─── A+D. WHO パーセンタイル＆アニメーション ───
+const WHO_TABLE = {
+  // WHO 2021 Table 8.3: [value, centile]
+  vol:   [[0,0],[1.0,2.5],[1.4,5],[1.8,10],[2.3,25],[3.0,50],[4.2,75],[5.5,90],[6.2,95],[6.9,97.5],[10,99]],
+  conc:  [[0,0],[11,2.5],[16,5],[22,10],[36,25],[66,50],[110,75],[166,90],[208,95],[254,97.5],[400,99]],
+  total: [[0,0],[29,2.5],[39,5],[58,10],[108,25],[210,50],[363,75],[561,90],[701,95],[865,97.5],[1300,99]],
+  morph: [[0,0],[3,2.5],[4,5],[5,10],[8,25],[14,50],[23,75],[32,90],[39,95],[45,97.5],[60,99]],
+};
+
+// デモ値（raw: WHO計算用単位, countEnd: 表示アニメ用）
+const DEMO_DATA = {
+  // WHO 2021 50th percentile values (median)
+  vol:   { raw:3.0,  countEnd:3.0,  fmt:n=>n.toFixed(1) },
+  conc:  { raw:66,   countEnd:6600, fmt:n=>Math.round(n).toLocaleString() },
+  total: { raw:210,  countEnd:2.1,  fmt:n=>n.toFixed(1) },
+  morph: { raw:14,   countEnd:14,   fmt:n=>Math.round(n)+'' },
+};
+
+function calcPct(table, value){
+  if(value <= table[0][0]) return 0;
+  if(value >= table[table.length-1][0]) return 99;
+  for(let i=1;i<table.length;i++){
+    if(value <= table[i][0]){
+      const [v0,p0]=table[i-1],[v1,p1]=table[i];
+      return p0+(value-v0)/(v1-v0)*(p1-p0);
+    }
+  }
+  return 99;
+}
+
+function topText(pct){
+  const top = Math.round(100-pct);
+  if(top<=5) return '上位5%以内';
+  return '上位約'+top+'%';
+}
+
+function runMetric(key, delay){
+  const data  = DEMO_DATA[key];
+  const table = WHO_TABLE[key];
+  const cap   = key.charAt(0).toUpperCase()+key.slice(1);
+  const numEl = document.getElementById('num'+cap);
+  const pctEl = document.getElementById('pct'+cap);
+  const barEl = document.getElementById('bar'+cap);
+  const refEl = document.getElementById('ref'+cap);
+  if(!numEl||!pctEl||!barEl||!refEl) return;
+
+  const pct = calcPct(table, data.raw);
+  refEl.style.left = '5%';
+
+  setTimeout(()=>{
+    // バー描画
+    setTimeout(()=>{ barEl.style.width = Math.min(pct,95)+'%'; }, 80);
+
+    // カウントアップ
+    const dur = 1200, t0 = performance.now();
+    function step(now){
+      const t = Math.min((now-t0)/dur, 1);
+      const e = 1-Math.pow(1-t, 3);
+      numEl.textContent = data.fmt(e * data.countEnd);
+      if(t < 1){ requestAnimationFrame(step); }
+      else {
+        numEl.textContent = data.fmt(data.countEnd);
+        pctEl.textContent = topText(pct);
+        pctEl.style.opacity = '1';
+      }
+    }
+    requestAnimationFrame(step);
+  }, delay);
+}
+
+function initAnimations(){
+  const card3d = document.getElementById('card3d');
+  const stamp  = document.getElementById('cardStamp');
+
+  if(card3d){
+    setTimeout(()=>{
+      card3d.classList.add('card-on');
+      card3d.addEventListener('animationend', ()=>{
+        if(stamp) setTimeout(()=>stamp.classList.add('stamp-on'), 250);
+      }, {once:true});
+    }, 80);
+  }
+
+  // A. パーセンタイルバー＋カウントアップ
+  runMetric('vol',  450);
+  runMetric('conc', 600);
+  runMetric('total',750);
+  runMetric('morph',900);
+}
+
+function loadByToken(token) {
+  fetch(APPS_SCRIPT_API + '?t=' + encodeURIComponent(token) + '&api=1')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error) {
+        document.body.innerHTML = '<p style="padding:60px;font-family:sans-serif;color:#333">認定情報が見つかりません。</p>';
+        return;
+      }
+      initFromMemberData(data);
+      initAnimations();
+    })
+    .catch(function(err) {
+      console.error('API error:', err);
+      document.body.innerHTML = '<p style="padding:60px;font-family:sans-serif;color:#333">データの読み込みに失敗しました。</p>';
+    });
+}
+
+function loadByMagic(magic) {
+  fetch(APPS_SCRIPT_API + '?api=1&magic=' + encodeURIComponent(magic))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error === 'expired') {
+        localStorage.removeItem('sc_magic');
+        window.location.replace('/login.html?expired=1');
+        return;
+      }
+      if (data.error) {
+        localStorage.removeItem('sc_magic');
+        window.location.replace('/login.html');
+        return;
+      }
+      localStorage.setItem('sc_magic', magic);
+      initFromMemberData(data);
+      initAnimations();
+    })
+    .catch(function(err) {
+      console.error('API error:', err);
+      document.body.innerHTML = '<p style="padding:60px;font-family:sans-serif;color:#333">データの読み込みに失敗しました。</p>';
+    });
+}
+
+function _cardRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function downloadCard() {
+  var svgEl = document.querySelector('.card-main svg');
+  if (!svgEl) { showToast('カードが読み込まれていません'); return; }
+
+  // 正方形キャンバス（Instagram/X対応）
+  var CW = 1080, CH = 1080;
+  var cardW = 820, cardH = Math.round(820 * 214 / 340);
+  var cardX = (CW - cardW) / 2;
+  var cardY = (CH - cardH) / 2 - 30;
+
+  var svgStr = new XMLSerializer().serializeToString(svgEl);
+  if (svgStr.indexOf('xmlns=') < 0) svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+  svgStr = svgStr.replace(/<svg([^>]*)>/, function(m, attrs) {
+    return '<svg' + attrs.replace(/\s*(?:width|height)="[^"]*"/g, '') + ' width="' + cardW + '" height="' + cardH + '">';
+  });
+
+  var svgBlob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  var svgUrl  = URL.createObjectURL(svgBlob);
+  var img = new Image();
+  img.onload = function() {
+    var cv  = document.createElement('canvas');
+    cv.width = CW; cv.height = CH;
+    var ctx = cv.getContext('2d');
+
+    // 背景グラデーション
+    var bg = ctx.createLinearGradient(0, 0, CW, CH);
+    bg.addColorStop(0, '#f5f0ff');
+    bg.addColorStop(1, '#eaf2ff');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, CW, CH);
+
+    // カード影
+    ctx.save();
+    ctx.shadowColor = 'rgba(155,135,214,0.28)';
+    ctx.shadowBlur  = 72;
+    ctx.shadowOffsetY = 28;
+    _cardRoundRect(ctx, cardX, cardY, cardW, cardH, 26);
+    ctx.fillStyle = 'rgba(255,255,255,0.01)';
+    ctx.fill();
+    ctx.restore();
+
+    // カード本体
+    ctx.drawImage(img, cardX, cardY, cardW, cardH);
+    URL.revokeObjectURL(svgUrl);
+
+    // 下部テキスト
+    ctx.fillStyle = 'rgba(134,134,139,0.7)';
+    ctx.font = '400 26px Helvetica Neue, Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('一般社団法人 日本精子協会', CW / 2, cardY + cardH + 68);
+
+    cv.toBlob(function(pngBlob) {
+      var file = new File([pngBlob], 'seedcard.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'SEED CARD' }).catch(function() {});
+        return;
+      }
+      var dlUrl = URL.createObjectURL(pngBlob);
+      var a = document.createElement('a');
+      a.download = 'seedcard.png';
+      a.href = dlUrl;
+      a.click();
+      setTimeout(function() { URL.revokeObjectURL(dlUrl); }, 1000);
+      showToast('カード画像を保存しました');
+    }, 'image/png');
+  };
+  img.onerror = function() { URL.revokeObjectURL(svgUrl); showToast('画像の生成に失敗しました'); };
+  img.src = svgUrl;
+}
+
+function logout() {
+  localStorage.removeItem('sc_magic');
+  window.location.replace('/login.html');
+}
+
+function _showSettingsMsg(msgEl, type, html) {
+  msgEl.style.display = 'block';
+  msgEl.style.background = type === 'ok' ? '#f0fdf4' : '#fff1f2';
+  msgEl.style.color      = type === 'ok' ? '#166534' : '#9f1239';
+  msgEl.innerHTML = html;
+}
+var _needLoginHtml = 'この操作にはログインが必要です。<br><a href="/login.html" style="color:inherit;font-weight:600;text-decoration:underline">ログインページへ</a>';
+
+// ─── メールアドレス変更 ───
+function requestEmailChange() {
+  var newEmail = document.getElementById('newEmailInput').value.trim();
+  var msgEl    = document.getElementById('emailChangeMsg');
+  var btn      = document.getElementById('emailChangeBtn');
+
+  if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+    _showSettingsMsg(msgEl, 'err', '有効なメールアドレスを入力してください。');
+    return;
+  }
+  var magic = localStorage.getItem('sc_magic');
+  if (!magic) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
+
+  btn.disabled = true;
+  btn.textContent = '送信中…';
+  fetch(APPS_SCRIPT_API + '?action=requestemailchange&magic=' + encodeURIComponent(magic) + '&newemail=' + encodeURIComponent(newEmail))
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success) {
+        _showSettingsMsg(msgEl, 'ok', '新しいメールアドレスに確認リンクを送信しました。<br>メールを確認してリンクをクリックしてください。');
+        btn.textContent = '送信しました';
+      } else if (d.error === 'already_used') {
+        _showSettingsMsg(msgEl, 'err', 'そのメールアドレスはすでに登録されています。');
+        btn.disabled = false; btn.textContent = '確認メールを送信';
+      } else if (d.error === 'expired' || d.error === 'invalid_session') {
+        _showSettingsMsg(msgEl, 'err', _needLoginHtml);
+        btn.disabled = false; btn.textContent = '確認メールを送信';
+      } else {
+        _showSettingsMsg(msgEl, 'err', '送信に失敗しました。しばらくしてからお試しください。');
+        btn.disabled = false; btn.textContent = '確認メールを送信';
+      }
+    })
+    .catch(function() {
+      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
+      btn.disabled = false; btn.textContent = '確認メールを送信';
+    });
+}
+
+// ─── 発送先住所変更 ───
+function requestAddressChange() {
+  var postal   = document.getElementById('newPostalInput').value.trim().replace(/[-－ー]/g, '');
+  var address  = document.getElementById('newAddressInput').value.trim();
+  var msgEl    = document.getElementById('addressChangeMsg');
+  var btn      = document.getElementById('addressChangeBtn');
+
+  if (!address) { _showSettingsMsg(msgEl, 'err', '住所を入力してください。'); return; }
+  var magic = localStorage.getItem('sc_magic');
+  if (!magic) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
+
+  btn.disabled = true;
+  btn.textContent = '更新中…';
+  fetch(APPS_SCRIPT_API + '?action=changeaddress&magic=' + encodeURIComponent(magic)
+    + '&postal=' + encodeURIComponent(postal)
+    + '&address=' + encodeURIComponent(address))
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success) {
+        _showSettingsMsg(msgEl, 'ok', '住所を更新しました。');
+        btn.textContent = '更新しました';
+      } else if (d.error === 'expired' || d.error === 'invalid_session') {
+        _showSettingsMsg(msgEl, 'err', _needLoginHtml);
+        btn.disabled = false; btn.textContent = '住所を更新する';
+      } else {
+        _showSettingsMsg(msgEl, 'err', '更新に失敗しました。しばらくしてからお試しください。');
+        btn.disabled = false; btn.textContent = '住所を更新する';
+      }
+    })
+    .catch(function() {
+      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
+      btn.disabled = false; btn.textContent = '住所を更新する';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  var token  = params.get('t') || '';
+  var magic  = params.get('magic') || '';
+
+  // メールアドレス変更確認リンク
+  var emailChange = params.get('emailchange') || '';
+  if (emailChange) {
+    history.replaceState(null, '', '/');
+    fetch(APPS_SCRIPT_API + '?action=confirmemailchange&token=' + encodeURIComponent(emailChange))
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.success) {
+          localStorage.removeItem('sc_magic');
+          alert('メールアドレスを ' + d.newEmail + ' に変更しました。\n再ログインしてください。');
+          window.location.replace('/login.html');
+        } else {
+          alert('変更リンクが無効または期限切れです。再度お試しください。');
+          window.location.replace('/');
+        }
+      });
+    return;
+  }
+
+  if (token) {
+    // NFCタップ or 直リンク → カードトークンで表示（ログイン不要）
+    loadByToken(token);
+    return;
+  }
+
+  if (magic) {
+    // マジックリンクメールから来た場合
+    history.replaceState(null, '', '/');
+    loadByMagic(magic);
+    return;
+  }
+
+  // localStorageにセッションが残っていれば再利用
+  var saved = localStorage.getItem('sc_magic');
+  if (saved) {
+    loadByMagic(saved);
+    return;
+  }
+
+  // 未ログイン → ログインページへ
+  window.location.replace('/login.html');
+});
+</script>
+
+</body>
+</html>
