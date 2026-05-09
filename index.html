@@ -2,1304 +2,1411 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>一般社団法人 日本精子協会</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>SEED CARD｜認定</title>
+<meta property="og:title" content="SEED CARD｜一般社団法人 日本精子協会 認定">
+<meta property="og:description" content="精子の資格「SEED CARD」を取得しました。精子のチカラで、輝く未来を作る。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SEED CARD｜一般社団法人 日本精子協会 認定">
+<meta name="twitter:description" content="精子の資格「SEED CARD」を取得しました。精子のチカラで、輝く未来を作る。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f2f2f7;
+  --white:#ffffff;
+  --text:#1d1d1f;
+  --text2:#3a3a3c;
+  --text3:#86868b;
+  --border:rgba(60,60,67,.12);
+  --grad-purple:linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 100%);
+  --grad-soft:linear-gradient(135deg,#ffffff 0%,#f0ebff 100%);
+  --accent:#9b87d6;
+  --jp:'Noto Sans JP',sans-serif;
+  --sf:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+  --en:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--jp);
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+.grad{background:var(--grad-purple);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-:root {
-  --bg-card:   rgba(255,255,255,0.88);
-  --bg-card-s: rgba(255,255,255,0.96);
-  --grad-btn:  linear-gradient(135deg, #c8a8f0 0%, #7ec8f8 100%);
-  --grad-text: linear-gradient(135deg, #b088e0 0%, #5ab0e8 100%);
-  --text:   #1d1d1f;
-  --text2:  #3a3a3c;
-  --text3:  #6e6e73;
-  --border: rgba(0,0,0,0.08);
-  --jp:   'Noto Serif JP', serif;
-  --sans: 'Noto Sans JP', sans-serif;
-  --en:   'Inter', sans-serif;
-  --r: 20px;
-}
+.container{max-width:480px;margin:0 auto;padding:0 16px}
 
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: #f5f5f7;
-  min-height: 100vh;
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-a { text-decoration: none; color: inherit; }
-img { display: block; }
-
-/* fade up */
-.fu { opacity:0; transform:translateY(20px); transition:opacity .8s cubic-bezier(.22,.68,0,1.1), transform .8s cubic-bezier(.22,.68,0,1.1); }
-.fu.d1{transition-delay:.1s} .fu.d2{transition-delay:.2s} .fu.d3{transition-delay:.3s}
-.fu.on { opacity:1; transform:translateY(0); }
-
-/* ── NAV ── */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:300;
-  height:56px; padding:0 52px;
-  display:flex; align-items:center; justify-content:space-between;
-  background:#ffffff;
-  backdrop-filter:saturate(200%) blur(24px);
-  -webkit-backdrop-filter:saturate(200%) blur(24px);
-  border-bottom:1px solid rgba(0,0,0,.08);
-}
-.nav-logo-wrap { display:flex; align-items:center; }
-.nav-logo-wrap img { height:30px; width:auto; }
-.nav-logo-text { font-family:var(--sans); font-size:13.5px; font-weight:500; letter-spacing:.05em; color:var(--text); }
-.nav-r { display:flex; align-items:center; gap:32px; }
-.nav-r a { font-size:13px; font-weight:400; color:var(--text2); transition:color .2s; letter-spacing:.03em; }
-.nav-r a:hover { color:#9ab8e8; }
-.nav-btn {
-  font-size:13px; font-weight:500; letter-spacing:.06em;
-  color:#fff !important; background:var(--grad-btn);
-  padding:9px 24px; border-radius:99px;
-  transition:opacity .2s,transform .2s;
-}
-.nav-btn:hover { opacity:.85; transform:scale(1.02); }
-
-/* ── HERO ── */
-.hero {
-  min-height:100svh;
-  display:flex; flex-direction:column; justify-content:center;
-  padding:100px 72px 80px;
-  position:relative; overflow:hidden;
-}
-/* 装飾：右側に薄い丸 */
-/* ヒーロー装飾：浮遊アニメーション */
-@keyframes floatA { 0%,100%{transform:translateY(-50%) scale(1)} 50%{transform:translateY(calc(-50% + 20px)) scale(1.04)} }
-@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
-@keyframes floatC { 0%,100%{transform:translate(0,0)} 33%{transform:translate(10px,-12px)} 66%{transform:translate(-8px,10px)} }
-@keyframes dotTwinkle { 0%,100%{opacity:var(--op,0.5)} 50%{opacity:calc(var(--op,0.5)*0.25)} }
-.hero::before {
-  content:'';
-  position:absolute; right:-120px; top:50%; transform:translateY(-50%);
-  width:560px; height:560px; border-radius:50%;
-  background:radial-gradient(circle, rgba(200,168,240,.15) 0%, transparent 70%);
-  pointer-events:none;
-  animation: floatA 9s ease-in-out infinite;
-}
-.hero::after {
-  content:'';
-  position:absolute; right:180px; top:30%;
-  width:280px; height:280px; border-radius:50%;
-  background:radial-gradient(circle, rgba(126,200,248,.12) 0%, transparent 70%);
-  pointer-events:none;
-  animation: floatB 11s ease-in-out infinite;
-}
-.hero-dot {
-  position:absolute; border-radius:50%; pointer-events:none;
-  animation: dotTwinkle var(--d,4s) ease-in-out infinite var(--dl,0s);
-}
-.hero-label {
-  font-family:var(--en); font-size:11px; font-weight:300;
-  letter-spacing:.32em; color:#9080c8;
-  margin-bottom:22px;
-  opacity:0; animation:fi .9s .3s forwards;
-}
-.hero h1 {
-  font-family:var(--jp); font-size:clamp(36px,5vw,62px);
-  font-weight:400; line-height:1.5; letter-spacing:.06em;
-  opacity:0; animation:fi .9s .5s forwards;
-}
-.hero h1 .gw {
-  background:var(--grad-text);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.hero-sub {
-  font-size:15px; font-weight:300; color:var(--text2);
-  line-height:1.9; margin-top:18px; max-width:480px;
-  opacity:0; animation:fi .9s .7s forwards;
-}
-.hero-cta {
-  display:flex; gap:12px; margin-top:40px; flex-wrap:wrap;
-  opacity:0; animation:fi .9s .9s forwards;
-}
-.btn-p {
-  font-size:13px; font-weight:400; letter-spacing:.06em;
-  color:#fff; background:var(--grad-btn);
-  padding:13px 32px; border-radius:99px;
-  transition:opacity .25s,transform .25s; display:inline-block;
-}
-.btn-p:hover { opacity:.85; transform:translateY(-2px); }
-.btn-s {
-  font-size:13px; font-weight:400; letter-spacing:.06em;
-  color:#9ab8e8; border:1px solid rgba(160,140,230,.4);
-  padding:13px 32px; border-radius:99px;
-  transition:all .25s; display:inline-block;
-  background:rgba(255,255,255,.4);
-}
-.btn-s:hover { background:#ffffff; border-color:#9ab8e8; }
-@keyframes fi { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
-/* ── SHARED ── */
-.sec { max-width:960px; margin:0 auto; padding:80px 48px; }
-.sec-label { font-family:var(--en); font-size:11px; font-weight:400; letter-spacing:.28em; color:#9080c8; margin-bottom:14px; display:block; }
-h2.sec-ttl {
-  font-family:var(--jp); font-size:clamp(24px,3.5vw,36px); font-weight:500;
-  line-height:1.6; letter-spacing:.04em; margin-bottom:18px; color:var(--text);
-  overflow-wrap:break-word; word-break:keep-all;
-}
-.sec-body {
-  font-size:15px; font-weight:400; color:var(--text2);
-  line-height:2.0; max-width:100%;
-  overflow-wrap:break-word; word-break:keep-all;
-}
-/* 下線をすべて消す */
-a { text-decoration:none !important; }
-.div-line { height:1px; background:var(--border); max-width:960px; margin:0 auto; }
-
-/* カード共通 */
-.card {
-  background:var(--bg-card);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:var(--r);
-}
-.card-s {
-  background:var(--bg-card-s);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:var(--r);
+/* ─── ヘッダー（究極にミニマル） ─── */
+.top-status{
+  font-family:var(--en);font-size:10.5px;font-weight:600;
+  letter-spacing:.18em;color:var(--text3);
+  text-align:center;
+  padding:32px 0 16px;
+  text-transform:uppercase;
 }
 
-/* ── SCROLL ANIMATIONS ── */
-/* Blur Reveal（見出し用） */
-.sa-blur { opacity:0; filter:blur(10px); transform:translateY(14px); transition:opacity .9s cubic-bezier(.16,1,.3,1), filter .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
-.sa-blur.on { opacity:1; filter:blur(0); transform:translateY(0); }
-/* ヒーロー内 blur（アニメーション付き） */
-.sa-blur-el { opacity:0; filter:blur(8px); transform:translateY(12px); animation:heroBR .9s cubic-bezier(.16,1,.3,1) .5s forwards; }
-@keyframes heroBR { to { opacity:1; filter:blur(0); transform:translateY(0); } }
-/* Stagger（カード群） */
-.sa-stagger { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-.sa-stagger.on { opacity:1; transform:translateY(0); }
-/* Count Up用マーカー */
-.count-up-done { } 
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:48px; }
-.about-card { padding:40px 36px; }
-.act-item { display:flex; align-items:flex-start; gap:14px; padding:11px 0; border-bottom:1px solid var(--border); }
-.act-item:last-child { border-bottom:none; }
-.act-anim { opacity:0; transform:translateX(-12px); transition:opacity .5s ease, transform .5s ease; }
-.act-num { font-family:var(--en); font-size:10px; font-weight:300; letter-spacing:.15em; color:#9080c8; padding-top:3px; min-width:20px; }
-.act-text { font-size:14px; font-weight:400; color:var(--text); line-height:1.7; }
-
-/* ── STAT BAR ── */
-.stat-bar {
-  background:rgba(0,0,0,.06);
-  border-top:1px solid rgba(255,255,255,.6);
-  border-bottom:1px solid rgba(255,255,255,.6);
-  
+/* ─── ウェルカム ─── */
+.welcome{padding:56px 16px 8px}
+.welcome h1{
+  font-family:var(--sf);
+  font-size:38px;font-weight:600;letter-spacing:-.025em;
+  line-height:1.05;
+  color:var(--text);
 }
-.stat-bar-inner { max-width:960px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); }
-.stat-item { padding:44px 40px; text-align:center; border-right:1px solid var(--border); }
-.stat-item:last-child { border-right:none; }
-.stat-num { font-family:var(--en); font-size:44px; font-weight:200; line-height:1; background:var(--grad-text); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
-.stat-label { font-size:13px; font-weight:400; color:var(--text2); line-height:1.7; }
-
-/* ── シードカード 3Dホログラム ── */
-@keyframes scHF1 { 0%{left:-130%} 100%{left:210%} }
-
-/* ── SEEDCARD ── */
-.seed-wrap { margin-top:52px; border-radius:var(--r); overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
-.seed-img { position:relative; min-height:400px; }
-.seed-img img { width:100%; height:100%; object-fit:cover; object-position:center top; }
-.seed-img::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(20,60,140,.4),rgba(20,80,160,.25)); }
-.seed-img-text { position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; justify-content:flex-end; padding:40px; }
-.seed-text {
-  background:#ffffff;
-  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  padding:44px 40px; display:flex; flex-direction:column; justify-content:space-between; gap:28px;
+.welcome h1 .grad-name{
+  display:block;
+  background:var(--grad-purple);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-top:4px;
 }
-.seed-actions { display:flex; flex-direction:column; gap:12px; }
-.seed-action-card {
-  background:#ffffff;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:14px; padding:18px 20px;
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-  transition:box-shadow .2s,transform .2s;
+.member-since{
+  margin-top:14px;
+  font-family:var(--en);font-size:11px;font-weight:500;
+  letter-spacing:.18em;color:var(--text3);
+  text-transform:uppercase;
 }
-.seed-action-card:hover { box-shadow:0 8px 28px rgba(0,0,0,.07); transform:translateY(-2px); }
-.seed-action-label { font-size:12px; font-weight:400; color:var(--text2); margin-bottom:4px; }
-.seed-action-title { font-family:var(--jp); font-size:15px; font-weight:400; color:var(--text); }
-.seed-action-btn { font-family:var(--en); font-size:11px; font-weight:400; letter-spacing:.06em; white-space:nowrap; padding:8px 18px; border-radius:99px; transition:all .2s; flex-shrink:0; }
-.seed-btn-fill { color:#fff; background:linear-gradient(135deg,#c8a8f0,#7ec8f8); }
-.seed-btn-fill:hover { opacity:.85; }
-.seed-btn-out { color:#9ab8e8; border:1px solid rgba(160,140,230,.4); background:transparent; }
-.seed-btn-out:hover { background:rgba(160,140,230,.08); }
 
-/* ── KNOW ── */
-.know-img { width:100%; height:300px; border-radius:var(--r); overflow:hidden; margin-bottom:48px; border:1px solid rgba(0,0,0,.06); }
-.know-img img { width:100%; height:100%; object-fit:cover; object-position:center 40%; transition:transform .6s; }
-.know-img:hover img { transform:scale(1.02); }
-.four-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-.four-card { padding:26px 22px; }
-.four-card:nth-child(odd)  { background:#ffffff; border:1px solid rgba(0,0,0,.08); border-radius:var(--r); }
-.four-card:nth-child(even) { background:#ffffff; border:1px solid rgba(0,0,0,.08); border-radius:var(--r); }
-.four-n { font-family:var(--en); font-size:10px; font-weight:300; letter-spacing:.2em; color:#9080c8; margin-bottom:10px; }
-.four-t { font-family:var(--jp); font-size:15px; font-weight:400; margin-bottom:8px; color:var(--text); }
-.four-b { font-size:13px; font-weight:400; color:var(--text2); line-height:1.8; }
-
-/* ── KENSA ── */
-.kensa-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:48px; }
-.kensa-card { border-radius:var(--r); overflow:hidden; position:relative; border:1px solid rgba(0,0,0,.06); }
-.kensa-card img { width:100%; height:260px; object-fit:cover; transition:transform .6s; }
-.kensa-card:hover img { transform:scale(1.04); }
-.kensa-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(20,40,120,.65) 0%,transparent 55%); display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
-.kensa-en { font-family:var(--en); font-size:10px; font-weight:300; letter-spacing:.2em; color:rgba(255,255,255,.6); margin-bottom:6px; }
-.kensa-t { font-family:var(--jp); font-size:18px; font-weight:400; color:#fff; margin-bottom:6px; }
-.kensa-d { font-size:12px; font-weight:300; color:rgba(255,255,255,.78); line-height:1.7; }
-.kensa-link { display:inline-flex; align-items:center; gap:5px; font-family:var(--en); font-size:11px; font-weight:300; color:rgba(255,255,255,.85); margin-top:12px; transition:gap .2s; }
-.kensa-link::after { content:'→'; }
-.kensa-link:hover { gap:9px; color:#fff; }
-
-/* ── IRYO ── */
-.iryo-wrap {
-  background:#ffffff;
-  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:var(--r); padding:52px 48px; margin-top:52px;
-  display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+/* ─── カードビジュアル ─── */
+.card-stage{
+  margin:36px 0 0;
+  padding:0;
+  display:flex;justify-content:center;
 }
-.iryo-img { border-radius:14px; overflow:hidden; border:1px solid rgba(0,0,0,.06); }
-.iryo-img img { width:100%; height:260px; object-fit:cover; transition:transform .6s; }
-.iryo-img:hover img { transform:scale(1.03); }
-.iryo-label { font-family:var(--en); font-size:10px; font-weight:300; letter-spacing:.28em; color:#9080c8; margin-bottom:12px; }
-.iryo-ttl { font-family:var(--jp); font-size:clamp(17px,2.2vw,22px); font-weight:400; line-height:1.65; letter-spacing:.04em; margin-bottom:16px; color:var(--text); }
-.iryo-body { font-size:14px; font-weight:400; color:var(--text2); line-height:2; margin-bottom:24px; }
-.iryo-link { display:inline-flex; align-items:center; gap:6px; font-family:var(--en); font-size:12px; font-weight:300; color:#9ab8e8; transition:gap .2s; }
-.iryo-link::after { content:'→'; }
-.iryo-link:hover { gap:10px; }
 
-/* ── MEMBERSHIP ── */
-.mem-wrap { border-top:1px solid rgba(0,0,0,.06); }
-.mem-inner { max-width:960px; margin:0 auto; padding:80px 48px; }
-.mem-head { text-align:center; max-width:480px; margin:0 auto 48px; }
-.mem-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.mem-card {
-  background:#ffffff;
-  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:var(--r); padding:44px 40px;
-  transition:transform .3s,box-shadow .3s;
+.card-main{
+  width:100%;aspect-ratio:340/214;
+  border-radius:18px;
+  background:var(--grad-soft);
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 44px rgba(0,0,0,.1),0 4px 10px rgba(0,0,0,.06);
 }
-.mem-card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(0,0,0,.07); }
-.mem-type  { font-family:var(--en); font-size:10px; font-weight:300; letter-spacing:.25em; color:#9080c8; margin-bottom:14px; }
-.mem-name  { font-family:var(--jp); font-size:20px; font-weight:400; letter-spacing:.04em; margin-bottom:8px; color:var(--text); }
-.mem-price { font-family:var(--en); font-size:46px; font-weight:200; line-height:1; background:var(--grad-text); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:4px; }
-.mem-unit  { font-size:13px; font-weight:400; color:var(--text2); margin-bottom:20px; }
-.mem-desc  { font-size:14px; font-weight:400; color:var(--text2); line-height:1.9; margin-bottom:28px; }
-.mem-btn   { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.08em; color:#fff; background:var(--grad-btn); padding:11px 28px; border-radius:99px; transition:opacity .2s,transform .2s; }
-.mem-btn:hover { opacity:.85; transform:scale(1.02); }
+.card-main svg{position:absolute;inset:0;width:100%;height:100%}
 
-/* ── FOOTER ── */
-footer {
-  background:rgba(0,0,0,.03);
-  
-  border-top:1px solid rgba(0,0,0,.06);
-  padding:48px 52px 36px;
+/* カード下のキャプション */
+.card-caption{
+  text-align:center;
+  margin-top:18px;
+  font-family:var(--en);font-size:10px;font-weight:600;
+  letter-spacing:.22em;color:var(--text3);
+  text-transform:uppercase;
 }
-.foot-in { max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:28px; }
-.foot-logo-j { font-family:var(--jp); font-size:13px; font-weight:400; margin-bottom:4px; color:var(--text); }
-.foot-logo-e { font-family:var(--en); font-size:10px; font-weight:300; letter-spacing:.2em; color:var(--text3); }
-.foot-links { display:flex; gap:22px; flex-wrap:wrap; align-items:center; }
-.foot-links a { font-size:13px; font-weight:400; color:var(--text2); transition:color .2s; }
-.foot-links a:hover { color:#9ab8e8; }
-.foot-copy { max-width:960px; margin:22px auto 0; padding-top:18px; border-top:1px solid var(--border); font-family:var(--en); font-size:12px; font-weight:400; color:var(--text2); }
 
-/* ── RESPONSIVE ── */
-@media (max-width:768px) {
-  nav { padding:0 20px; }
-  .nav-r a:not(.nav-btn) { display:none; }
-  .hero { padding:80px 24px 60px; }
-  .hero::before, .hero::after { display:none; }
-  .sec { padding:56px 24px; }
-  .about-grid { grid-template-columns:1fr; }
-  .stat-bar-inner { grid-template-columns:1fr; }
-  .stat-item { border-right:none; border-bottom:1px solid var(--border); }
-  .stat-item:last-child { border-bottom:none; }
-  .seed-wrap { grid-template-columns:1fr; }
-  .seed-img { min-height:220px; }
-  .four-grid { grid-template-columns:1fr 1fr; }
-  .kensa-grid { grid-template-columns:1fr; }
-  .iryo-wrap { grid-template-columns:1fr; padding:32px 24px; }
-  .mem-inner { padding:56px 24px; }
-  .mem-grid { grid-template-columns:1fr; }
-  footer { padding:40px 20px 28px; }
+/* ─── セクション共通（iOS設定風bento） ─── */
+.section{
+  padding:0;
+  margin-bottom:28px;
+}
+.section-header{
+  margin-bottom:8px;
+  padding:0 16px;
+}
+.section-h{
+  font-family:var(--sf);
+  font-size:13px;font-weight:600;
+  letter-spacing:.04em;
+  color:var(--text3);
+  text-transform:uppercase;
+  line-height:1.3;
+}
+.section-sub{
+  font-size:12px;color:var(--text3);
+  margin-top:6px;letter-spacing:.005em;line-height:1.55;
+  padding:0;text-transform:none;font-weight:400;
+}
+
+/* bento本体 */
+.bento{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+}
+/* 検査データ専用：ライトグラデーション背景 */
+.bento.gradient-bento{
+  background:linear-gradient(135deg,#f0e8ff 0%,#e8f0ff 100%);
+}
+
+/* ─── 情報リスト（bento内） ─── */
+.info-list,
+.data-list,
+.privacy-list{
+  display:flex;flex-direction:column;
+}
+.info-row,
+.data-row,
+.privacy-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;
+  border-bottom:.5px solid var(--border);
+  min-height:44px;
+}
+.data-row{padding:13px 16px}
+.info-row:last-child,
+.data-row:last-child,
+.privacy-row:last-child{border-bottom:none}
+
+.info-row{font-size:15px}
+.info-row .l{color:var(--text);font-weight:400;letter-spacing:.005em}
+.info-row .v{
+  font-family:var(--sf);
+  color:var(--text3);font-weight:400;
+  letter-spacing:-.005em;
+}
+
+/* ─── 検査データリスト ─── */
+.data-name-block{display:flex;flex-direction:column;line-height:1.2}
+.data-row .name{
+  font-size:15px;color:var(--text);font-weight:400;
+  letter-spacing:.005em;
+}
+.data-row .who-base{
+  font-size:11px;color:var(--text3);font-weight:400;
+  letter-spacing:.005em;margin-top:3px;
+}
+.data-row .val{
+  font-family:var(--sf);
+  font-size:16px;font-weight:600;
+  color:var(--text);
+  letter-spacing:-.01em;
+}
+.data-row .val .unit{
+  font-size:12px;font-weight:500;
+  color:var(--text3);
+  margin-left:4px;letter-spacing:.005em;
+}
+
+/* ─── プライバシー設定 ─── */
+.privacy-row{
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.privacy-row .lbl{
+  font-size:15px;color:var(--text);font-weight:400;
+  letter-spacing:.005em;
+}
+
+/* ─── アップデートボタン（独立bento） ─── */
+.update-card{
+  display:flex;align-items:center;gap:14px;
+  width:100%;padding:14px 16px;
+  background:#fff;
+  border-radius:14px;
+  cursor:pointer;
+  transition:transform .15s,background .15s;
+  text-decoration:none;
+  min-height:60px;
+}
+.update-card:active{transform:scale(.985);background:#f5f5f7}
+.update-card .icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--grad-purple);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 3px 10px rgba(155,135,214,.3);
+}
+.update-card .icon svg{width:18px;height:18px;color:#fff;stroke-width:2.2}
+.update-card .text{flex:1;line-height:1.3}
+.update-card .text .ttl{
+  font-family:var(--sf);
+  font-size:15px;font-weight:500;color:var(--text);
+  letter-spacing:-.005em;margin-bottom:2px;
+}
+.update-card .text .sub{
+  font-size:12px;color:var(--text3);
+  letter-spacing:.005em;line-height:1.4;
+}
+.update-card .price{
+  font-family:var(--sf);
+  font-size:16px;font-weight:600;
+  color:var(--text);letter-spacing:-.01em;
+  flex-shrink:0;
+}
+
+/* ─── トグルスイッチ ─── */
+.toggle{
+  width:46px;height:28px;border-radius:99px;
+  background:rgba(120,120,128,.16);
+  position:relative;transition:background .25s;
+  flex-shrink:0;
+}
+.toggle.on{background:var(--grad-purple)}
+.toggle-knob{
+  position:absolute;top:2px;left:2px;
+  width:24px;height:24px;border-radius:50%;
+  background:#fff;
+  box-shadow:0 3px 8px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.1);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.toggle.on .toggle-knob{transform:translateX(18px)}
+
+/* ─── ウォレットボタン ─── */
+.wallet-stack{
+  display:flex;flex-direction:column;gap:10px;
+  align-items:center;
+  margin-top:6px;
+}
+.wallet-btn{
+  display:block;width:100%;max-width:230px;
+  cursor:pointer;text-decoration:none;
+  transition:transform .15s,opacity .15s;
+  background:transparent;border:none;padding:0;line-height:0;
+}
+.wallet-btn:active{transform:scale(.97);opacity:.92}
+.wallet-btn svg{
+  width:100%;height:auto;display:block;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
+}
+
+/* ─── シェアセクション ─── */
+.share-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  margin-bottom:30px;
+  padding:8px 0;
+}
+.share-btn{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;
+  padding:8px 0;
+  background:transparent;
+  border-radius:0;
+  cursor:pointer;
+  transition:transform .15s,opacity .15s;
+  text-decoration:none;
+  position:relative;
+}
+.share-btn:active{transform:scale(.94);opacity:.8}
+.share-btn .ico{
+  width:56px;height:56px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.1);
+}
+.share-btn .ico svg{width:26px;height:26px}
+.share-btn .name{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:50%;
+  transform:translateX(-50%);
+  font-size:11px;font-weight:500;
+  color:var(--text);letter-spacing:.01em;
+  white-space:nowrap;
+}
+.ico-x{background:#000;color:#fff}
+.ico-line{background:#06c755;color:#fff}
+.ico-fb{background:#1877f2;color:#fff}
+.ico-copy{
+  background:#f0f0f3;color:var(--text2);
+  box-shadow:none;
+}
+.ico-copy svg{width:22px;height:22px}
+
+/* シェア文章プレビュー */
+.share-preview{
+  background:#fff;
+  border-radius:14px;
+  padding:16px 18px;
+}
+.share-preview-card{
+  margin:6px auto 18px;
+  width:63%;max-width:252px;
+  aspect-ratio:340/214;
+  border-radius:10px;overflow:hidden;
+  background:linear-gradient(135deg,#fff,#f5f0ff);
+  box-shadow:0 6px 18px rgba(155,135,214,.16),0 2px 5px rgba(0,0,0,.04);
+  position:relative;
+}
+.share-preview-card svg{position:absolute;inset:0;width:100%;height:100%}
+.share-preview-note{
+  margin:0 auto 18px;
+  font-family:var(--en);font-size:9.5px;font-weight:500;
+  letter-spacing:.05em;color:var(--text3);
+  text-align:center;
+}
+.share-preview .label{
+  font-family:var(--en);font-size:9.5px;font-weight:600;
+  letter-spacing:.18em;color:var(--text3);
+  text-transform:uppercase;margin-bottom:10px;
+}
+.share-preview .text{
+  font-size:13px;color:var(--text2);line-height:1.85;
+  letter-spacing:.005em;white-space:pre-line;
+}
+.share-preview .tag{color:var(--accent);font-weight:500}
+
+/* ─── フッター ─── */
+.footer{
+  margin-top:44px;padding:28px 0 50px;
+  border-top:.5px solid var(--border);
+  text-align:center;
+  font-size:11.5px;color:var(--text3);letter-spacing:.02em;line-height:1.85;
+}
+.footer a{color:var(--accent);text-decoration:none;font-weight:500}
+.footer .sep{margin:0 10px;opacity:.5}
+
+/* ─── カードダウンロードボタン ─── */
+.dl-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 20px;
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:99px;
+  font-size:12px;font-weight:500;
+  color:var(--text3);
+  cursor:pointer;
+  font-family:var(--jp);
+  transition:background .15s,color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.dl-btn:active{background:#f5f5f7;color:var(--text)}
+.dl-btn svg{width:13px;height:13px;flex-shrink:0}
+
+/* ─── トースト ─── */
+.toast{
+  position:fixed;left:50%;bottom:30px;
+  transform:translateX(-50%) translateY(100px);
+  background:rgba(29,29,31,.96);color:#fff;
+  padding:13px 24px;border-radius:99px;
+  font-family:var(--sf);font-size:14px;font-weight:500;
+  letter-spacing:-.005em;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  opacity:0;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .35s;
+  z-index:200;pointer-events:none;
+  display:flex;align-items:center;gap:8px;
+  backdrop-filter:blur(20px);
+}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+.toast svg{width:16px;height:16px;color:#7eb8e4}
+
+/* ─── レスポンシブ調整 ─── */
+@media(max-width:380px){
+  .container{padding:0 20px}
+  .welcome h1{font-size:32px}
+  .section-h{font-size:20px}
+}
+
+/* ─── A. パーセンタイルバッジ ─── */
+.pct-badge{
+  display:inline-flex;align-items:center;
+  background:linear-gradient(135deg,#c8a8f0,#7ec8f8);
+  border-radius:99px;padding:2px 8px;
+  font-family:var(--sf);font-size:10px;font-weight:700;
+  color:#fff;letter-spacing:.02em;white-space:nowrap;
+  opacity:0;transition:opacity .4s ease;
+}
+
+/* ─── A. データ行（バー付き新レイアウト） ─── */
+.data-row{
+  padding:14px 16px 12px !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  min-height:unset !important;
+  gap:8px;
+}
+.data-row-top{display:flex;justify-content:space-between;align-items:flex-start}
+.data-val-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.data-bar-wrap{
+  position:relative;height:4px;
+  background:rgba(120,120,128,.12);
+  border-radius:99px;overflow:visible;margin-top:2px;
+}
+.data-bar-fill{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,#c8a8f0,#7ec8f8);
+  width:0%;transition:width 1.3s cubic-bezier(.34,1.1,.64,1);
+}
+.data-bar-ref{
+  position:absolute;top:-4px;
+  width:1.5px;height:12px;
+  background:rgba(150,100,220,.5);
+  border-radius:1px;transform:translateX(-50%);
+}
+.data-bar-ref::after{
+  content:'WHO';
+  position:absolute;
+  top:50%;left:3px;
+  transform:translateY(-50%);
+  font-size:7px;font-weight:700;
+  color:rgba(130,80,200,.9);white-space:nowrap;
+  font-family:var(--sf);letter-spacing:.04em;
+  background:rgba(248,244,255,.96);
+  border-radius:3px;padding:1px 3px;
+  line-height:1;
+}
+
+/* ─── C. Verifiedバッジ ─── */
+.verified-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:linear-gradient(135deg,rgba(200,168,240,.14),rgba(126,200,248,.14));
+  border:1px solid rgba(155,135,214,.28);
+  border-radius:99px;padding:4px 10px 4px 5px;
+  margin-top:10px;opacity:0;
+  animation:fadeSlideUp .45s ease 1.3s forwards;
+}
+.verified-badge svg{width:16px;height:16px;flex-shrink:0}
+.verified-badge .vbl{
+  font-family:var(--sf);font-size:11px;font-weight:600;
+  color:#9b87d6;letter-spacing:.02em;
+}
+
+/* ─── D. カード3Dフリップ ─── */
+.card-stage{perspective:900px}
+.card-3d-wrap{
+  width:100%;
+  opacity:0;
+  transform-origin:center center;
+  transform-style:preserve-3d;
+}
+.card-3d-wrap.card-on{
+  animation:cardFlip .85s cubic-bezier(.34,1.2,.64,1) forwards;
+}
+@keyframes cardFlip{
+  0%{transform:rotateY(-90deg);opacity:0}
+  25%{opacity:1}
+  100%{transform:rotateY(0deg);opacity:1}
+}
+
+/* ─── D. 認定スタンプ ─── */
+.card-stamp{
+  position:absolute;bottom:12px;right:14px;
+  opacity:0;transform:scale(3.5) rotate(-22deg);
+  transform-origin:center center;pointer-events:none;
+}
+.card-stamp.stamp-on{
+  animation:stampIn .55s cubic-bezier(.22,1.5,.36,1) forwards;
+}
+@keyframes stampIn{
+  0%{opacity:0;transform:scale(3) rotate(-18deg)}
+  55%{opacity:1;transform:scale(.88) rotate(3deg)}
+  75%{transform:scale(1.07) rotate(-1.5deg)}
+  100%{opacity:1;transform:scale(1) rotate(0deg)}
+}
+
+/* ─── D. フェードアップ共通 ─── */
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo-wrap">
-    <img src="images/logo.png" alt="日本精子協会"
-      onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-    <span class="nav-logo-text" style="display:none">一般社団法人 日本精子協会</span>
-  </a>
-  <div class="nav-r">
-    <a href="#seedcard">精子の資格をとる</a>
-    <a href="#about">協会について</a>
-    <a href="#membership" class="nav-btn">入会する</a>
-  </div>
-</nav>
+<div class="container">
 
-<!-- HERO Bento 3分割 -->
-<section class="hero" style="min-height:100svh;padding:72px 32px 32px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden">
-  
-  <div style="position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:calc(100svh - 104px);min-height:520px">
-
-    <!-- 左：メインコピー（2行分） -->
-    <div style="grid-row:span 2;background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.07);padding:52px 48px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden">
-      <img src="images/seishi.png" alt="" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:55%;opacity:.1;pointer-events:none;user-select:none">
-      <div style="position:relative;z-index:1">
-        <div class="hero-label" style="margin-bottom:20px;opacity:0;animation:fi .9s .2s forwards">Japan Sperm Association</div>
-        <h1 style="font-family:var(--jp);font-size:clamp(30px,4vw,54px);font-weight:400;line-height:1.5;letter-spacing:.06em;opacity:0;animation:fi .9s .4s forwards">精子のチカラで<br><span class="gw">輝く未来を創る。</span></h1>
-        <p style="font-size:15px;font-weight:400;color:var(--text3);line-height:1.9;margin-top:16px;opacity:0;animation:fi .9s .6s forwards">男性の生殖健康を支援する<br>一般社団法人 日本精子協会</p>
-        <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fi .9s .8s forwards">
-          <a href="#about" class="btn-p">協会について</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 右上：シードカード -->
-    <a href="#seedcard" style="background:linear-gradient(135deg,#ede8ff,#ddeeff);border-radius:var(--r);border:1px solid rgba(160,140,230,.15);padding:24px 20px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;animation:fi .9s .55s forwards;transition:transform .3s,box-shadow .3s;text-decoration:none;overflow:hidden;position:relative" onmouseover="this.style.boxShadow='0 12px 36px rgba(160,140,230,.15)'" onmouseout="this.style.boxShadow=''">
-      <div style="margin-bottom:12px">
-        <div style="font-family:var(--en);font-size:10px;font-weight:500;letter-spacing:.25em;color:#9080c8;margin-bottom:8px">SEED CARD</div>
-        <div style="font-family:var(--jp);font-size:clamp(14px,1.5vw,18px);font-weight:400;color:var(--text);line-height:1.5;letter-spacing:.04em">精子の資格をとる。</div>
-      </div>
-      <!-- ミニ3Dカード -->
-      <div style="perspective:600px;display:flex;justify-content:center;flex:1;align-items:center" id="heroCardScene">
-        <div id="heroCard3d" style="width:226px;height:142px;border-radius:10px;position:relative;transform-style:preserve-3d;transition:transform .07s ease-out,box-shadow .07s ease-out;background:#ffffff;box-shadow:0 14px 36px rgba(0,0,0,.13),0 4px 12px rgba(0,0,0,.07);overflow:hidden;cursor:pointer">
-          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 226 142" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="hcg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#f5f5f7"/>
-    </linearGradient>
-  </defs>
-  <rect width="226" height="142" fill="url(#hcg)" rx="10"/>
-  <text x="18" y="32"
-    font-family="'Inter','Helvetica Neue',Arial,sans-serif"
-    font-size="13" font-weight="700" letter-spacing="0.18em"
-    fill="#6c757d">SEED CARD</text>
-  <text x="18" y="124"
-    font-family="'Inter','Helvetica Neue',Arial,sans-serif"
-    font-size="9" font-weight="600" letter-spacing="0.08em"
-    fill="#6c757d">TARO SEISHI</text>
-  <g transform="translate(127.5,61.9) scale(0.1563)">
-    <path fill="#6c757d" d="M422.4,142.6c18.3-2.6,31.5,12.8,42.2,25.5,42.2,50.2,73.7,134,28.7,192-35.1,45.4-85.7,51.7-125,7-49.8-56.5-24-134.7,15.1-189,8.2-11.4,24.6-33.5,39.1-35.6ZM425.7,158.6c-12.5,2.1-34.4,34.6-41,45.7-31.6,52.4-46.9,125.4,11,166.2,48.5,34.1,100.4-19.4,104.2-67.6,3.6-45.2-24.2-102.4-55.3-134.1-4.7-4.8-11.9-11.3-18.9-10.2Z"/>
-  </g>
-</svg>
-          <div style="position:absolute;top:0;left:-130%;width:60%;height:100%;pointer-events:none;background:linear-gradient(108deg,transparent 28%,rgba(200,178,255,.22) 40%,rgba(178,220,255,.18) 48%,transparent 65%);animation:scHF1 4.5s ease-in-out infinite;transform:skewX(-5deg);mix-blend-mode:screen"></div>
-          <div id="heroCardShine" style="position:absolute;inset:0;border-radius:9px;pointer-events:none;transition:background .06s"></div>
-          <div style="position:absolute;inset:1px;border-radius:8px;border:1px solid rgba(255,255,255,.8);pointer-events:none"></div>
-        </div>
-      </div>
-      <div style="display:inline-flex;align-items:center;gap:6px;font-family:var(--en);font-size:11px;font-weight:500;color:#9080c8;margin-top:12px">詳しく見る →</div>
-    </a>
-
-    <!-- 右下：精子力の説明 + 精子パーティクル -->
-    <a href="#know" style="background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.07);padding:32px 28px 20px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;animation:fi .9s .7s forwards;transition:transform .3s,box-shadow .3s;text-decoration:none;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-      <canvas id="heroSpermCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
-      <div style="position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-between;height:100%">
-        <div>
-          <div style="font-family:var(--en);font-size:10px;font-weight:500;letter-spacing:.25em;color:#9080c8;margin-bottom:12px">Know Your Sperm</div>
-          <div style="font-family:var(--jp);font-size:clamp(16px,1.8vw,22px);font-weight:400;color:var(--text);line-height:1.55;letter-spacing:.04em">精子力とは？</div>
-        </div>
-        <div style="font-family:var(--en);font-size:13px;font-weight:500;color:#9080c8;margin-top:auto">詳しく知る →</div>
-      </div>
-    </a>
-
-  </div>
-</section>
-<style>
-@media(max-width:768px){
-  section.hero{padding:64px 16px 16px !important}
-  section.hero > div[style*="grid"]{grid-template-columns:1fr !important;grid-template-rows:auto !important;height:auto !important}
-  section.hero > div[style*="grid"] > div:first-child{grid-row:span 1 !important;min-height:260px}
-}
-</style>
-
-<!-- ABOUT -->
-<div class="sec fu" id="about">
-  <span class="sec-label">About us</span>
-  <h2 class="sec-ttl sa-blur">精子力を上げて、日本人を増やす。</h2>
-  <p class="sec-body">日本の出生数は2023年に初めて70万人を下回りました。晩婚化や生活習慣の変化により、男性の精子力は世代を追うごとに低下しています。不妊の原因の約半数は男性側にあると言われていますが、そのことを知る男性はまだ多くありません。当協会は、男性が自らの生殖健康と向き合うきっかけをつくるために設立されました。</p>
-  <div class="about-grid">
-    <!-- ③ Missionカード：画像のみ＋協会についてボタン -->
-    <div class="about-card card" style="padding:0;overflow:hidden;min-height:280px;position:relative">
-      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80&fit=crop&crop=center" alt="Mission" style="width:100%;height:100%;object-fit:cover;display:block;min-height:280px">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.52) 0%,rgba(80,50,160,.1) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px">
-        <a href="https://www.japan-sperm.com/blank-1" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--grad-btn);padding:9px 20px;border-radius:99px;transition:opacity .2s;align-self:flex-start" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">協会について</a>
-      </div>
-    </div>
-    <div class="about-card card" id="act-card">
-      <span style="font-family:var(--en);font-size:10px;font-weight:300;letter-spacing:.25em;color:#9080c8;display:block;margin-bottom:14px">Our Activities</span>
-      <div style="font-family:var(--jp);font-size:16px;font-weight:400;line-height:1.6;letter-spacing:.04em;margin-bottom:18px;color:var(--text)">わたしたちの活動</div>
-      <div class="act-item act-anim" id="aa1"><span class="act-num">01</span><div style="width:3px;height:28px;border-radius:2px;background:linear-gradient(180deg,#c8a8f0,#7ec8f8);flex-shrink:0"></div><span class="act-text">精子の健康知識（精子力）の普及</span></div>
-      <div class="act-item act-anim" id="aa2"><span class="act-num">02</span><div style="width:3px;height:28px;border-radius:2px;background:linear-gradient(180deg,#c8a8f0,#7ec8f8);flex-shrink:0"></div><span class="act-text">男性不妊への正しい理解の促進</span></div>
-      <div class="act-item act-anim" id="aa3"><span class="act-num">03</span><div style="width:3px;height:28px;border-radius:2px;background:linear-gradient(180deg,#c8a8f0,#7ec8f8);flex-shrink:0"></div><span class="act-text">精液検査の普及と啓発</span></div>
-      <div class="act-item act-anim" id="aa4"><span class="act-num">04</span><div style="width:3px;height:28px;border-radius:2px;background:linear-gradient(180deg,#c8a8f0,#7ec8f8);flex-shrink:0"></div><span class="act-text">シードカード普及による婚活支援</span></div>
+  <!-- ウェルカム -->
+  <div class="welcome">
+    <h1>
+      Welcome,<span class="grad-name" id="welcomeName">.</span>
+    </h1>
+    <div class="member-since" id="memberSince">Member since </div>
+    <div class="verified-badge">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vbg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c8a8f0"/>
+            <stop offset="100%" stop-color="#7ec8f8"/>
+          </linearGradient>
+        </defs>
+        <circle cx="8" cy="8" r="8" fill="url(#vbg)"/>
+        <path d="M4 8.5 L6.5 11 L12 5.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="vbl">一般社団法人 日本精子協会　認定済み</span>
     </div>
   </div>
-</div>
 
-<!-- 問題提起 インフォグラフィック -->
-<div class="fu" style="max-width:960px;margin:0 auto;padding:0 48px 60px">
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-
-    <!-- 50% ドーナツ -->
-    <div class="card" style="padding:32px 24px;text-align:center">
-      <div style="font-family:var(--en);font-size:10px;font-weight:500;letter-spacing:.22em;color:#9080c8;margin-bottom:18px">Male Factor</div>
-      <div style="position:relative;width:120px;height:120px;margin:0 auto">
-        <svg width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+  <!-- カードビジュアル -->
+  <div class="card-stage" id="cardStage">
+    <div class="card-3d-wrap" id="card3d">
+      <div class="card-main">
+        <svg viewBox="0 0 340 214" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="sg1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#c8a8f0"/>
-              <stop offset="100%" stop-color="#7ec8f8"/>
+            <linearGradient id="cm1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#f0ebff"/>
             </linearGradient>
           </defs>
-          <circle cx="60" cy="60" r="48" fill="none" stroke="#f0f0f5" stroke-width="10"/>
-          <circle cx="60" cy="60" r="48" fill="none" stroke="url(#sg1)" stroke-width="10"
-            stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="150.8"
-            style="transition:stroke-dashoffset 1s ease"/>
+          <rect width="340" height="214" fill="url(#cm1)" rx="14"/>
+          <!-- 左上：SEED CARD ロゴ（黄金バランス位置 y=48） -->
+          <text x="28" y="48" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3.6" fill="#6c757d">SEED CARD</text>
+          <!-- 右上：NFCマーク（SEED CARDと水平揃え） -->
+          <g transform="translate(283.5,21) scale(1.6)">
+            <path d="M16.3 19.5C17.4 17.2 18 14.7 18 12S17.4 6.7 16.3 4.5M12.7 17.8C13.5 16 14 14 14 12S13.5 7.9 12.7 6.1M9.1 16.1C9.7 14.8 10 13.4 10 12S9.7 9.1 9.1 7.9M5.5 14.3C5.8 13.6 6 12.8 6 12S5.8 10.3 5.5 9.6" stroke="#6c757d" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </g>
+          <!-- 左下：会員番号（小さめ）+ 名前 -->
+          <text id="cardMemberNo" x="28" y="170" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="9" font-weight="500" letter-spacing="2" fill="#9aa0a8"></text>
+          <text x="28" y="190" id="cardName" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1" fill="#6c757d"></text>
+          <!-- 右下：精子マーク（下端=TARO SEISHI下端=190に揃え）-->
+          <g transform="translate(250.9,148.5) scale(0.1185)">
+            <path fill="#6c757d" d="M422.4,142.6c18.3-2.6,31.5,12.8,42.2,25.5,42.2,50.2,73.7,134,28.7,192-35.1,45.4-85.7,51.7-125,7-49.8-56.5-24-134.7,15.1-189,8.2-11.4,24.6-33.5,39.1-35.6ZM425.7,158.6c-12.5,2.1-34.4,34.6-41,45.7-31.6,52.4-46.9,125.4,11,166.2,48.5,34.1,100.4-19.4,104.2-67.6,3.6-45.2-24.2-102.4-55.3-134.1-4.7-4.8-11.9-11.3-18.9-10.2Z"/>
+          </g>
         </svg>
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <span style="font-family:var(--en);font-size:32px;font-weight:200;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-count="50" data-suffix="%">0</span>
-          <span style="font-family:var(--en);font-size:14px;font-weight:300;color:#9080c8">%</span>
+        <div class="card-stamp" id="cardStamp">
+          <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35" cy="35" r="32" fill="none" stroke="rgba(155,135,214,0.45)" stroke-width="2" stroke-dasharray="4 2.5"/>
+            <circle cx="35" cy="35" r="24" fill="none" stroke="rgba(155,135,214,0.35)" stroke-width="1.2"/>
+            <path d="M22 35 L31 44 L48 26" stroke="#9b87d6" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+            <text x="35" y="16" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="6" font-weight="700" letter-spacing="2.5" fill="rgba(155,135,214,0.85)">CERTIFIED</text>
+            <text x="35" y="59" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="5.5" font-weight="600" letter-spacing="1.5" fill="rgba(155,135,214,0.8)">精子協会認定</text>
+          </svg>
         </div>
-      </div>
-      <div style="font-size:13px;font-weight:400;color:var(--text3);line-height:1.7;margin-top:14px">不妊の原因に<br>男性側の要因が関係</div>
-      <div style="font-family:var(--en);font-size:10px;font-weight:400;letter-spacing:.12em;color:#9e9ea8;margin-top:6px">WHO調査</div>
-    </div>
-
-    <!-- 1/6 点滅アニメーション -->
-    <div class="card" style="padding:32px 24px;text-align:center" id="card16">
-      <div style="font-family:var(--en);font-size:10px;font-weight:500;letter-spacing:.22em;color:#9080c8;margin-bottom:18px">Infertile Couples</div>
-      <div style="display:flex;justify-content:center;align-items:baseline;gap:4px;margin-bottom:18px">
-        <span id="num16" style="font-family:var(--en);font-size:44px;font-weight:200;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">6</span>
-        <span style="font-family:var(--en);font-size:24px;font-weight:200;color:#9080c8">/</span>
-        <span style="font-family:var(--en);font-size:44px;font-weight:200;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">6</span>
-      </div>
-      <div style="display:flex;justify-content:center;gap:7px;margin-bottom:14px" id="icons16">
-        <svg class="icon16" width="20" height="30" viewBox="0 0 20 30"><circle cx="10" cy="7" r="5.5" fill="#c8a8f0"/><path d="M1 28c0-5 4-9 9-9s9 4 9 9" fill="#c8a8f0"/></svg>
-        <svg class="icon16" width="20" height="30" viewBox="0 0 20 30"><circle cx="10" cy="7" r="5.5" fill="#c8a8f0"/><path d="M1 28c0-5 4-9 9-9s9 4 9 9" fill="#c8a8f0"/></svg>
-        <svg class="icon16" width="20" height="30" viewBox="0 0 20 30"><circle cx="10" cy="7" r="5.5" fill="#c8a8f0"/><path d="M1 28c0-5 4-9 9-9s9 4 9 9" fill="#c8a8f0"/></svg>
-        <svg class="icon16" width="20" height="30" viewBox="0 0 20 30"><circle cx="10" cy="7" r="5.5" fill="#c8a8f0"/><path d="M1 28c0-5 4-9 9-9s9 4 9 9" fill="#c8a8f0"/></svg>
-        <svg class="icon16" width="20" height="30" viewBox="0 0 20 30"><circle cx="10" cy="7" r="5.5" fill="#c8a8f0"/><path d="M1 28c0-5 4-9 9-9s9 4 9 9" fill="#c8a8f0"/></svg>
-        <svg class="icon16" width="20" height="30" viewBox="0 0 20 30"><circle cx="10" cy="7" r="5.5" fill="#c8a8f0"/><path d="M1 28c0-5 4-9 9-9s9 4 9 9" fill="#c8a8f0"/></svg>
-      </div>
-      <div style="font-size:13px;font-weight:400;color:var(--text3);line-height:1.7">不妊に悩む<br>カップルの割合</div>
-    </div>
-
-    <!-- 出生数 アニメーションバーチャート -->
-    <div class="card" style="padding:32px 24px;text-align:center" id="birthCard">
-      <div style="font-family:var(--en);font-size:10px;font-weight:500;letter-spacing:.22em;color:#9080c8;margin-bottom:18px">Births in Japan</div>
-      <div style="display:flex;justify-content:center;align-items:baseline;gap:3px;margin-bottom:14px">
-        <span style="font-family:var(--en);font-size:24px;font-weight:200;color:#9080c8">&lt;</span>
-        <span style="font-family:var(--en);font-size:40px;font-weight:200;line-height:1;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">70</span>
-        <span style="font-family:var(--en);font-size:16px;font-weight:300;color:#9080c8">万人</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;text-align:left">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-family:var(--en);font-size:10px;color:#9e9ea8;width:28px;flex-shrink:0">2019</span>
-          <div style="flex:1;height:10px;background:#f0f0f5;border-radius:99px;overflow:hidden"><div class="birth-bar" data-w="94" style="width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#c8a8f0,#7ec8f8);opacity:.45;transition:width 2.8s cubic-bezier(.4,0,.2,1) 0s"></div></div>
-          <span style="font-family:var(--en);font-size:10px;color:#9e9ea8;width:30px;text-align:right">86万</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-family:var(--en);font-size:10px;color:#9e9ea8;width:28px;flex-shrink:0">2021</span>
-          <div style="flex:1;height:10px;background:#f0f0f5;border-radius:99px;overflow:hidden"><div class="birth-bar" data-w="85" style="width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#c8a8f0,#7ec8f8);opacity:.6;transition:width 2.8s cubic-bezier(.4,0,.2,1) .5s"></div></div>
-          <span style="font-family:var(--en);font-size:10px;color:#9e9ea8;width:30px;text-align:right">81万</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-family:var(--en);font-size:10px;color:#9e9ea8;width:28px;flex-shrink:0">2022</span>
-          <div style="flex:1;height:10px;background:#f0f0f5;border-radius:99px;overflow:hidden"><div class="birth-bar" data-w="79" style="width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#c8a8f0,#7ec8f8);opacity:.75;transition:width 2.8s cubic-bezier(.4,0,.2,1) 1.1s"></div></div>
-          <span style="font-family:var(--en);font-size:10px;color:#9e9ea8;width:30px;text-align:right">77万</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-family:var(--en);font-size:10px;font-weight:500;color:#3a3a3c;width:28px;flex-shrink:0">2023</span>
-          <div style="flex:1;height:10px;background:#f0f0f5;border-radius:99px;overflow:hidden"><div class="birth-bar" data-w="72" style="width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#c8a8f0,#7ec8f8);transition:width 2.8s cubic-bezier(.4,0,.2,1) 1.7s"></div></div>
-          <span style="font-family:var(--en);font-size:10px;font-weight:500;color:#9080c8;width:30px;text-align:right">&lt;70万</span>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:400;color:var(--text3);line-height:1.7;margin-top:14px">2023年の日本の出生数<br>初めて70万人を下回る</div>
-    </div>
-
-  </div>
-</div>
-
-<!-- KNOW -->
-<div class="sec fu" id="know">
-  <span class="sec-label">Know Your Sperm</span>
-  <h2 class="sec-ttl sa-blur">精子力とは？</h2>
-  <p class="sec-body">精子の数・運動性・形態・DNAの完全性。この4つの要素を総合したものが「精子力」です。精子力は生まれつき決まったものではなく、生活習慣の改善によって約3か月後から変化が現れます。まず現状を知ることが、すべての出発点です。</p>
-
-  <div class="four-grid" id="four-grid">
-    <div class="four-card sa-stagger" style="text-align:center">
-      <div class="four-n">01 — Number</div><div class="four-t">数の力</div>
-      <div style="height:100px;margin:4px 0"><canvas id="sc01" style="width:100%;height:100%;display:block"></canvas></div>
-      <div style="font-family:'Inter',sans-serif;font-size:10px;color:#9e9ea8;margin-bottom:6px">WHO基準 ≥ 16M/ml</div>
-      <div class="four-b">精子濃度・総精子数。亜鉛・睡眠が助けになります。</div>
-    </div>
-    <div class="four-card sa-stagger" style="text-align:center;transition-delay:.12s">
-      <div class="four-n">02 — Motility</div><div class="four-t">動く力</div>
-      <div style="height:100px;margin:4px 0"><canvas id="sc02" style="width:100%;height:100%;display:block"></canvas></div>
-      <div style="font-family:'Inter',sans-serif;font-size:10px;color:#9e9ea8;margin-bottom:6px">WHO基準 ≥ 42%</div>
-      <div class="four-b">前進運動率・速度。DHA/EPA・CoQ10が関係。</div>
-    </div>
-    <div class="four-card sa-stagger" style="text-align:center;transition-delay:.24s">
-      <div class="four-n">03 — Morphology</div><div class="four-t">形の力</div>
-      <div style="height:130px;margin:4px 0"><canvas id="sc03" style="width:100%;height:100%;display:block"></canvas></div>
-      <div style="font-family:'Inter',sans-serif;font-size:10px;color:#9e9ea8;margin-bottom:6px">WHO基準 ≥ 4%</div>
-      <div class="four-b">正常形態率。葉酸・抗酸化物質が維持に関与。</div>
-    </div>
-    <div class="four-card sa-stagger" style="text-align:center;transition-delay:.36s">
-      <div class="four-n">04 — DNA</div><div class="four-t">DNAの力</div>
-      <div style="height:80px;display:flex;align-items:center;justify-content:center;margin:8px 0">
-        <canvas id="sc04dna" style="width:72px;height:88px;display:block"></canvas>
-      </div>
-      <div style="font-family:'Inter',sans-serif;font-size:10px;color:#9e9ea8;margin-bottom:6px">断片化指数 &lt; 25%</div>
-      <div class="four-b">禁煙・ビタミンC・Eが断片化の抑制に有効。</div>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:36px">
-    <a href="https://note.com/japan_sperm" target="_blank" class="btn-p">精子力についてくわしく知る</a>
-  </div>
-</div>
-
-<div class="div-line fu"></div>
-
-<!-- KENSA -->
-<div class="sec fu" id="check">
-  <span class="sec-label">Get Tested</span>
-  <h2 class="sec-ttl">精液検査を受ける</h2>
-  <p class="sec-body">クリニックまたは郵送キットで、気軽に検査を受けることができます。</p>
-  <div class="kensa-grid">
-    <div class="kensa-card">
-      <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=85&fit=crop&crop=center" alt="クリニック">
-      <div class="kensa-overlay">
-        <div class="kensa-en">At Clinic</div>
-        <div class="kensa-t">クリニックで受ける</div>
-        <div class="kensa-d">泌尿器科・男性不妊専門クリニックで精密な検査が受けられます。</div>
-      </div>
-    </div>
-    <div class="kensa-card">
-      <img src="https://images.unsplash.com/photo-1587370560942-ad2a04eabb6d?w=900&q=85&fit=crop&crop=center" alt="郵送キット">
-      <div class="kensa-overlay">
-        <div class="kensa-en">Mail-in Kit</div>
-        <div class="kensa-t">郵送キットで受ける</div>
-        <div class="kensa-d">自宅で採精して郵送するだけ。手軽に最初の一歩が踏み出せます。</div>
-        <a href="https://hb.afl.rakuten.co.jp/ichiba/44b14aa8.d2a316eb.44b14aa9.acf07ac7/" target="_blank" class="kensa-link">おすすめキットを見る</a>
       </div>
     </div>
   </div>
-</div>
 
-<div class="div-line fu"></div>
+  <!-- カードダウンロードボタン -->
+  <div style="text-align:center;margin-top:14px;margin-bottom:4px">
+    <button class="dl-btn" onclick="downloadCard()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      カード画像を保存
+    </button>
+  </div>
 
-<!-- SEEDCARD -->
-<div id="seedcard" style="background:linear-gradient(160deg,#f5f0ff 0%,#eef5ff 100%);margin-top:0">
-<div class="sec fu">
-  <span class="sec-label">SEED CARD</span>
-  <h2 class="sec-ttl">精子の資格をとる。</h2>
-  <p class="sec-body">シードカードは精子力の高い男性のみに発行される資格。将来を考えるパートナーが最も気にすることのひとつが、子どもを持てるかどうかです。精子力を可視化し、証明することは、誠実さと将来性を同時に示す、新しい婚活のスペックになりつつあります。</p>
-
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px 0">
-    <div class="card" style="padding:24px 20px;text-align:center">
-      <div style="font-family:var(--en);font-size:28px;font-weight:200;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px">01</div>
-      <div style="font-family:var(--jp);font-size:14px;font-weight:500;margin-bottom:8px;color:var(--text)">医学的な信頼性</div>
-      <div style="font-size:12px;font-weight:400;color:var(--text3);line-height:1.8">WHO基準に準拠した精液検査をもとに、医師監修のもと協会が認定します。</div>
+  <!-- ① 認定情報 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">認定情報</div>
     </div>
-    <div class="card" style="padding:24px 20px;text-align:center">
-      <div style="font-family:var(--en);font-size:28px;font-weight:200;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px">02</div>
-      <div style="font-family:var(--jp);font-size:14px;font-weight:500;margin-bottom:8px;color:var(--text)">パートナーへの安心感</div>
-      <div style="font-size:12px;font-weight:400;color:var(--text3);line-height:1.8">数値で示された精子力は、将来を考えるパートナーへの誠実な意思表示になります。</div>
-    </div>
-    <div class="card" style="padding:24px 20px;text-align:center">
-      <div style="font-family:var(--en);font-size:28px;font-weight:200;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px">03</div>
-      <div style="font-family:var(--jp);font-size:14px;font-weight:500;margin-bottom:8px;color:var(--text)">自分自身への気づき</div>
-      <div style="font-size:12px;font-weight:400;color:var(--text3);line-height:1.8">精子力を知ることで、生活習慣の改善につながり、健康全体の底上げにもなります。</div>
+    <div class="bento">
+      <div class="info-list">
+        <div class="info-row" id="rowName"><span class="l">氏名</span><span class="v" id="valName"></span></div>
+        <div class="info-row" id="rowNo"><span class="l">会員番号</span><span class="v" id="valNo"></span></div>
+        <div class="info-row" id="rowCertDate"><span class="l">認定日</span><span class="v" id="valCertDate"></span></div>
+        <div class="info-row" id="rowExpiry"><span class="l">認定期限</span><span class="v" id="valExpiry"></span></div>
+      </div>
     </div>
   </div>
 
-  <div class="seed-wrap">
-    <!-- シードカード 3Dホログラムカード -->
-    <div style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:32px;background:linear-gradient(135deg,#f5f0ff,#eef5ff)">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
-        <div style="perspective:1000px" id="scScene">
-          <div id="scCard" style="width:340px;height:214px;border-radius:14px;position:relative;transform-style:preserve-3d;transition:transform .07s ease-out,box-shadow .07s ease-out;cursor:pointer;background:#f5f5f5;box-shadow:0 24px 64px rgba(0,0,0,.13),0 6px 20px rgba(0,0,0,.07);overflow:hidden">
-            <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 340 214" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="scGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#f5f5f7"/>
-    </linearGradient>
-  </defs>
-  <rect width="340" height="214" fill="url(#scGrad)" rx="14"/>
-  <text x="28" y="48"
-    font-family="'Inter','Helvetica Neue',Arial,sans-serif"
-    font-size="20" font-weight="700" letter-spacing="0.18em"
-    fill="#6c757d">SEED CARD</text>
-  <text x="28" y="186"
-    font-family="'Inter','Helvetica Neue',Arial,sans-serif"
-    font-size="13" font-weight="600" letter-spacing="0.08em"
-    fill="#6c757d">TARO SEISHI</text>
-  <g transform="translate(190.9,92.5) scale(0.2351)">
-    <path fill="#6c757d" d="M422.4,142.6c18.3-2.6,31.5,12.8,42.2,25.5,42.2,50.2,73.7,134,28.7,192-35.1,45.4-85.7,51.7-125,7-49.8-56.5-24-134.7,15.1-189,8.2-11.4,24.6-33.5,39.1-35.6ZM425.7,158.6c-12.5,2.1-34.4,34.6-41,45.7-31.6,52.4-46.9,125.4,11,166.2,48.5,34.1,100.4-19.4,104.2-67.6,3.6-45.2-24.2-102.4-55.3-134.1-4.7-4.8-11.9-11.3-18.9-10.2Z"/>
-  </g>
-</svg>
-            <div id="scHolo1" style="position:absolute;top:0;left:-130%;width:60%;height:100%;pointer-events:none;background:linear-gradient(108deg,transparent 28%,rgba(200,178,255,.2) 40%,rgba(178,220,255,.17) 48%,rgba(200,255,210,.14) 56%,transparent 68%);animation:scHF1 4.5s ease-in-out infinite;transform:skewX(-5deg);mix-blend-mode:screen"></div>
-            <div style="position:absolute;top:0;left:-130%;width:45%;height:100%;pointer-events:none;background:linear-gradient(108deg,transparent 32%,rgba(255,210,178,.1) 44%,rgba(200,178,255,.16) 54%,transparent 64%);animation:scHF1 4.5s ease-in-out infinite 1.6s;transform:skewX(-5deg);mix-blend-mode:screen"></div>
-            <div id="scShine" style="position:absolute;inset:0;border-radius:14px;pointer-events:none;transition:background .06s"></div>
-            <div style="position:absolute;inset:1px;border-radius:13px;border:1px solid rgba(255,255,255,.8);pointer-events:none"></div>
-          </div>
-        </div>
-        <div style="font-size:12px;color:#9080c8;font-family:var(--en);letter-spacing:.08em;opacity:.7">カーソルを合わせると3Dで表示</div>
-      </div>
+  <!-- ② 検査データ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">検査データ</div>
+      <div class="section-sub" id="sectionLastExam">WHO 2021基準·全項目クリア · 最終検査:</div>
     </div>
-    <div class="seed-text">
-      <div>
-        <div style="font-family:var(--jp);font-size:17px;font-weight:500;margin-bottom:20px;letter-spacing:.04em;color:var(--text)">シードカードの取得の流れ</div>
-        <div style="display:flex;flex-direction:column;gap:0" id="seed-flow">
-          <div class="seed-step" id="ss1" style="display:flex;align-items:flex-start;gap:12px;padding-bottom:16px;opacity:0;transform:translateX(-10px);transition:opacity .5s ease,transform .5s ease">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0">
-              <div style="width:28px;height:28px;border-radius:50%;background:var(--grad-btn);color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">1</div>
-              <div style="width:1px;height:18px;background:linear-gradient(180deg,#c8a8f0,transparent)"></div>
+    <div class="bento gradient-bento">
+      <div class="data-list">
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">精液量</span>
+              <span class="who-base">基準:1.4mL 以上</span>
             </div>
-            <div style="padding-top:4px">
-              <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">精液検査を受ける</div>
-              <div style="font-size:12px;font-weight:400;color:var(--text3)">クリニックまたは郵送キットで。</div>
+            <div class="data-val-right">
+              <span class="val"><span id="numVol">—</span><span class="unit">mL</span></span>
+              <span class="pct-badge" id="pctVol"></span>
             </div>
           </div>
-          <div class="seed-step" id="ss2" style="display:flex;align-items:flex-start;gap:12px;padding-bottom:16px;opacity:0;transform:translateX(-10px);transition:opacity .5s ease .18s,transform .5s ease .18s">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0">
-              <div style="width:28px;height:28px;border-radius:50%;background:var(--grad-btn);color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">2</div>
-              <div style="width:1px;height:18px;background:linear-gradient(180deg,#c8a8f0,transparent)"></div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barVol"></div>
+            <div class="data-bar-ref" id="refVol"></div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">精子濃度</span>
+              <span class="who-base">基準:1,600万/mL 以上</span>
             </div>
-            <div style="padding-top:4px">
-              <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">協会に申請する</div>
-              <div style="font-size:12px;font-weight:400;color:var(--text3)">検査結果をオンラインで提出。</div>
+            <div class="data-val-right">
+              <span class="val"><span id="numConc">—</span><span class="unit" id="unitConc">万/mL</span></span>
+              <span class="pct-badge" id="pctConc"></span>
             </div>
           </div>
-          <div class="seed-step" id="ss3" style="display:flex;align-items:flex-start;gap:12px;opacity:0;transform:translateX(-10px);transition:opacity .5s ease .36s,transform .5s ease .36s">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--grad-btn);color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
-            <div style="padding-top:4px">
-              <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">シードカード発行</div>
-              <div style="font-size:12px;font-weight:400;color:var(--text3)">審査後、精子力が認定されます。</div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barConc"></div>
+            <div class="data-bar-ref" id="refConc"></div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">総精子数</span>
+              <span class="who-base">基準:3,900万 以上</span>
             </div>
+            <div class="data-val-right">
+              <span class="val"><span id="numTotal">—</span><span class="unit" id="unitTotal">億</span></span>
+              <span class="pct-badge" id="pctTotal"></span>
+            </div>
+          </div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barTotal"></div>
+            <div class="data-bar-ref" id="refTotal"></div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-row-top">
+            <div class="data-name-block">
+              <span class="name">正常形態率</span>
+              <span class="who-base">基準:4% 以上</span>
+            </div>
+            <div class="data-val-right">
+              <span class="val"><span id="numMorph">—</span><span class="unit">%</span></span>
+              <span class="pct-badge" id="pctMorph"></span>
+            </div>
+          </div>
+          <div class="data-bar-wrap">
+            <div class="data-bar-fill" id="barMorph"></div>
+            <div class="data-bar-ref" id="refMorph"></div>
           </div>
         </div>
       </div>
-      <div class="seed-actions">
-        <a href="https://www.japan-sperm.com/seedcard" class="seed-action-card">
-          <div>
-            <div class="seed-action-label">新しく取得したい方</div>
-            <div class="seed-action-title">シードカードを申請する</div>
-          </div>
-          <span class="seed-action-btn seed-btn-fill">申請する</span>
-        </a>
-        <a href="https://seedcard.japan-sperm.com" target="_blank" class="seed-action-card">
-          <div>
-            <div class="seed-action-label">すでにお持ちの方</div>
-            <div class="seed-action-title">会員ログイン</div>
-          </div>
-          <span class="seed-action-btn seed-btn-out">ログイン</span>
-        </a>
+    </div>
+
+    <!-- 更新ボタン -->
+    <div id="updateCardWrap" style="margin-top:10px">
+      <a id="updateCardLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdUBZGeShk0Q0Zg6JLAV7WPtTjsnkHoACp99wpSkksU2EQFCQ/viewform?usp=header" class="update-card" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+            <polyline points="21 3 21 8 16 8"/>
+            <polyline points="3 21 3 16 8 16"/>
+          </svg>
+        </div>
+        <div class="text">
+          <div class="ttl" id="updateCardTtl">検査結果を更新する</div>
+          <div class="sub" id="updateCardSub">再検査結果を反映 · 認定期限を1年延長</div>
+        </div>
+        <div class="price">¥10,000</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ③ 表示設定 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">表示設定</div>
+      <div class="section-sub">SNSシェア·認定証で表示する項目</div>
+    </div>
+    <div class="bento">
+      <div class="privacy-list">
+        <div class="privacy-row" onclick="togglePrivacy('name')">
+          <span class="lbl">氏名を表示</span>
+          <div class="toggle on" id="swName"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="privacy-row" onclick="togglePrivacy('no')">
+          <span class="lbl">会員番号を表示</span>
+          <div class="toggle on" id="swNo"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="privacy-row" onclick="togglePrivacy('certDate')">
+          <span class="lbl">認定日を表示</span>
+          <div class="toggle on" id="swCertDate"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="privacy-row" onclick="togglePrivacy('expiry')">
+          <span class="lbl">認定期限を表示</span>
+          <div class="toggle on" id="swExpiry"><div class="toggle-knob"></div></div>
+        </div>
       </div>
     </div>
   </div>
-</div><!-- /.sec -->
-</div><!-- /#seedcard wrapper -->
 
-<div class="div-line fu"></div>
-<div class="sec fu" id="medical">
-  <span class="sec-label">For Healthcare Professionals</span>
-  <h2 class="sec-ttl">医療従事者の方へ</h2>
-  <p class="sec-body">当協会は医師監修のもと、WHO基準に準拠した情報を発信しています。ガイドラインのご活用や、連携クリニックのご登録をお待ちしています。</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px">
-
-    <!-- ガイドライン -->
-    <div class="card" style="padding:36px 32px">
-      <div style="width:44px;height:44px;border-radius:12px;background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;margin-bottom:18px">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9080c8" stroke-width="1.8" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      </div>
-      <div style="font-family:var(--en);font-size:10px;font-weight:300;letter-spacing:.25em;color:#9080c8;margin-bottom:10px">Guideline 2026</div>
-      <div style="font-family:var(--jp);font-size:17px;font-weight:400;margin-bottom:12px;letter-spacing:.04em;color:var(--text)">一般社団法人 日本精子協会　ガイドライン</div>
-      <div style="width:100%;aspect-ratio:3/2;background:#f5f5f7;border:2px dashed rgba(0,0,0,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden">
-        <img src="images/guideline.jpg" alt="ガイドライン" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-        <div style="display:none;flex-direction:column;align-items:center;gap:8px;color:rgba(0,0,0,.3)">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <span style="font-size:12px">ガイドライン画像を配置</span>
-        </div>
-      </div>
-      <p style="font-size:14px;font-weight:400;color:var(--text2);line-height:1.95;margin-bottom:20px">精子の基礎知識から、生活習慣との関係、医療機関への相談のタイミングまで。日常生活に役立つ情報を幅広くまとめた、医師監修の公式ガイドラインです。</p>
-      <a href="https://www.japan-sperm.com/_files/ugd/17e9f1_f1a9fab2a47747ec985b1a12eccea935.pdf" target="_blank" class="btn-p" style="font-size:13px">ガイドラインPDFを開く</a>
+  <!-- ⑤ シェア -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-h">シェアする</div>
+      <div class="section-sub">仲間と認定を共有しましょう</div>
     </div>
 
-    <!-- 連携クリニック -->
-    <div class="card" style="padding:36px 32px">
-      <div style="width:44px;height:44px;border-radius:12px;background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;margin-bottom:18px">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9080c8" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <!-- 画像としてシェア -->
+    <a href="#" class="update-card" onclick="downloadCard();return false;" style="margin-bottom:10px">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
       </div>
-      <div style="font-family:var(--en);font-size:10px;font-weight:300;letter-spacing:.25em;color:#9080c8;margin-bottom:10px">Clinic Partnership</div>
-      <div style="font-family:var(--jp);font-size:17px;font-weight:400;margin-bottom:12px;letter-spacing:.04em;color:var(--text)">連携クリニックのご登録</div>
-      <div style="width:100%;aspect-ratio:3/2;background:#f5f5f7;border:2px dashed rgba(0,0,0,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden">
-        <img src="images/clinic.jpg" alt="連携クリニック" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-        <div style="display:none;flex-direction:column;align-items:center;gap:8px;color:rgba(0,0,0,.3)">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span style="font-size:12px">クリニック画像を配置</span>
-        </div>
+      <div class="text">
+        <div class="ttl">カード画像をダウンロードしてシェア</div>
+        <div class="sub">名前・会員番号入りの画像を保存</div>
       </div>
-      <p style="font-size:14px;font-weight:400;color:var(--text2);line-height:1.95;margin-bottom:20px">泌尿器科・産婦人科・不妊治療クリニックの先生方との連携を積極的に推進しています。シードカード制度の説明や患者紹介など、ご相談はお気軽にお問い合わせください。</p>
-      <a href="https://www.japan-sperm.com/blank-2" class="btn-p" style="font-size:13px">お問い合わせ</a>
+    </a>
+    <div class="share-grid">
+      <a href="#" class="share-btn" onclick="shareX(event)">
+        <div class="ico ico-x"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+      </a>
+      <a href="#" class="share-btn" onclick="shareLine(event)">
+        <div class="ico ico-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.628-.63.628h-2.386c-.345 0-.627-.285-.627-.628V8.108c0-.345.282-.63.63-.63h2.386c.345 0 .627.285.627.63 0 .349-.282.63-.63.63H17.61v1.125zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v3.756h1.756c.348 0 .629.283.629.63 0 .344-.282.628-.629.628M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></div>
+      </a>
+      <a href="#" class="share-btn" onclick="shareFacebook(event)">
+        <div class="ico ico-fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+      </a>
     </div>
 
+    <div class="share-preview">
+      <div class="label">投稿される文章</div>
+
+      <div class="share-preview-card">
+        <svg viewBox="0 0 340 214" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="spc1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#f0ebff"/>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="214" fill="url(#spc1)" rx="14"/>
+          <text x="28" y="48" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3.6" fill="#6c757d">SEED CARD</text>
+          <g transform="translate(283.5,21) scale(1.6)">
+            <path d="M16.3 19.5C17.4 17.2 18 14.7 18 12S17.4 6.7 16.3 4.5M12.7 17.8C13.5 16 14 14 14 12S13.5 7.9 12.7 6.1M9.1 16.1C9.7 14.8 10 13.4 10 12S9.7 9.1 9.1 7.9M5.5 14.3C5.8 13.6 6 12.8 6 12S5.8 10.3 5.5 9.6" stroke="#6c757d" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </g>
+          <text id="shareCardMemberNo" x="28" y="170" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="9" font-weight="500" letter-spacing="2" fill="#9aa0a8"></text>
+          <text id="shareCardName" x="28" y="190" font-family="-apple-system,SF Pro Display,Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1" fill="#6c757d"></text>
+          <g transform="translate(250.9,148.5) scale(0.1185)">
+            <path fill="#6c757d" d="M422.4,142.6c18.3-2.6,31.5,12.8,42.2,25.5,42.2,50.2,73.7,134,28.7,192-35.1,45.4-85.7,51.7-125,7-49.8-56.5-24-134.7,15.1-189,8.2-11.4,24.6-33.5,39.1-35.6ZM425.7,158.6c-12.5,2.1-34.4,34.6-41,45.7-31.6,52.4-46.9,125.4,11,166.2,48.5,34.1,100.4-19.4,104.2-67.6,3.6-45.2-24.2-102.4-55.3-134.1-4.7-4.8-11.9-11.3-18.9-10.2Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="text" id="shareText">精子の資格「SEED CARD」を取得しました。
+
+<span class="tag">#日本精子協会 #SEEDCARD #精子のチカラで輝く未来を作る #プレコンセプションケア #ブライダルチェック</span></div>
+    </div>
   </div>
 
+  <!-- フッター -->
+  <!-- ⑥ アカウント設定 -->
+  <div class="section" id="accountSection">
+    <div class="section-header">
+      <div class="section-h">アカウント設定</div>
+      <div class="section-sub">登録情報の変更</div>
+    </div>
+    <div class="bento">
+      <div class="privacy-list">
+        <div class="privacy-row" style="cursor:pointer" onclick="document.getElementById('emailChangeArea').style.display=document.getElementById('emailChangeArea').style.display==='none'?'block':'none'">
+          <span class="lbl">登録メールアドレスを変更</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div id="emailChangeArea" style="display:none;padding:16px 0 4px">
+          <input type="email" id="newEmailInput" placeholder="新しいメールアドレス" autocomplete="email"
+            style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
+          <button onclick="requestEmailChange()" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer" id="emailChangeBtn">
+            確認メールを送信
+          </button>
+          <div id="emailChangeMsg" style="display:none;margin-top:10px;font-size:12px;line-height:1.6;padding:10px 12px;border-radius:8px"></div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:0"></div>
+
+        <div class="privacy-row" style="cursor:pointer" onclick="document.getElementById('addressChangeArea').style.display=document.getElementById('addressChangeArea').style.display==='none'?'block':'none'">
+          <span class="lbl">発送先住所を変更</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div id="addressChangeArea" style="display:none;padding:16px 0 4px">
+          <input type="text" id="newPostalInput" placeholder="郵便番号（例：1040061）" inputmode="numeric"
+            style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
+          <input type="text" id="newAddressInput" placeholder="住所（都道府県から）"
+            style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
+          <button onclick="requestAddressChange()" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer" id="addressChangeBtn">
+            住所を更新する
+          </button>
+          <div id="addressChangeMsg" style="display:none;margin-top:10px;font-size:12px;line-height:1.6;padding:10px 12px;border-radius:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    一般社団法人 日本精子協会<br>
+    <a href="#">公式サイト</a><span class="sep">·</span><a href="#">サポート</a><br>
+    <a href="#" onclick="logout();return false;" style="color:var(--text3);margin-top:8px;display:inline-block;font-size:11px">ログアウト</a>
+  </div>
 
 </div>
 
-<!-- MEMBERSHIP -->
-<div class="mem-wrap fu" id="membership">
-  <div class="mem-inner">
-    <div class="mem-head">
-      <span class="sec-label" style="display:block;text-align:center;margin-bottom:10px">Membership</span>
-      <h2 class="sec-ttl" style="font-size:clamp(22px,3vw,32px);text-align:center;margin-bottom:12px">賛助会員の募集</h2>
-      <p style="font-size:14px;font-weight:400;color:var(--text2);line-height:1.9;text-align:center">当協会の活動理念に賛同し、精子の力で日本人を増やしたいとお考えの法人・個人の皆様の支援を募集しています。</p>
-      <div style="width:100%;max-width:640px;margin:24px auto 0;aspect-ratio:16/7;background:#f5f5f7;border:2px dashed rgba(0,0,0,.1);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden">
-        <img src="images/membership.jpg" alt="仲間を募集" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-        <div style="display:none;flex-direction:column;align-items:center;gap:8px;color:rgba(0,0,0,.3)">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span style="font-size:12px">仲間募集イメージ画像を配置</span>
-        </div>
-      </div>
-    </div>
-    <div class="mem-grid">
-      <div class="mem-card">
-        <div class="mem-type">Individual Member</div>
-        <div class="mem-name">個人会員</div>
-        <div class="mem-price">¥10,000</div>
-        <div class="mem-unit">年額（税込）</div>
-        <p class="mem-desc">協会の活動を支援し、精子に関する正しい知識の普及に貢献します。</p>
-        <a href="https://www.japan-sperm.com/複製-認定登録の応募" class="mem-btn">入会する</a>
-      </div>
-      <div class="mem-card">
-        <div class="mem-type">Corporate Member</div>
-        <div class="mem-name">法人会員</div>
-        <div class="mem-price">¥15,000</div>
-        <div class="mem-unit">年額（税込）</div>
-        <p class="mem-desc">企業として協会の活動を支援し、社員の生殖健康への意識向上に取り組みます。</p>
-        <a href="https://www.japan-sperm.com/複製-認定登録の応募" class="mem-btn">入会する</a>
-      </div>
-    </div>
-  </div>
+<!-- トースト -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastMsg">完了</span>
 </div>
-
-<!-- FOOTER -->
-<footer>
-  <div style="max-width:960px;margin:0 auto">
-
-    <!-- 上段：ロゴ＋ナビ -->
-    <div class="foot-in" style="padding-bottom:28px;border-bottom:1px solid rgba(0,0,0,.08)">
-      <div>
-        <div class="foot-logo-j">一般社団法人 日本精子協会</div>
-        <div class="foot-logo-e" style="margin-bottom:8px">Japan Sperm Association</div>
-        <div style="font-size:12px;font-weight:400;color:var(--text2);line-height:1.7">医師監修ガイドライン発行 ／ シードカード認定機関</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 32px">
-        <a href="#about" class="foot-links" style="display:block;font-size:13px;font-weight:400;color:var(--text2)">協会について</a>
-        <a href="#medical" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">医療従事者の方へ</a>
-        <a href="#seedcard" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">精子の資格（シードカード）</a>
-        <a href="#membership" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">賛助会員</a>
-        <a href="#know" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">精子力を知る</a>
-        <a href="https://www.japan-sperm.com/blank-2" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">お問い合わせ</a>
-        <a href="#check" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">精液検査を受ける</a>
-        <a href="https://www.japan-sperm.com/about-2" style="display:block;font-size:13px;font-weight:400;color:var(--text2);transition:color .2s" onmouseover="this.style.color='#9ab8e8'" onmouseout="this.style.color=''">特定商取引法に基づく表記</a>
-      </div>
-    </div>
-
-    <!-- 下段：免責・コピーライト -->
-    <div style="padding-top:22px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
-
-      <div style="font-family:var(--en);font-size:12px;font-weight:400;color:var(--text2);white-space:nowrap">©2024 一般社団法人 日本精子協会</div>
-    </div>
-
-  </div>
-</footer>
 
 <script>
-
-/* ── 精子力4要素 Canvas アニメーション ── */
-function initSpermCanvas(canvasId, count, colors, sizeScale, speedScale) {
-  const cv = document.getElementById(canvasId);
-  if (!cv) return;
-
-  // canvasの実ピクセルサイズをCSSサイズに合わせる
-  function resize() {
-    cv.width  = cv.offsetWidth;
-    cv.height = cv.offsetHeight;
-  }
-  resize();
-  // ResizeObserverで動的リサイズに対応
-  if (window.ResizeObserver) {
-    new ResizeObserver(resize).observe(cv);
-  }
-
-  const ctx = cv.getContext('2d');
-
-  const sperms = Array.from({length: count}, (_, i) => {
-    const col = colors[i % colors.length];
-    return {
-      x: (0.2 + Math.random() * 0.6) * cv.width,
-      y: (0.2 + Math.random() * 0.6) * cv.height,
-      hw: (16 + Math.random() * 6) * sizeScale,   // 頭の幅
-      hh: (11 + Math.random() * 4) * sizeScale,   // 頭の高さ
-      tl: (60 + Math.random() * 30) * sizeScale,  // 尻尾の長さ
-      speed: (1.0 + Math.random() * 0.8) * speedScale,
-      angle: Math.random() * Math.PI * 2,
-      wobble: (Math.random() - 0.5) * 0.018,
-      phase: Math.random() * Math.PI * 2,
-      color: col,
-      hiColor: col.replace(/[\d.]+\)$/, '0.35)'),
-    };
-  });
-
-  function draw(time) {
-    const W = cv.width, H = cv.height;
-    if (!W || !H) { requestAnimationFrame(draw); return; }
-
-    ctx.clearRect(0, 0, W, H);
-
-    sperms.forEach(s => {
-      // 自然なふらつき
-      s.angle += s.wobble + Math.sin(time * 0.0004 + s.phase) * 0.007;
-      s.x += Math.cos(s.angle) * s.speed;
-      s.y += Math.sin(s.angle) * s.speed;
-
-      // 壁反射
-      const m = s.hw * 2;
-      if (s.x < m)   { s.x = m;   s.angle = Math.PI - s.angle; }
-      if (s.x > W-m) { s.x = W-m; s.angle = Math.PI - s.angle; }
-      if (s.y < m)   { s.y = m;   s.angle = -s.angle; }
-      if (s.y > H-m) { s.y = H-m; s.angle = -s.angle; }
-
-      ctx.save();
-      ctx.translate(s.x, s.y);
-      ctx.rotate(s.angle);
-
-      // 尻尾（頭の後ろ＝マイナスX方向）
-      ctx.beginPath();
-      ctx.lineWidth = Math.max(s.hh * 0.18, 1.5);
-      ctx.strokeStyle = s.color;
-      ctx.lineCap = 'round';
-      ctx.moveTo(0, 0);
-      const waveOffset = time / 120 + s.phase;
-      for (let i = 0; i < 40; i++) {
-        const ratio = i / 40;
-        const x = -(ratio * s.tl);
-        const y = Math.sin(ratio * 6 - waveOffset) * (s.hh * 1.2 * ratio);
-        ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      // 頭部（楕円・右方向）
-      ctx.beginPath();
-      ctx.fillStyle = s.color;
-      ctx.ellipse(s.hw / 2, 0, s.hw / 2, s.hh / 2, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // ハイライト
-      ctx.beginPath();
-      ctx.fillStyle = s.hiColor;
-      ctx.ellipse(s.hw * 0.28, -s.hh * 0.22, s.hw * 0.2, s.hh * 0.15, -0.4, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    });
-
-    requestAnimationFrame(draw);
-  }
-  requestAnimationFrame(draw);
+// ─── トースト ───
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),2000);
 }
 
-// 01: 数の力 - 複数・小さめ・ゆっくり
-initSpermCanvas('sc01', 5,
-  ['rgba(200,178,248,0.78)', 'rgba(160,200,248,0.72)', 'rgba(185,165,242,0.68)', 'rgba(145,190,245,0.65)', 'rgba(210,190,250,0.7)'],
-  0.55, 0.32
-);
+// ─── プライバシートグル ───
+const state = { name: true, no: true, certDate: true, expiry: true };
 
-// 02: 動く力 - 横方向推進（スピード調整済み）
-(function() {
-  const cv = document.getElementById('sc02');
-  if (!cv) return;
-  function resize() { cv.width=cv.offsetWidth; cv.height=cv.offsetHeight; }
-  resize();
-  if(window.ResizeObserver) new ResizeObserver(resize).observe(cv);
-  const ctx = cv.getContext('2d');
-  const s = {x:-80,y:0,hw:14,hh:10,tl:65,speed:1.1,color:'rgba(155,198,248,0.88)',hiColor:'rgba(195,225,255,0.38)',phase:0};
-  function draw(time) {
-    const W=cv.width,H=cv.height;
-    if(!W||!H){requestAnimationFrame(draw);return;}
-    if(s.y===0) s.y=H/2;
-    ctx.clearRect(0,0,W,H);
-    ctx.beginPath();ctx.setLineDash([4,5]);ctx.strokeStyle='rgba(180,160,240,0.18)';ctx.lineWidth=1;
-    ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();ctx.setLineDash([]);
-    s.x+=s.speed;
-    s.y=H/2+Math.sin(time/700)*(H*0.1);
-    if(s.x>W+80) s.x=-80;
-    ctx.save();ctx.translate(s.x,s.y);
-    ctx.beginPath();ctx.lineWidth=2.2;ctx.strokeStyle=s.color;ctx.lineCap='round';ctx.moveTo(0,0);
-    for(let i=0;i<40;i++){const r=i/40;ctx.lineTo(-(r*s.tl),Math.sin(r*6-(time/120))*(s.hh*1.3*r));}
-    ctx.stroke();
-    ctx.beginPath();ctx.fillStyle=s.color;ctx.ellipse(s.hw/2,0,s.hw/2,s.hh/2,0,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.fillStyle=s.hiColor;ctx.ellipse(s.hw*0.28,-s.hh*0.22,s.hw*0.2,s.hh*0.15,-0.4,0,Math.PI*2);ctx.fill();
-    ctx.restore();
-    requestAnimationFrame(draw);
+function togglePrivacy(field){
+  state[field] = !state[field];
+  apply();
+}
+
+function apply(){
+  // ヘッダーの名前
+  const welcomeName = document.getElementById('welcomeName');
+  const cardName = document.getElementById('cardName');
+  const valName = document.getElementById('valName');
+  const shareCardName = document.getElementById('shareCardName');
+  const shareCardMemberNo = document.getElementById('shareCardMemberNo');
+
+  if(state.name){
+    if(welcomeName) welcomeName.textContent = _mName + '.';
+    if(cardName) cardName.textContent = _mRomaji;
+    if(valName) { valName.textContent = _mName; valName.style.color = ''; }
+    document.getElementById('swName').classList.add('on');
+    if(shareCardName) shareCardName.textContent = _mRomaji;
+  } else {
+    if(welcomeName) welcomeName.textContent = 'Member.';
+    if(cardName) cardName.textContent = '';
+    if(valName) { valName.textContent = '— 非公開 —'; valName.style.color = 'var(--text3)'; }
+    document.getElementById('swName').classList.remove('on');
+    if(shareCardName) shareCardName.textContent = '';
   }
-  requestAnimationFrame(draw);
-})();
 
-// 03: 形の力 - 縦向き配置
-(function() {
-  const cv = document.getElementById('sc03');
-  if (!cv) return;
-  function resize() { cv.width=cv.offsetWidth; cv.height=cv.offsetHeight; }
-  resize();
-  if(window.ResizeObserver) new ResizeObserver(resize).observe(cv);
-  const ctx = cv.getContext('2d');
+  // 会員番号
+  const valNo = document.getElementById('valNo');
+  const cardMemberNo = document.getElementById('cardMemberNo');
+  if(state.no){
+    if(valNo) { valNo.textContent = _mNoStr; valNo.style.color = ''; }
+    if(cardMemberNo) cardMemberNo.style.display = '';
+    document.getElementById('swNo').classList.add('on');
+    if(shareCardMemberNo) shareCardMemberNo.textContent = _mNoStr;
+  } else {
+    if(valNo) { valNo.textContent = '— 非公開 —'; valNo.style.color = 'var(--text3)'; }
+    if(cardMemberNo) cardMemberNo.style.display = 'none';
+    document.getElementById('swNo').classList.remove('on');
+    if(shareCardMemberNo) shareCardMemberNo.textContent = '';
+  }
 
-  // 縦向き精子描画（頭=上, 尻尾=下）
-  // originY = 頭の中心座標
-  function drawV(x, originY, hw, hh, tl, color, hiColor, time, phase, type) {
-    const wo = time/130+phase;
-    ctx.save();
-    ctx.translate(x, originY);
+  // 認定日
+  const rowCert = document.getElementById('rowCertDate');
+  if(state.certDate){
+    rowCert.style.display = '';
+    document.getElementById('swCertDate').classList.add('on');
+  } else {
+    rowCert.style.display = 'none';
+    document.getElementById('swCertDate').classList.remove('on');
+  }
 
-    if(type==='normal'){
-      // 頭（上）
-      ctx.beginPath();ctx.fillStyle=color;
-      ctx.ellipse(0, 0, hw/2, hh/2, 0, 0, Math.PI*2);ctx.fill();
-      // ハイライト
-      ctx.beginPath();ctx.fillStyle=hiColor;
-      ctx.ellipse(-hw*0.15, -hh*0.2, hw*0.18, hh*0.12, -0.4, 0, Math.PI*2);ctx.fill();
-      // 首
-      ctx.beginPath();ctx.fillStyle=color;ctx.globalAlpha=0.7;
-      ctx.ellipse(0, hh*0.6, hw*0.18, hh*0.15, 0, 0, Math.PI*2);ctx.fill();
-      ctx.globalAlpha=1;
-      // 尻尾（頭の下から波打ちながら伸びる）
-      ctx.beginPath();ctx.lineWidth=1.8;ctx.strokeStyle=color;ctx.lineCap='round';
-      ctx.moveTo(0, hh*0.7);
-      for(let i=1;i<=40;i++){
-        const r=i/40;
-        const tx=Math.sin(r*6-wo)*(hw*0.85*r);
-        const ty=hh*0.7 + r*tl;
-        ctx.lineTo(tx,ty);
-      }
-      ctx.stroke();
+  // 認定期限
+  const rowEx = document.getElementById('rowExpiry');
+  if(state.expiry){
+    rowEx.style.display = '';
+    document.getElementById('swExpiry').classList.add('on');
+  } else {
+    rowEx.style.display = 'none';
+    document.getElementById('swExpiry').classList.remove('on');
+  }
+}
 
-    } else if(type==='two_heads'){
-      // 二頭（左右に分岐した頭）
-      ctx.beginPath();ctx.fillStyle=color;
-      ctx.ellipse(-hw*0.38, -hh*0.22, hw*0.32, hh*0.28, 0.25, 0, Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.fillStyle=color;
-      ctx.ellipse(hw*0.38, -hh*0.22, hw*0.32, hh*0.28, -0.25, 0, Math.PI*2);ctx.fill();
-      // 首（合流部）
-      ctx.beginPath();ctx.fillStyle=color;ctx.globalAlpha=0.65;
-      ctx.ellipse(0, hh*0.5, hw*0.16, hh*0.14, 0, 0, Math.PI*2);ctx.fill();
-      ctx.globalAlpha=1;
-      // 尻尾
-      ctx.beginPath();ctx.lineWidth=1.4;ctx.strokeStyle=color;ctx.lineCap='round';
-      ctx.moveTo(0, hh*0.62);
-      for(let i=1;i<=30;i++){
-        const r=i/30;
-        ctx.lineTo(Math.sin(r*5-wo)*(hw*0.7*r), hh*0.62+r*tl*0.75);
-      }
-      ctx.stroke();
+// ─── ウォレット追加 ───
+function addToAppleWallet(e){e.preventDefault();showToast('Apple Walletに追加しています...')}
+function addToGoogleWallet(e){e.preventDefault();showToast('Google Walletに追加しています...')}
 
+// ─── SNSシェア ───
+var shareUrl = window.location.href;
+const shareText = `精子の資格「SEED CARD」を取得しました。
+
+#日本精子協会 #SEEDCARD #精子のチカラで輝く未来を作る #プレコンセプションケア #ブライダルチェック`;
+
+var ASSOC_URL = 'https://www.japan-sperm.com';
+
+function shareX(e){
+  e.preventDefault();
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText), '_blank');
+}
+function shareLine(e){
+  e.preventDefault();
+  window.open('https://line.me/R/msg/text/?' + encodeURIComponent(shareText), '_blank');
+}
+function shareFacebook(e){
+  e.preventDefault();
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '&quote=' + encodeURIComponent(shareText), '_blank');
+}
+function copyLink(e){
+  e.preventDefault();
+  navigator.clipboard.writeText(shareText + '\n' + ASSOC_URL).then(function(){ showToast('文章をコピーしました'); });
+}
+
+// ─── Apps Script API URL（Netlifyからデータ取得に使用） ───
+var APPS_SCRIPT_API = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
+
+// apply()が使う表示用変数
+var _mName   = '';
+var _mRomaji = '';
+var _mNoStr  = '';
+
+function initFromMemberData(m) {
+  if (!m) { return; }
+
+  _mName   = m.name || '';
+  _mNoStr  = 'No.' + String(m.memberNo);
+  _mRomaji = m.nameRomaji ? m.nameRomaji.toUpperCase() : _mName;
+
+  // 名前
+  var nameEl = document.getElementById('welcomeName');
+  if (nameEl) { nameEl.textContent = _mName + '.'; }
+  var valNameEl = document.getElementById('valName');
+  if (valNameEl) { valNameEl.textContent = _mName; }
+  var cardNameEl = document.getElementById('cardName');
+  if (cardNameEl) { cardNameEl.textContent = _mRomaji; }
+
+  // 会員番号
+  var memberSinceEl = document.getElementById('memberSince');
+  if (memberSinceEl) { memberSinceEl.textContent = 'Member since ' + String(m.certDate).substring(0, 4); }
+  var cardNoEl = document.getElementById('cardMemberNo');
+  if (cardNoEl) { cardNoEl.textContent = _mNoStr; }
+  var valNoEl = document.getElementById('valNo');
+  if (valNoEl) { valNoEl.textContent = _mNoStr; }
+
+  // 日付
+  var certDateEl = document.getElementById('valCertDate');
+  if (certDateEl) { certDateEl.textContent = m.certDate; }
+  var expiryEl = document.getElementById('valExpiry');
+  if (expiryEl) { expiryEl.textContent = m.expiryDate; }
+  var lastExamEl = document.getElementById('sectionLastExam');
+  if (lastExamEl) { lastExamEl.textContent = 'WHO 2021基準·全項目クリア · 最終検査:' + m.certDate; }
+
+  // 精子データをDEMO_DATAに反映
+  DEMO_DATA.vol.raw      = m.vol;
+  DEMO_DATA.vol.countEnd = m.vol;
+  DEMO_DATA.morph.raw      = m.morph;
+  DEMO_DATA.morph.countEnd = m.morph;
+
+  // スプレッドシートのあらゆる入力形式を「万」単位に正規化する
+  // 対応形式: "11000"(万), "110"(百万), "1.1"(億), "1"(億),
+  //           "110000000"(生数値), "1億1000万", "6600万", "1.1億" など
+  function toWan(v) {
+    var s = String(v || '').replace(/[,，\s　]/g, '');
+    if (!s || s === '0') return 0;
+    // 日本語表記（億・万の文字がある場合）
+    if (/[億万]/.test(s)) {
+      var om = s.match(/([0-9.]+)\s*億/); var mm = s.match(/([0-9.]+)\s*万/);
+      return Math.round((om ? parseFloat(om[1]) * 10000 : 0) + (mm ? parseFloat(mm[1]) : 0));
+    }
+    var n = parseFloat(s);
+    if (isNaN(n) || n <= 0) return 0;
+    if (n >= 1000000) return Math.round(n / 10000); // 生数値 → 万
+    if (n >= 1000)    return Math.round(n);          // 万単位（例:11000）
+    if (n >= 10)      return Math.round(n * 100);    // 百万単位（例:110）
+    return Math.round(n * 10000);                    // 億単位（例:1.1, 1）
+  }
+
+  // 精子濃度：万/mLまたは億/mLで表示
+  var concWan = toWan(m.conc);
+  DEMO_DATA.conc.raw = concWan / 100;
+  var unitConcEl = document.getElementById('unitConc');
+  if (concWan < 10000) {
+    DEMO_DATA.conc.countEnd = concWan;
+    DEMO_DATA.conc.fmt = function(n) { return Math.round(n).toLocaleString(); };
+    if (unitConcEl) unitConcEl.textContent = '万/mL';
+  } else {
+    DEMO_DATA.conc.countEnd = concWan / 10000;
+    DEMO_DATA.conc.fmt = function(n) { return n.toFixed(1); };
+    if (unitConcEl) unitConcEl.textContent = '億/mL';
+  }
+
+  // 総精子数：万または億で表示
+  var totalWan = toWan(m.total);
+  DEMO_DATA.total.raw = totalWan / 100;
+  var unitTotalEl = document.getElementById('unitTotal');
+  if (totalWan < 10000) {
+    DEMO_DATA.total.countEnd = totalWan;
+    DEMO_DATA.total.fmt = function(n) { return Math.round(n).toLocaleString(); };
+    if (unitTotalEl) unitTotalEl.textContent = '万';
+  } else {
+    DEMO_DATA.total.countEnd = totalWan / 10000;
+    DEMO_DATA.total.fmt = function(n) { return n.toFixed(1); };
+    if (unitTotalEl) unitTotalEl.textContent = '億';
+  }
+
+  // 更新ボタン：フォームURLに氏名・会員番号を事前入力
+  (function() {
+    var wrap = document.getElementById('updateCardWrap');
+    var link = document.getElementById('updateCardLink');
+    var ttl  = document.getElementById('updateCardTtl');
+    var sub  = document.getElementById('updateCardSub');
+    if (!wrap) return;
+
+    var now    = new Date();
+    var expiry = m.expiryDate ? new Date(m.expiryDate) : null;
+    var diffMs = expiry ? expiry - now : null;
+    var diffDays = diffMs !== null ? Math.ceil(diffMs / 86400000) : null;
+
+    var today = new Date(); today.setHours(0,0,0,0);
+    var newExpiry = new Date(today); newExpiry.setFullYear(newExpiry.getFullYear() + 1);
+    var newExpiryStr = newExpiry.getFullYear() + '年' + (newExpiry.getMonth()+1) + '月' + newExpiry.getDate() + '日';
+
+    if (diffDays !== null && diffDays < 0) {
+      // 期限切れ
+      ttl.textContent = '認定期限が切れています';
+      sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます';
+      if (link) { link.style.background = 'linear-gradient(135deg,#fff1f2,#fff8f0)'; link.style.borderLeft = '3px solid #f43f5e'; }
+    } else if (diffDays !== null && diffDays <= 30) {
+      ttl.textContent = '検査結果を更新する（期限まで' + diffDays + '日）';
+      sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます · お早めに';
     } else {
-      // 短尾：頭は正常サイズ、尻尾が非常に短い
-      ctx.beginPath();ctx.fillStyle=color;
-      ctx.ellipse(0, 0, hw/2, hh/2, 0, 0, Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.fillStyle=color;ctx.globalAlpha=0.65;
-      ctx.ellipse(0, hh*0.6, hw*0.18, hh*0.15, 0, 0, Math.PI*2);ctx.fill();
-      ctx.globalAlpha=1;
-      // 極端に短い尻尾
-      ctx.beginPath();ctx.lineWidth=1.4;ctx.strokeStyle=color;ctx.lineCap='round';
-      ctx.moveTo(0, hh*0.72);
-      for(let i=1;i<=8;i++){
-        const r=i/8;
-        ctx.lineTo(Math.sin(r*3-wo)*(hw*0.4*r), hh*0.72+r*tl*0.18);
+      ttl.textContent = '検査結果を更新する';
+      sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます（更新日から1年）';
+    }
+
+    if (link) link.href = 'https://myseedcard.japan-sperm.com/portal.html';
+  })();
+
+  // シェアプレビューカードにも名前・番号を反映
+  apply();
+
+  // カードスタジオ用にセッション保存
+  try { sessionStorage.setItem('sc_member', JSON.stringify(m)); } catch(e) {}
+}
+
+// ─── A+D. WHO パーセンタイル＆アニメーション ───
+const WHO_TABLE = {
+  // WHO 2021 Table 8.3: [value, centile]
+  vol:   [[0,0],[1.0,2.5],[1.4,5],[1.8,10],[2.3,25],[3.0,50],[4.2,75],[5.5,90],[6.2,95],[6.9,97.5],[10,99]],
+  conc:  [[0,0],[11,2.5],[16,5],[22,10],[36,25],[66,50],[110,75],[166,90],[208,95],[254,97.5],[400,99]],
+  total: [[0,0],[29,2.5],[39,5],[58,10],[108,25],[210,50],[363,75],[561,90],[701,95],[865,97.5],[1300,99]],
+  morph: [[0,0],[3,2.5],[4,5],[5,10],[8,25],[14,50],[23,75],[32,90],[39,95],[45,97.5],[60,99]],
+};
+
+// デモ値（raw: WHO計算用単位, countEnd: 表示アニメ用）
+const DEMO_DATA = {
+  // WHO 2021 50th percentile values (median)
+  vol:   { raw:3.0,  countEnd:3.0,  fmt:n=>n.toFixed(1) },
+  conc:  { raw:66,   countEnd:6600, fmt:n=>Math.round(n).toLocaleString() },
+  total: { raw:210,  countEnd:2.1,  fmt:n=>n.toFixed(1) },
+  morph: { raw:14,   countEnd:14,   fmt:n=>Math.round(n)+'' },
+};
+
+function calcPct(table, value){
+  if(value <= table[0][0]) return 0;
+  if(value >= table[table.length-1][0]) return 99;
+  for(let i=1;i<table.length;i++){
+    if(value <= table[i][0]){
+      const [v0,p0]=table[i-1],[v1,p1]=table[i];
+      return p0+(value-v0)/(v1-v0)*(p1-p0);
+    }
+  }
+  return 99;
+}
+
+function topText(pct){
+  const top = Math.round(100-pct);
+  if(top<=5) return '上位5%以内';
+  return '上位約'+top+'%';
+}
+
+function runMetric(key, delay){
+  const data  = DEMO_DATA[key];
+  const table = WHO_TABLE[key];
+  const cap   = key.charAt(0).toUpperCase()+key.slice(1);
+  const numEl = document.getElementById('num'+cap);
+  const pctEl = document.getElementById('pct'+cap);
+  const barEl = document.getElementById('bar'+cap);
+  const refEl = document.getElementById('ref'+cap);
+  if(!numEl||!pctEl||!barEl||!refEl) return;
+
+  const pct = calcPct(table, data.raw);
+  refEl.style.left = '5%';
+
+  setTimeout(()=>{
+    // バー描画
+    setTimeout(()=>{ barEl.style.width = Math.min(pct,95)+'%'; }, 80);
+
+    // カウントアップ
+    const dur = 1200, t0 = performance.now();
+    function step(now){
+      const t = Math.min((now-t0)/dur, 1);
+      const e = 1-Math.pow(1-t, 3);
+      numEl.textContent = data.fmt(e * data.countEnd);
+      if(t < 1){ requestAnimationFrame(step); }
+      else {
+        numEl.textContent = data.fmt(data.countEnd);
+        pctEl.textContent = topText(pct);
+        pctEl.style.opacity = '1';
       }
-      ctx.stroke();
     }
+    requestAnimationFrame(step);
+  }, delay);
+}
+
+function initAnimations(){
+  const card3d = document.getElementById('card3d');
+  const stamp  = document.getElementById('cardStamp');
+
+  if(card3d){
+    setTimeout(()=>{
+      card3d.classList.add('card-on');
+      card3d.addEventListener('animationend', ()=>{
+        if(stamp) setTimeout(()=>stamp.classList.add('stamp-on'), 250);
+      }, {once:true});
+    }, 80);
+  }
+
+  // A. パーセンタイルバー＋カウントアップ
+  runMetric('vol',  450);
+  runMetric('conc', 600);
+  runMetric('total',750);
+  runMetric('morph',900);
+}
+
+function loadByToken(token) {
+  fetch(APPS_SCRIPT_API + '?t=' + encodeURIComponent(token) + '&api=1')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error) {
+        document.body.innerHTML = '<p style="padding:60px;font-family:sans-serif;color:#333">認定情報が見つかりません。</p>';
+        return;
+      }
+      initFromMemberData(data);
+      initAnimations();
+    })
+    .catch(function(err) {
+      console.error('API error:', err);
+      document.body.innerHTML = '<p style="padding:60px;font-family:sans-serif;color:#333">データの読み込みに失敗しました。</p>';
+    });
+}
+
+function loadByMagic(magic) {
+  fetch(APPS_SCRIPT_API + '?api=1&magic=' + encodeURIComponent(magic))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error === 'expired') {
+        localStorage.removeItem('sc_magic');
+        window.location.replace('/login.html?expired=1');
+        return;
+      }
+      if (data.error) {
+        localStorage.removeItem('sc_magic');
+        window.location.replace('/login.html');
+        return;
+      }
+      localStorage.setItem('sc_magic', magic);
+      initFromMemberData(data);
+      initAnimations();
+    })
+    .catch(function(err) {
+      console.error('API error:', err);
+      document.body.innerHTML = '<p style="padding:60px;font-family:sans-serif;color:#333">データの読み込みに失敗しました。</p>';
+    });
+}
+
+function _cardRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function downloadCard() {
+  var svgEl = document.querySelector('.card-main svg');
+  if (!svgEl) { showToast('カードが読み込まれていません'); return; }
+
+  // 正方形キャンバス（Instagram/X対応）
+  var CW = 1080, CH = 1080;
+  var cardW = 820, cardH = Math.round(820 * 214 / 340);
+  var cardX = (CW - cardW) / 2;
+  var cardY = (CH - cardH) / 2 - 30;
+
+  var svgStr = new XMLSerializer().serializeToString(svgEl);
+  if (svgStr.indexOf('xmlns=') < 0) svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+  svgStr = svgStr.replace(/<svg([^>]*)>/, function(m, attrs) {
+    return '<svg' + attrs.replace(/\s*(?:width|height)="[^"]*"/g, '') + ' width="' + cardW + '" height="' + cardH + '">';
+  });
+
+  var svgBlob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  var svgUrl  = URL.createObjectURL(svgBlob);
+  var img = new Image();
+  img.onload = function() {
+    var cv  = document.createElement('canvas');
+    cv.width = CW; cv.height = CH;
+    var ctx = cv.getContext('2d');
+
+    // 背景グラデーション
+    var bg = ctx.createLinearGradient(0, 0, CW, CH);
+    bg.addColorStop(0, '#f5f0ff');
+    bg.addColorStop(1, '#eaf2ff');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, CW, CH);
+
+    // カード影
+    ctx.save();
+    ctx.shadowColor = 'rgba(155,135,214,0.28)';
+    ctx.shadowBlur  = 72;
+    ctx.shadowOffsetY = 28;
+    _cardRoundRect(ctx, cardX, cardY, cardW, cardH, 26);
+    ctx.fillStyle = 'rgba(255,255,255,0.01)';
+    ctx.fill();
     ctx.restore();
+
+    // カード本体
+    ctx.drawImage(img, cardX, cardY, cardW, cardH);
+    URL.revokeObjectURL(svgUrl);
+
+    // 下部テキスト
+    ctx.fillStyle = 'rgba(134,134,139,0.7)';
+    ctx.font = '400 26px Helvetica Neue, Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('一般社団法人 日本精子協会', CW / 2, cardY + cardH + 68);
+
+    cv.toBlob(function(pngBlob) {
+      var file = new File([pngBlob], 'seedcard.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'SEED CARD' }).catch(function() {});
+        return;
+      }
+      var dlUrl = URL.createObjectURL(pngBlob);
+      var a = document.createElement('a');
+      a.download = 'seedcard.png';
+      a.href = dlUrl;
+      a.click();
+      setTimeout(function() { URL.revokeObjectURL(dlUrl); }, 1000);
+      showToast('カード画像を保存しました');
+    }, 'image/png');
+  };
+  img.onerror = function() { URL.revokeObjectURL(svgUrl); showToast('画像の生成に失敗しました'); };
+  img.src = svgUrl;
+}
+
+function logout() {
+  localStorage.removeItem('sc_magic');
+  window.location.replace('/login.html');
+}
+
+function _showSettingsMsg(msgEl, type, html) {
+  msgEl.style.display = 'block';
+  msgEl.style.background = type === 'ok' ? '#f0fdf4' : '#fff1f2';
+  msgEl.style.color      = type === 'ok' ? '#166534' : '#9f1239';
+  msgEl.innerHTML = html;
+}
+var _needLoginHtml = 'この操作にはログインが必要です。<br><a href="/login.html" style="color:inherit;font-weight:600;text-decoration:underline">ログインページへ</a>';
+
+// ─── メールアドレス変更 ───
+function requestEmailChange() {
+  var newEmail = document.getElementById('newEmailInput').value.trim();
+  var msgEl    = document.getElementById('emailChangeMsg');
+  var btn      = document.getElementById('emailChangeBtn');
+
+  if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+    _showSettingsMsg(msgEl, 'err', '有効なメールアドレスを入力してください。');
+    return;
   }
+  var magic = localStorage.getItem('sc_magic');
+  if (!magic) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
 
-  function draw(time) {
-    const W=cv.width, H=cv.height;
-    if(!W||!H){requestAnimationFrame(draw);return;}
-    ctx.clearRect(0,0,W,H);
-
-    // ラベル（濃く・大きく）
-    ctx.font='bold 9px Inter,sans-serif';
-    ctx.textAlign='center';
-    ctx.fillStyle='rgba(130,110,195,1.0)';  ctx.fillText('正常', W/2,   12);
-    ctx.fillStyle='rgba(130,130,148,1.0)';  ctx.fillText('二頭', W*0.18, 12);
-    ctx.fillStyle='rgba(130,130,148,1.0)';  ctx.fillText('短尾', W*0.82, 12);
-
-    // 頭の中心Y座標（ラベルの下＋頭の半径分）
-    const headY = 22;
-    const hw=12, hh=9;
-
-    // 正常（中央・ライトパープル）
-    drawV(W/2,   headY, hw,hh, 70, 'rgba(200,178,248,0.92)','rgba(230,220,255,0.5)', time, 0,   'normal');
-    // 異常①二頭（左）
-    drawV(W*0.18,headY, 9, 7,  50, 'rgba(155,155,172,0.8)', 'rgba(200,200,210,0.3)', time, 1.2, 'two_heads');
-    // 異常②短尾（右）
-    drawV(W*0.82,headY, 9, 7,  50, 'rgba(155,155,172,0.8)', 'rgba(200,200,210,0.3)', time, 2.4, 'short_tail');
-
-    requestAnimationFrame(draw);
-  }
-  requestAnimationFrame(draw);
-})();
-
-// 04: DNA - 滑らかな二重螺旋
-(function() {
-  const cv = document.getElementById('sc04dna');
-  if(!cv) return;
-  cv.width=72; cv.height=88;
-  const ctx = cv.getContext('2d');
-  function draw(time) {
-    const W=cv.width,H=cv.height;
-    ctx.clearRect(0,0,W,H);
-    const t=time/1200, segs=80, amp=20, cx2=W/2;
-    const grd=ctx.createLinearGradient(0,0,0,H);
-    grd.addColorStop(0,'rgba(200,168,240,0.92)');grd.addColorStop(1,'rgba(126,200,248,0.92)');
-    // 螺旋1
-    ctx.beginPath();
-    for(let i=0;i<=segs;i++){
-      const y=(i/segs)*H;
-      const x=cx2+Math.sin(i/segs*Math.PI*3+t)*amp;
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle=grd;ctx.lineWidth=2.8;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();
-    // 螺旋2
-    ctx.beginPath();
-    for(let i=0;i<=segs;i++){
-      const y=(i/segs)*H;
-      const x=cx2+Math.sin(i/segs*Math.PI*3+t+Math.PI)*amp;
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle='rgba(168,210,248,0.62)';ctx.lineWidth=2.2;ctx.stroke();
-    // 横断バー
-    for(let b=0;b<6;b++){
-      const fr=(b+0.5)/6;
-      const y=fr*H;
-      const x1=cx2+Math.sin(fr*Math.PI*3+t)*amp;
-      const x2=cx2+Math.sin(fr*Math.PI*3+t+Math.PI)*amp;
-      const al=0.3+Math.abs(Math.sin(fr*Math.PI*3+t))*0.3;
-      ctx.beginPath();ctx.strokeStyle=`rgba(210,195,245,${al})`;ctx.lineWidth=1.4;
-      ctx.moveTo(x1,y);ctx.lineTo(x2,y);ctx.stroke();
-      [x1,x2].forEach(x=>{ctx.beginPath();ctx.fillStyle=`rgba(200,178,248,${al+0.1})`;ctx.arc(x,y,2.2,0,Math.PI*2);ctx.fill();});
-    }
-    requestAnimationFrame(draw);
-  }
-  requestAnimationFrame(draw);
-})();
-
-// ヒーロー右下：精子パーティクル
-(function() {
-  const cv = document.getElementById('heroSpermCanvas');
-  if(!cv) return;
-  function resize(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;}
-  resize();
-  if(window.ResizeObserver) new ResizeObserver(resize).observe(cv);
-  const ctx=cv.getContext('2d');
-  const sperms=Array.from({length:12},(_,i)=>{
-    const col=i%2===0?'rgba(200,178,248,0.62)':'rgba(160,200,248,0.58)';
-    return{x:Math.random()*400,y:Math.random()*200,hw:11+Math.random()*6,hh:8+Math.random()*4,tl:52+Math.random()*26,speed:0.22+Math.random()*0.18,angle:Math.random()*Math.PI*2,wobble:(Math.random()-0.5)*0.015,phase:Math.random()*Math.PI*2,color:col};
-  });
-  function draw(time){
-    const W=cv.width,H=cv.height;
-    if(!W||!H){requestAnimationFrame(draw);return;}
-    ctx.clearRect(0,0,W,H);
-    sperms.forEach(s=>{
-      s.angle+=s.wobble+Math.sin(time*0.0004+s.phase)*0.006;
-      s.x+=Math.cos(s.angle)*s.speed;s.y+=Math.sin(s.angle)*s.speed;
-      const m=s.hw*2;
-      if(s.x<m){s.x=m;s.angle=Math.PI-s.angle;}if(s.x>W-m){s.x=W-m;s.angle=Math.PI-s.angle;}
-      if(s.y<m){s.y=m;s.angle=-s.angle;}if(s.y>H-m){s.y=H-m;s.angle=-s.angle;}
-      ctx.save();ctx.translate(s.x,s.y);ctx.rotate(s.angle);
-      ctx.beginPath();ctx.lineWidth=Math.max(s.hh*0.16,1);ctx.strokeStyle=s.color;ctx.lineCap='round';ctx.moveTo(0,0);
-      for(let i=0;i<40;i++){const r=i/40;ctx.lineTo(-(r*s.tl),Math.sin(r*6-(time/120+s.phase))*(s.hh*1.1*r));}
-      ctx.stroke();
-      ctx.beginPath();ctx.fillStyle=s.color;ctx.ellipse(s.hw/2,0,s.hw/2,s.hh/2,0,0,Math.PI*2);ctx.fill();
-      ctx.restore();
+  btn.disabled = true;
+  btn.textContent = '送信中…';
+  fetch(APPS_SCRIPT_API + '?action=requestemailchange&magic=' + encodeURIComponent(magic) + '&newemail=' + encodeURIComponent(newEmail))
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success) {
+        _showSettingsMsg(msgEl, 'ok', '新しいメールアドレスに確認リンクを送信しました。<br>メールを確認してリンクをクリックしてください。');
+        btn.textContent = '送信しました';
+      } else if (d.error === 'already_used') {
+        _showSettingsMsg(msgEl, 'err', 'そのメールアドレスはすでに登録されています。');
+        btn.disabled = false; btn.textContent = '確認メールを送信';
+      } else if (d.error === 'expired' || d.error === 'invalid_session') {
+        _showSettingsMsg(msgEl, 'err', _needLoginHtml);
+        btn.disabled = false; btn.textContent = '確認メールを送信';
+      } else {
+        _showSettingsMsg(msgEl, 'err', '送信に失敗しました。しばらくしてからお試しください。');
+        btn.disabled = false; btn.textContent = '確認メールを送信';
+      }
+    })
+    .catch(function() {
+      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
+      btn.disabled = false; btn.textContent = '確認メールを送信';
     });
-    requestAnimationFrame(draw);
+}
+
+// ─── 発送先住所変更 ───
+function requestAddressChange() {
+  var postal   = document.getElementById('newPostalInput').value.trim().replace(/[-－ー]/g, '');
+  var address  = document.getElementById('newAddressInput').value.trim();
+  var msgEl    = document.getElementById('addressChangeMsg');
+  var btn      = document.getElementById('addressChangeBtn');
+
+  if (!address) { _showSettingsMsg(msgEl, 'err', '住所を入力してください。'); return; }
+  var magic = localStorage.getItem('sc_magic');
+  if (!magic) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
+
+  btn.disabled = true;
+  btn.textContent = '更新中…';
+  fetch(APPS_SCRIPT_API + '?action=changeaddress&magic=' + encodeURIComponent(magic)
+    + '&postal=' + encodeURIComponent(postal)
+    + '&address=' + encodeURIComponent(address))
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success) {
+        _showSettingsMsg(msgEl, 'ok', '住所を更新しました。');
+        btn.textContent = '更新しました';
+      } else if (d.error === 'expired' || d.error === 'invalid_session') {
+        _showSettingsMsg(msgEl, 'err', _needLoginHtml);
+        btn.disabled = false; btn.textContent = '住所を更新する';
+      } else {
+        _showSettingsMsg(msgEl, 'err', '更新に失敗しました。しばらくしてからお試しください。');
+        btn.disabled = false; btn.textContent = '住所を更新する';
+      }
+    })
+    .catch(function() {
+      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
+      btn.disabled = false; btn.textContent = '住所を更新する';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  var token  = params.get('t') || '';
+  var magic  = params.get('magic') || '';
+
+  // メールアドレス変更確認リンク
+  var emailChange = params.get('emailchange') || '';
+  if (emailChange) {
+    history.replaceState(null, '', '/');
+    fetch(APPS_SCRIPT_API + '?action=confirmemailchange&token=' + encodeURIComponent(emailChange))
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.success) {
+          localStorage.removeItem('sc_magic');
+          alert('メールアドレスを ' + d.newEmail + ' に変更しました。\n再ログインしてください。');
+          window.location.replace('/login.html');
+        } else {
+          alert('変更リンクが無効または期限切れです。再度お試しください。');
+          window.location.replace('/');
+        }
+      });
+    return;
   }
-  requestAnimationFrame(draw);
-})();
 
-/* ── ヒーローBentoカード3Dインタラクション ── */
-(function(){
-  const sc = document.getElementById('heroCard3d');
-  const ss = document.getElementById('heroCardScene');
-  const sh = document.getElementById('heroCardShine');
-  if(!sc||!ss||!sh) return;
-  ss.addEventListener('mousemove', e => {
-    const r = sc.getBoundingClientRect();
-    const x = (e.clientX-r.left)/r.width-0.5;
-    const y = (e.clientY-r.top)/r.height-0.5;
-    sc.style.transform = `rotateX(${-y*24}deg) rotateY(${x*24}deg) scale(1.06)`;
-    sc.style.boxShadow = `${-x*14}px ${y*7+12}px 32px rgba(0,0,0,.16),0 3px 10px rgba(0,0,0,.06)`;
-    sh.style.background = `radial-gradient(ellipse at ${30+x*55}% ${30+y*55}%,rgba(255,255,255,.45) 0%,transparent 55%)`;
-  });
-  ss.addEventListener('mouseleave', () => {
-    sc.style.transform = 'rotateX(0) rotateY(0) scale(1)';
-    sc.style.boxShadow = '0 12px 32px rgba(0,0,0,.12),0 3px 10px rgba(0,0,0,.06)';
-    sh.style.background = 'none';
-  });
-})();
+  if (token) {
+    // NFCタップ or 直リンク → カードトークンで表示（ログイン不要）
+    loadByToken(token);
+    return;
+  }
 
-/* ── シードカード3Dインタラクション ── */
-(function(){
-  const sc = document.getElementById('scCard');
-  const ss = document.getElementById('scScene');
-  const sh = document.getElementById('scShine');
-  if(!sc||!ss||!sh) return;
-  ss.addEventListener('mousemove', e => {
-    const r = ss.getBoundingClientRect();
-    const x = (e.clientX-r.left)/r.width-0.5;
-    const y = (e.clientY-r.top)/r.height-0.5;
-    sc.style.transform = `rotateX(${-y*22}deg) rotateY(${x*22}deg) scale(1.05)`;
-    sc.style.boxShadow = `${-x*20}px ${y*10+24}px 64px rgba(0,0,0,.18),0 6px 20px rgba(0,0,0,.07)`;
-    sh.style.background = `radial-gradient(ellipse at ${30+x*55}% ${30+y*55}%,rgba(255,255,255,.42) 0%,transparent 55%)`;
-  });
-  ss.addEventListener('mouseleave', () => {
-    sc.style.transform = 'rotateX(0) rotateY(0) scale(1)';
-    sc.style.boxShadow = '0 24px 64px rgba(0,0,0,.13),0 6px 20px rgba(0,0,0,.07)';
-    sh.style.background = 'none';
-  });
-})();
+  if (magic) {
+    // マジックリンクメールから来た場合
+    history.replaceState(null, '', '/');
+    loadByMagic(magic);
+    return;
+  }
 
-const saObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(!e.isIntersecting) return;
-    const el = e.target;
-    el.classList.add('on');
+  // localStorageにセッションが残っていれば再利用
+  var saved = localStorage.getItem('sc_magic');
+  if (saved) {
+    loadByMagic(saved);
+    return;
+  }
 
-    /* Count Up（統計カード内） */
-    el.querySelectorAll('[data-count]').forEach(num => {
-      if(num.dataset.counted) return;
-      num.dataset.counted = '1';
-      const target = +num.dataset.count;
-      const prefix = num.dataset.prefix || '';
-      const suffix = num.dataset.suffix || '';
-      let s=null, dur=5500;
-      const tick = ts => {
-        if(!s) s=ts;
-        const prog = Math.min((ts-s)/dur,1);
-        const ease = 1-Math.pow(1-prog,3);
-        num.textContent = prefix+Math.round(ease*target)+suffix;
-        if(prog<1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    });
-  });
-}, { threshold:0.12 });
-
-document.querySelectorAll('.fu, .sa-blur, .sa-stagger').forEach(el => saObs.observe(el));
-
-/* ── 1/6 カウントダウン＋アイコン点滅 ── */
-const obs16 = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(!e.isIntersecting) return;
-    const numEl = document.getElementById('num16');
-    const icons = document.querySelectorAll('.icon16');
-    if(!numEl) return;
-    let cur = 6;
-    const colors = ['#c8a8f0','#c8a8f0','#c8a8f0','#c8a8f0','#c8a8f0','#e8e8ee'];
-    // 6→5→4→3→2→1 と順番に消えていく
-    const step = () => {
-      if(cur <= 1) return;
-      setTimeout(() => {
-        cur--;
-        numEl.textContent = cur;
-        // cur番目以降のアイコンをグレーに
-        icons.forEach((ic, i) => {
-          const fill = i < cur ? '#c8a8f0' : '#e8e8ee';
-          ic.querySelectorAll('circle,path').forEach(el => el.setAttribute('fill', fill));
-          // 消えるアイコンに点滅効果
-          if(i === cur) {
-            ic.style.transition = 'opacity .3s';
-            ic.style.opacity = '0.3';
-            setTimeout(() => { ic.style.opacity = '1'; }, 300);
-          }
-        });
-        step();
-      }, 800);
-    };
-    // 最初に全部グレーにしてから1つずつ点灯→最終的に1/6
-    setTimeout(step, 400);
-    obs16.disconnect();
-  });
-}, { threshold: 0.3 });
-const c16 = document.getElementById('card16');
-if(c16) obs16.observe(c16);
-
-/* ── 出生数バーアニメーション ── */
-const birthObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(!e.isIntersecting) return;
-    document.querySelectorAll('.birth-bar').forEach(bar => {
-      bar.style.width = bar.dataset.w + '%';
-    });
-    birthObs.disconnect();
-  });
-}, { threshold: 0.3 });
-const bc = document.getElementById('birthCard');
-if(bc) birthObs.observe(bc);
-const actObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      ['aa1','aa2','aa3','aa4'].forEach((id,i) => setTimeout(() => {
-        const el=document.getElementById(id);
-        if(el){el.style.opacity='1';el.style.transform='translateX(0)';}
-      }, i*160));
-      actObs.disconnect();
-    }
-  });
-}, { threshold:0.2 });
-const ac = document.getElementById('act-card');
-if(ac) actObs.observe(ac);
-
-/* ④ シードカードフロー */
-const flowObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      ['ss1','ss2','ss3'].forEach((id,i) => setTimeout(() => {
-        const el=document.getElementById(id);
-        if(el){el.style.opacity='1';el.style.transform='translateX(0)';}
-      }, i*200));
-      flowObs.disconnect();
-    }
-  });
-}, { threshold:0.2 });
-const sf = document.getElementById('seed-flow');
-if(sf) flowObs.observe(sf);
+  // 未ログイン → ログインページへ
+  window.location.replace('/login.html');
+});
 </script>
+
 </body>
 </html>
