@@ -185,13 +185,19 @@ button:disabled{opacity:.4;cursor:default!important}
   </div>
 
   <div class="tab-bar">
-    <button class="tab on" data-tab="progress" onclick="switchTab(this)">進行中<span class="badge" id="b-progress"></span></button>
-    <button class="tab"    data-tab="renewal"  onclick="switchTab(this)">更新対応中<span class="badge" id="b-renewal"></span></button>
-    <button class="tab"    data-tab="members"  onclick="switchTab(this)">会員一覧</button>
+    <button class="tab on" data-tab="ic-review" onclick="switchTab(this)">新規審査<span class="badge" id="b-ic-review"></span></button>
+    <button class="tab"    data-tab="ic-pay"    onclick="switchTab(this)">新規支払<span class="badge" id="b-ic-pay"></span></button>
+    <button class="tab"    data-tab="ic-ship"   onclick="switchTab(this)">新規発送<span class="badge" id="b-ic-ship"></span></button>
+    <button class="tab"    data-tab="rc-review" onclick="switchTab(this)">更新審査<span class="badge" id="b-rc-review"></span></button>
+    <button class="tab"    data-tab="rc-pay"    onclick="switchTab(this)">更新支払<span class="badge" id="b-rc-pay"></span></button>
+    <button class="tab"    data-tab="members"   onclick="switchTab(this)">会員一覧</button>
   </div>
 
-  <div class="tab-pane on" id="pane-progress"></div>
-  <div class="tab-pane"    id="pane-renewal"></div>
+  <div class="tab-pane on" id="pane-ic-review"></div>
+  <div class="tab-pane"    id="pane-ic-pay"></div>
+  <div class="tab-pane"    id="pane-ic-ship"></div>
+  <div class="tab-pane"    id="pane-rc-review"></div>
+  <div class="tab-pane"    id="pane-rc-pay"></div>
   <div class="tab-pane"    id="pane-members"></div>
 
 </div>
@@ -271,110 +277,109 @@ function switchTab(btn){
 
 // ─── 全タブ描画 ───
 function renderAll(d){
-  var reviewing   = d.initial.filter(function(r){return r.result==='審査中';});
-  var waitPayment = d.initial.filter(function(r){return r.result==='合格'&&r.payment==='支払い待ち';});
-  var waitShip    = d.initial.filter(function(r){return r.shipping==='発送待ち';});
-  var rnReview    = d.renewal.filter(function(r){return !r.result||r.result==='審査中';});
-  var rnWaitPay   = d.renewal.filter(function(r){return r.result==='合格';});
-  var members     = d.initial.filter(function(r){return r.memberNo;})
-                              .sort(function(a,b){return parseInt(a.memberNo)-parseInt(b.memberNo);});
-  document.getElementById('b-progress').textContent = (reviewing.length+waitShip.length)||'';
-  document.getElementById('b-renewal').textContent  = rnReview.length||'';
-  renderProgress(reviewing, waitPayment, waitShip);
-  renderRenewal(rnReview, rnWaitPay);
+  var icReview = d.initial.filter(function(r){return r.result==='審査中';});
+  var icPay    = d.initial.filter(function(r){return r.result==='合格'&&r.payment==='支払い待ち';});
+  var icShip   = d.initial.filter(function(r){return r.shipping==='発送待ち';});
+  var rcReview = d.renewal.filter(function(r){return !r.result||r.result==='審査中';});
+  var rcPay    = d.renewal.filter(function(r){return r.result==='合格';});
+  var members  = d.initial.filter(function(r){return r.memberNo;})
+                           .sort(function(a,b){return parseInt(a.memberNo)-parseInt(b.memberNo);});
+  document.getElementById('b-ic-review').textContent = icReview.length||'';
+  document.getElementById('b-ic-pay').textContent    = icPay.length||'';
+  document.getElementById('b-ic-ship').textContent   = icShip.length||'';
+  document.getElementById('b-rc-review').textContent = rcReview.length||'';
+  document.getElementById('b-rc-pay').textContent    = rcPay.length||'';
+  renderIcReview(icReview);
+  renderIcPay(icPay);
+  renderIcShip(icShip);
+  renderRcReview(rcReview);
+  renderRcPay(rcPay);
   renderMembers(members, d.renewal);
 }
 
-// ─── 進行中（審査中・支払い待ち・発送待ち） ───
-function renderProgress(reviewing, waitPayment, waitShip){
-  var el=document.getElementById('pane-progress');
-  var html='';
-  if(reviewing.length){
-    html+='<div class="sec-title">審査中 <span class="sec-count">'+reviewing.length+'件</span></div>';
-    html+=reviewing.map(function(r){
-      return '<div class="card" id="ic-'+r.row+'">'
-        +'<div class="card-head"><div class="card-head-left"><div class="card-person">'+esc(r.name)+'</div><div class="card-ts">申請 '+esc(r.ts)+'</div></div><span class="st st-pending">審査中</span></div>'
-        +'<div class="card-body">'
-          +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
-          +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">〒'+esc(r.postal)+'<br>'+esc(r.address)+'</span></div>'
-          +spermGrid(r)
-          +photoBlock(r.photo)
-        +'</div>'
-        +'<div class="card-actions">'
-          +'<button class="btn-ng" onclick="confirmResult('+r.row+',\'不合格\',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">不合格</button>'
-          +'<button class="btn-ok" onclick="confirmResult('+r.row+',\'合格\',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">合格にする</button>'
-        +'</div>'
-        +'<div style="padding:0 16px 12px;border-top:.5px solid var(--border)">'
-          +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">申請を削除する</button>'
-        +'</div>'
-      +'</div>';
-    }).join('');
-  }
-  if(waitPayment.length){
-    html+='<div class="sec-title">💳 支払い待ち <span class="sec-count">'+waitPayment.length+'件</span></div>';
-    html+=waitPayment.map(function(r){
-      return '<div class="card" id="pc-'+r.row+'">'
-        +'<div class="card-head"><div class="card-head-left"><div class="card-person">'+esc(r.name)+'</div><div class="card-ts">合格通知済み</div></div><span class="st st-pay">支払い待ち</span></div>'
-        +'<div class="card-body">'
-          +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
-          +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">〒'+esc(r.postal)+'<br>'+esc(r.address)+'</span></div>'
-        +'</div>'
-        +'<div style="padding:8px 16px 12px">'
-          +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'pc-'+r.row+'\')">申請を削除する</button>'
-        +'</div>'
-      +'</div>';
-    }).join('');
-  }
-  if(waitShip.length){
-    html+='<div class="sec-title">📦 発送待ち <span class="sec-count">'+waitShip.length+'件</span></div>';
-    html+=waitShip.map(function(r){
-      return '<div class="card" id="sc-'+r.row+'">'
-        +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div></div><span class="st st-pending">発送待ち</span></div>'
-        +'<div class="card-body">'
-          +'<div class="info-row"><span class="info-lbl">郵便番号</span><span class="info-val">〒'+esc(r.postal)+'</span></div>'
-          +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">'+esc(r.address)+'</span></div>'
-          +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
-        +'</div>'
-        +'<div class="card-actions">'
-          +'<button class="btn-ship" onclick="confirmShipping('+r.row+',\''+esc2(r.name)+'\',\'sc-'+r.row+'\')">📦&nbsp;発送済みにする</button>'
-        +'</div>'
-        +'<div style="padding:0 16px 12px;border-top:.5px solid var(--border)">'
-          +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'sc-'+r.row+'\')">申請を削除する</button>'
-        +'</div>'
-      +'</div>';
-    }).join('');
-  }
-  if(!html) html=empty('✓','進行中の案件はありません');
-  el.innerHTML=html;
+function renderIcReview(list){
+  var el=document.getElementById('pane-ic-review');
+  if(!list.length){el.innerHTML=empty('✓','新規審査待ちの案件はありません');return;}
+  el.innerHTML=list.map(function(r){
+    return '<div class="card" id="ic-'+r.row+'">'
+      +'<div class="card-head"><div class="card-head-left"><div class="card-person">'+esc(r.name)+'</div><div class="card-ts">申請 '+esc(r.ts)+'</div></div><span class="st st-pending">審査中</span></div>'
+      +'<div class="card-body">'
+        +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
+        +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">〒'+esc(r.postal)+'<br>'+esc(r.address)+'</span></div>'
+        +spermGrid(r)+photoBlock(r.photo)
+      +'</div>'
+      +'<div class="card-actions">'
+        +'<button class="btn-ng" onclick="confirmResult('+r.row+',\'不合格\',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">不合格</button>'
+        +'<button class="btn-ok" onclick="confirmResult('+r.row+',\'合格\',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">合格にする</button>'
+      +'</div>'
+      +'<div style="padding:0 16px 12px;border-top:.5px solid var(--border)">'
+        +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'ic-'+r.row+'\')">申請を削除する</button>'
+      +'</div>'
+    +'</div>';
+  }).join('');
 }
 
-// ─── 更新対応中（審査中・合格支払い待ち） ───
-function renderRenewal(reviewing, waitPayment){
-  var el=document.getElementById('pane-renewal');
-  var html='';
-  if(reviewing.length){
-    html+='<div class="sec-title">審査中 <span class="sec-count">'+reviewing.length+'件</span></div>';
-    html+=reviewing.map(function(r){
-      return '<div class="card" id="rc-'+r.row+'">'
-        +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div><div class="card-ts">更新申請 '+esc(r.ts)+'</div></div><span class="st st-pending">更新審査中</span></div>'
-        +'<div class="card-body">'+spermGrid(r)+photoBlock(r.photo)+'</div>'
-        +'<div class="card-actions">'
-          +'<button class="btn-ng" onclick="confirmRenewal('+r.row+',\'不合格\',\''+esc2(r.name)+'\',\'rc-'+r.row+'\')">不合格</button>'
-          +'<button class="btn-ok" onclick="confirmRenewal('+r.row+',\'合格\',\''+esc2(r.name)+'\',\'rc-'+r.row+'\')">合格にする</button>'
-        +'</div>'
-      +'</div>';
-    }).join('');
-  }
-  if(waitPayment.length){
-    html+='<div class="sec-title">💳 支払い待ち <span class="sec-count">'+waitPayment.length+'件</span></div>';
-    html+=waitPayment.map(function(r){
-      return '<div class="card">'
-        +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div><div class="card-ts">更新合格通知済み</div></div><span class="st st-pay">支払い待ち</span></div>'
-      +'</div>';
-    }).join('');
-  }
-  if(!html) html=empty('↺','更新対応中の案件はありません');
-  el.innerHTML=html;
+function renderIcPay(list){
+  var el=document.getElementById('pane-ic-pay');
+  if(!list.length){el.innerHTML=empty('💳','新規支払い待ちの案件はありません');return;}
+  el.innerHTML=list.map(function(r){
+    return '<div class="card" id="pc-'+r.row+'">'
+      +'<div class="card-head"><div class="card-head-left"><div class="card-person">'+esc(r.name)+'</div><div class="card-ts">合格通知済み</div></div><span class="st st-pay">支払い待ち</span></div>'
+      +'<div class="card-body">'
+        +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
+        +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">〒'+esc(r.postal)+'<br>'+esc(r.address)+'</span></div>'
+      +'</div>'
+      +'<div style="padding:8px 16px 12px">'
+        +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'pc-'+r.row+'\')">申請を削除する</button>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+function renderIcShip(list){
+  var el=document.getElementById('pane-ic-ship');
+  if(!list.length){el.innerHTML=empty('📦','新規発送待ちの案件はありません');return;}
+  el.innerHTML=list.map(function(r){
+    return '<div class="card" id="sc-'+r.row+'">'
+      +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div></div><span class="st st-pending">発送待ち</span></div>'
+      +'<div class="card-body">'
+        +'<div class="info-row"><span class="info-lbl">郵便番号</span><span class="info-val">〒'+esc(r.postal)+'</span></div>'
+        +'<div class="info-row"><span class="info-lbl">住所</span><span class="info-val">'+esc(r.address)+'</span></div>'
+        +'<div class="info-row"><span class="info-lbl">メール</span><span class="info-val">'+esc(r.email)+'</span></div>'
+      +'</div>'
+      +'<div class="card-actions">'
+        +'<button class="btn-ship" onclick="confirmShipping('+r.row+',\''+esc2(r.name)+'\',\'sc-'+r.row+'\')">📦&nbsp;発送済みにする</button>'
+      +'</div>'
+      +'<div style="padding:0 16px 12px;border-top:.5px solid var(--border)">'
+        +'<button style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;padding:6px 0" onclick="confirmDeleteProgress('+r.row+',\''+esc2(r.name)+'\',\'sc-'+r.row+'\')">申請を削除する</button>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+function renderRcReview(list){
+  var el=document.getElementById('pane-rc-review');
+  if(!list.length){el.innerHTML=empty('↺','更新審査待ちの案件はありません');return;}
+  el.innerHTML=list.map(function(r){
+    return '<div class="card" id="rc-'+r.row+'">'
+      +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div><div class="card-ts">更新申請 '+esc(r.ts)+'</div></div><span class="st st-pending">更新審査中</span></div>'
+      +'<div class="card-body">'+spermGrid(r)+photoBlock(r.photo)+'</div>'
+      +'<div class="card-actions">'
+        +'<button class="btn-ng" onclick="confirmRenewal('+r.row+',\'不合格\',\''+esc2(r.name)+'\',\'rc-'+r.row+'\')">不合格</button>'
+        +'<button class="btn-ok" onclick="confirmRenewal('+r.row+',\'合格\',\''+esc2(r.name)+'\',\'rc-'+r.row+'\')">合格にする</button>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+function renderRcPay(list){
+  var el=document.getElementById('pane-rc-pay');
+  if(!list.length){el.innerHTML=empty('💳','更新支払い待ちの案件はありません');return;}
+  el.innerHTML=list.map(function(r){
+    return '<div class="card">'
+      +'<div class="card-head"><div class="card-head-left"><div class="card-person">No.'+pad(r.memberNo)+'&nbsp;'+esc(r.name)+'</div><div class="card-ts">更新合格通知済み</div></div><span class="st st-pay">支払い待ち</span></div>'
+    +'</div>';
+  }).join('');
 }
 
 // ─── 会員一覧（アコーディオン） ───
