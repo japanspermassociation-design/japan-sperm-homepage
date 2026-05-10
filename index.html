@@ -32,7 +32,7 @@
 html{scroll-behavior:smooth}
 body{
   font-family:var(--jp);
-  background:var(--bg);
+  background:linear-gradient(150deg,#ede6ff 0%,#ddeeff 55%,#f0edff 100%);
   color:var(--text);
   -webkit-font-smoothing:antialiased;
   min-height:100vh;
@@ -557,6 +557,9 @@ body{
     </div>
   </div>
 
+  <!-- 協会名キャプション（トグルで表示） -->
+  <div class="card-caption" id="orgCaption" style="display:none">一般社団法人 日本精子協会</div>
+
   <!-- カードダウンロードボタン -->
   <div style="text-align:center;margin-top:14px;margin-bottom:4px">
     <button class="dl-btn" onclick="downloadCard()">
@@ -691,13 +694,9 @@ body{
           <span class="lbl">会員番号を表示</span>
           <div class="toggle on" id="swNo"><div class="toggle-knob"></div></div>
         </div>
-        <div class="privacy-row" onclick="togglePrivacy('certDate')">
-          <span class="lbl">認定日を表示</span>
-          <div class="toggle on" id="swCertDate"><div class="toggle-knob"></div></div>
-        </div>
-        <div class="privacy-row" onclick="togglePrivacy('expiry')">
-          <span class="lbl">認定期限を表示</span>
-          <div class="toggle on" id="swExpiry"><div class="toggle-knob"></div></div>
+        <div class="privacy-row" onclick="togglePrivacy('org')">
+          <span class="lbl">一般社団法人 日本精子協会を表示</span>
+          <div class="toggle" id="swOrg"><div class="toggle-knob"></div></div>
         </div>
       </div>
     </div>
@@ -832,7 +831,7 @@ function showToast(msg){
 }
 
 // ─── プライバシートグル ───
-const state = { name: true, no: true, certDate: true, expiry: true };
+const state = { name: true, no: true, org: false };
 
 function togglePrivacy(field){
   state[field] = !state[field];
@@ -876,24 +875,15 @@ function apply(){
     if(shareCardMemberNo) shareCardMemberNo.textContent = '';
   }
 
-  // 認定日
-  const rowCert = document.getElementById('rowCertDate');
-  if(state.certDate){
-    rowCert.style.display = '';
-    document.getElementById('swCertDate').classList.add('on');
+  // 協会名（カード下キャプション + ダウンロード画像）
+  const orgCaption = document.getElementById('orgCaption');
+  const swOrg = document.getElementById('swOrg');
+  if(state.org){
+    if(orgCaption) orgCaption.style.display = '';
+    if(swOrg) swOrg.classList.add('on');
   } else {
-    rowCert.style.display = 'none';
-    document.getElementById('swCertDate').classList.remove('on');
-  }
-
-  // 認定期限
-  const rowEx = document.getElementById('rowExpiry');
-  if(state.expiry){
-    rowEx.style.display = '';
-    document.getElementById('swExpiry').classList.add('on');
-  } else {
-    rowEx.style.display = 'none';
-    document.getElementById('swExpiry').classList.remove('on');
+    if(orgCaption) orgCaption.style.display = 'none';
+    if(swOrg) swOrg.classList.remove('on');
   }
 }
 
@@ -1171,12 +1161,12 @@ function loadByMagic(magic) {
     .then(function(data) {
       if (data.error === 'expired') {
         localStorage.removeItem('sc_magic');
-        window.location.replace('/login.html?expired=1');
+        window.location.replace('/portal.html');
         return;
       }
       if (data.error) {
         localStorage.removeItem('sc_magic');
-        window.location.replace('/login.html');
+        window.location.replace('/portal.html');
         return;
       }
       localStorage.setItem('sc_magic', magic);
@@ -1248,11 +1238,13 @@ function downloadCard() {
     ctx.drawImage(img, cardX, cardY, cardW, cardH);
     URL.revokeObjectURL(svgUrl);
 
-    // 下部テキスト
-    ctx.fillStyle = 'rgba(134,134,139,0.7)';
-    ctx.font = '400 26px Helvetica Neue, Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('一般社団法人 日本精子協会', CW / 2, cardY + cardH + 68);
+    // 下部テキスト（協会名トグルがONのときのみ）
+    if(state.org){
+      ctx.fillStyle = 'rgba(134,134,139,0.7)';
+      ctx.font = '400 26px Helvetica Neue, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('一般社団法人 日本精子協会', CW / 2, cardY + cardH + 68);
+    }
 
     cv.toBlob(function(pngBlob) {
       var file = new File([pngBlob], 'seedcard.png', { type: 'image/png' });
@@ -1275,7 +1267,7 @@ function downloadCard() {
 
 function logout() {
   localStorage.removeItem('sc_magic');
-  window.location.replace('/login.html');
+  window.location.replace('/portal.html');
 }
 
 function _showSettingsMsg(msgEl, type, html) {
@@ -1284,7 +1276,7 @@ function _showSettingsMsg(msgEl, type, html) {
   msgEl.style.color      = type === 'ok' ? '#166534' : '#9f1239';
   msgEl.innerHTML = html;
 }
-var _needLoginHtml = 'この操作にはログインが必要です。<br><a href="/login.html" style="color:inherit;font-weight:600;text-decoration:underline">ログインページへ</a>';
+var _needLoginHtml = 'この操作にはログインが必要です。<br><a href="/portal.html" style="color:inherit;font-weight:600;text-decoration:underline">ログインページへ</a>';
 
 // ─── メールアドレス変更 ───
 function requestEmailChange() {
@@ -1374,7 +1366,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (d.success) {
           localStorage.removeItem('sc_magic');
           alert('メールアドレスを ' + d.newEmail + ' に変更しました。\n再ログインしてください。');
-          window.location.replace('/login.html');
+          window.location.replace('/portal.html');
         } else {
           alert('変更リンクが無効または期限切れです。再度お試しください。');
           window.location.replace('/');
@@ -1404,7 +1396,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // 未ログイン → ログインページへ
-  window.location.replace('/login.html');
+  window.location.replace('/portal.html');
 });
 </script>
 
