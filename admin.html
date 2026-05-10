@@ -448,8 +448,8 @@ function renderMembers(list, renewals){
             +'<div class="det-sec-title">検査データ</div>'
             +'<div class="det-row2">'
               +'<div class="det-field"><div class="det-lbl">精液量 <span style="color:var(--text3);font-weight:400">（基準 1.4mL以上）</span></div><input class="det-input" id="f-vol-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.volume||'')+'"></div>'
-              +'<div class="det-field"><div class="det-lbl">精子濃度 <span style="color:var(--text3);font-weight:400">（基準 16M/mL以上）</span></div><input class="det-input" id="f-conc-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.concentration||'')+'"></div>'
-              +'<div class="det-field"><div class="det-lbl">総精子数 <span style="color:var(--text3);font-weight:400">（基準 39M以上）</span></div><input class="det-input" id="f-total-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.total||'')+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">精子濃度 <span style="color:var(--text3);font-weight:400">（基準 1,600万/mL以上）</span></div><input class="det-input" id="f-conc-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.concentration||'')+'"></div>'
+              +'<div class="det-field"><div class="det-lbl">総精子数 <span style="color:var(--text3);font-weight:400">（基準 3,900万以上）</span></div><input class="det-input" id="f-total-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.total||'')+'"></div>'
               +'<div class="det-field"><div class="det-lbl">正常形態率 <span style="color:var(--text3);font-weight:400">（基準 4%以上）</span></div><input class="det-input" id="f-morph-'+r.row+'" type="number" step="0.1" min="0" value="'+esc(r.morphology||'')+'"></div>'
             +'</div>'
           +'</div>'
@@ -627,8 +627,8 @@ function photoBlock(url){
 function spermGrid(r){
   return '<div class="sperm-grid">'
     +si('精液量',   r.volume,        'mL',   WHO.volume)
-    +si('精子濃度', r.concentration, 'M/mL', WHO.concentration)
-    +si('総精子数', r.total,         'M',    WHO.total)
+    +si('精子濃度', r.concentration, '万/mL', '1,600')
+    +si('総精子数', r.total,         '万',    '3,900')
     +si('正常形態率',r.morphology,   '%',    WHO.morphology)
   +'</div>';
 }
@@ -650,7 +650,7 @@ function downloadCSV(){
     '会員番号','氏名','ローマ字','メールアドレス',
     '郵便番号','住所',
     '認定日','認定期限','発送状況','支払い状況',
-    '精液量(mL)','精子濃度(M/mL)','総精子数(M)','正常形態率(%)',
+    '精液量(mL)','精子濃度(万/mL)','総精子数(万)','正常形態率(%)',
     'カードURL','申請日時'
   ];
 
