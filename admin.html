@@ -19,7 +19,7 @@
 body{font-family:var(--jp);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* ── ログイン ── */
-#loginScreen,#otpScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .login-wrap{width:100%;max-width:340px;text-align:center}
 .login-logo{font-family:var(--en);font-size:28px;font-weight:700;letter-spacing:.1em;background:linear-gradient(135deg,#e0c3fc,#8ec5fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2px}
 .login-sub{font-size:12px;color:var(--text3);letter-spacing:.1em;margin-bottom:36px;text-transform:uppercase;font-family:var(--en)}
@@ -158,7 +158,7 @@ button:disabled{opacity:.4;cursor:default!important}
 </head>
 <body>
 
-<!-- ログイン画面 STEP1：パスワード -->
+<!-- ログイン画面 -->
 <div id="loginScreen">
   <div class="login-wrap">
     <div class="login-logo">SEED CARD</div>
@@ -166,22 +166,8 @@ button:disabled{opacity:.4;cursor:default!important}
     <div class="login-card">
       <div class="login-label">管理者パスワード</div>
       <input type="password" id="adminKey" class="login-input" placeholder="パスワードを入力" autocomplete="current-password">
-      <button class="login-btn" id="loginBtn" onclick="login()">次へ</button>
+      <button class="login-btn" id="loginBtn" onclick="login()">ログイン</button>
       <div id="loginMsg"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ログイン画面 STEP2：認証コード -->
-<div id="otpScreen" style="display:none">
-  <div class="login-wrap">
-    <div class="login-logo">SEED CARD</div>
-    <div class="login-sub">Admin Panel</div>
-    <div class="login-card">
-      <div class="login-label" style="text-align:center;margin-bottom:14px">メールに届いた6桁のコードを入力してください</div>
-      <input type="text" id="otpInput" class="login-input" placeholder="000000" maxlength="6" inputmode="numeric" autocomplete="one-time-code" style="letter-spacing:.3em;text-align:center;font-size:22px">
-      <button class="login-btn" id="otpBtn" onclick="verifyOtp()">ログイン</button>
-      <div id="otpMsg"></div>
     </div>
   </div>
 </div>
@@ -238,53 +224,29 @@ var _memberMap = {};
 })();
 
 document.getElementById('adminKey').addEventListener('keydown', function(e){ if(e.key==='Enter') login(); });
-document.getElementById('otpInput').addEventListener('keydown', function(e){ if(e.key==='Enter') verifyOtp(); });
 
-// ─── 認証 STEP1：パスワード確認 → OTPメール送信 ───
+// ─── 認証 ───
 function login(){
   var k = document.getElementById('adminKey').value.trim();
   if(!k){ setLoginMsg('パスワードを入力してください。'); return; }
   var btn=document.getElementById('loginBtn');
-  btn.disabled=true; btn.textContent='送信中…';
-  showLoading();
-  apiCall('admin_requestotp',{key:k}).then(function(d){
-    hideLoading(); btn.disabled=false; btn.textContent='次へ';
-    if(d.error==='unauthorized'){ setLoginMsg('パスワードが違います。'); return; }
-    if(d.error){ setLoginMsg('エラーが発生しました。'); return; }
-    _key=k;
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('otpScreen').style.display='flex';
-    document.getElementById('otpInput').focus();
-  }).catch(function(){ hideLoading(); btn.disabled=false; btn.textContent='次へ'; setLoginMsg('通信エラーが発生しました。'); });
-}
-
-// ─── 認証 STEP2：OTPコード確認 ───
-function verifyOtp(){
-  var otp = document.getElementById('otpInput').value.trim();
-  if(!otp){ document.getElementById('otpMsg').textContent='コードを入力してください。'; return; }
-  var btn=document.getElementById('otpBtn');
   btn.disabled=true; btn.textContent='確認中…';
   showLoading();
-  apiCall('admin_verifyotp',{key:_key,otp:otp}).then(function(d){
+  apiCall('admin_get',{key:k}).then(function(d){
     hideLoading(); btn.disabled=false; btn.textContent='ログイン';
-    if(d.error==='invalid_otp'){ document.getElementById('otpMsg').textContent='コードが違います。'; return; }
-    if(d.error==='expired_otp'){ document.getElementById('otpMsg').textContent='コードの有効期限が切れました。最初からやり直してください。'; return; }
-    if(d.error){ document.getElementById('otpMsg').textContent='エラーが発生しました。'; return; }
-    sessionStorage.setItem('sc_admin_key',_key);
-    showMain(); loadData();
-  }).catch(function(){ hideLoading(); btn.disabled=false; btn.textContent='ログイン'; document.getElementById('otpMsg').textContent='通信エラーが発生しました。'; });
+    if(d.error==='unauthorized'){ setLoginMsg('パスワードが違います。'); return; }
+    if(d.error){ setLoginMsg('エラーが発生しました。'); return; }
+    _key=k; sessionStorage.setItem('sc_admin_key',k);
+    showMain(); _data=d; renderAll(d);
+  }).catch(function(){ hideLoading(); btn.disabled=false; btn.textContent='ログイン'; setLoginMsg('通信エラーが発生しました。'); });
 }
-
 function logout(){
   sessionStorage.removeItem('sc_admin_key'); _key='';
   document.getElementById('mainScreen').style.display='none';
-  document.getElementById('otpScreen').style.display='none';
   document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('adminKey').value='';
-  document.getElementById('otpInput').value='';
-  setLoginMsg('');
+  document.getElementById('adminKey').value=''; setLoginMsg('');
 }
-function showMain(){ document.getElementById('loginScreen').style.display='none'; document.getElementById('otpScreen').style.display='none'; document.getElementById('mainScreen').style.display='block'; }
+function showMain(){ document.getElementById('loginScreen').style.display='none'; document.getElementById('mainScreen').style.display='block'; }
 function setLoginMsg(m){ document.getElementById('loginMsg').textContent=m; }
 
 // ─── データ ───
