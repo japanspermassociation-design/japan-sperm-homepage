@@ -779,10 +779,11 @@ body{
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div id="emailChangeArea" style="display:none;padding:16px 0 4px">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px">現在: <span id="currentEmailDisplay" style="color:var(--text2);font-weight:500">（読込中）</span></div>
           <input type="email" id="newEmailInput" placeholder="新しいメールアドレス" autocomplete="email"
             style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
           <button onclick="requestEmailChange()" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer" id="emailChangeBtn">
-            確認メールを送信
+            更新する
           </button>
           <div id="emailChangeMsg" style="display:none;margin-top:10px;font-size:12px;line-height:1.6;padding:10px 12px;border-radius:8px"></div>
         </div>
@@ -794,6 +795,7 @@ body{
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div id="addressChangeArea" style="display:none;padding:16px 0 4px">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px">現在: <span id="currentAddressDisplay" style="color:var(--text2);font-weight:500">（読込中）</span></div>
           <input type="text" id="newPostalInput" placeholder="郵便番号（例：1040061）" inputmode="numeric"
             style="display:block;width:100%;padding:13px 14px;border:1.5px solid #e5e5ea;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box">
           <input type="text" id="newAddressInput" placeholder="住所（都道府県から）"
@@ -813,6 +815,33 @@ body{
     <a href="#" onclick="logout();return false;" style="color:var(--text3);margin-top:8px;display:inline-block;font-size:11px">ログアウト</a>
   </div>
 
+</div>
+
+<!-- 更新申請モーダル -->
+<div id="renewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;overflow-y:auto;-webkit-overflow-scrolling:touch">
+  <div style="min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px 16px">
+    <div style="background:#fff;border-radius:20px;width:100%;max-width:400px;padding:28px 24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:17px;font-weight:600;color:var(--text)">更新申請</div>
+        <button onclick="closeRenewModal()" style="background:none;border:none;font-size:24px;color:var(--text3);cursor:pointer;line-height:1;padding:4px">×</button>
+      </div>
+      <div style="font-size:13px;color:var(--text3);line-height:1.75;margin-bottom:22px">
+        新しい精液検査証をアップロードしてください。審査通過後、更新料（¥10,000）のお支払い案内をメールでお送りします。
+      </div>
+      <div style="margin-bottom:18px">
+        <label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px">精液検査証（写真）</label>
+        <label id="renewPhotoLabel" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px dashed #d1d1d6;border-radius:12px;padding:28px 16px;cursor:pointer;transition:border-color .15s;text-align:center">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span id="renewPhotoName" style="font-size:13px;color:var(--text3)">タップして写真を選択</span>
+          <input type="file" id="renewPhotoInput" accept="image/*" style="display:none" onchange="handleRenewPhoto(this)">
+        </label>
+      </div>
+      <button onclick="submitRenewApply()" id="renewSubmitBtn" style="width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s">
+        申請する（¥10,000）
+      </button>
+      <div id="renewMsg" style="display:none;margin-top:12px;font-size:12px;line-height:1.65;padding:10px 12px;border-radius:8px"></div>
+    </div>
+  </div>
 </div>
 
 <!-- トースト -->
@@ -920,16 +949,27 @@ function copyLink(e){
 var APPS_SCRIPT_API = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
 
 // apply()が使う表示用変数
-var _mName   = '';
-var _mRomaji = '';
-var _mNoStr  = '';
+var _mName    = '';
+var _mRomaji  = '';
+var _mNoStr   = '';
+var _mEmail   = '';
+var _mAddress = '';
+var _mToken   = '';
 
 function initFromMemberData(m) {
   if (!m) { return; }
 
-  _mName   = m.name || '';
-  _mNoStr  = 'No.' + String(m.memberNo);
-  _mRomaji = m.nameRomaji ? m.nameRomaji.toUpperCase() : _mName;
+  _mName    = m.name || '';
+  _mNoStr   = 'No.' + String(m.memberNo);
+  _mRomaji  = m.nameRomaji ? m.nameRomaji.toUpperCase() : _mName;
+  _mEmail   = m.email   || '';
+  _mAddress = m.address || '';
+
+  // 現在のメール・住所を表示
+  var currentEmailEl = document.getElementById('currentEmailDisplay');
+  if (currentEmailEl) currentEmailEl.textContent = _mEmail || '（未登録）';
+  var currentAddressEl = document.getElementById('currentAddressDisplay');
+  if (currentAddressEl) currentAddressEl.textContent = _mAddress || '（未登録）';
 
   // 名前
   var nameEl = document.getElementById('welcomeName');
@@ -1038,7 +1078,7 @@ function initFromMemberData(m) {
       sub.textContent = '更新すると期限が' + newExpiryStr + 'まで延長されます（更新日から1年）';
     }
 
-    if (link) link.href = 'https://myseedcard.japan-sperm.com/portal.html';
+    if (link) { link.onclick = function(e){ e.preventDefault(); openRenewModal(); }; link.removeAttribute('href'); }
   })();
 
   // シェアプレビューカードにも名前・番号を反映
@@ -1217,10 +1257,10 @@ function downloadCard() {
     cv.width = CW; cv.height = CH;
     var ctx = cv.getContext('2d');
 
-    // 背景グラデーション
+    // 背景グラデーション（SEED CARDグラデーション）
     var bg = ctx.createLinearGradient(0, 0, CW, CH);
-    bg.addColorStop(0, '#f5f0ff');
-    bg.addColorStop(1, '#eaf2ff');
+    bg.addColorStop(0, '#c8a8f0');
+    bg.addColorStop(1, '#7ec8f8');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, CW, CH);
 
@@ -1288,31 +1328,30 @@ function requestEmailChange() {
     _showSettingsMsg(msgEl, 'err', '有効なメールアドレスを入力してください。');
     return;
   }
-  var magic = localStorage.getItem('sc_magic');
-  if (!magic) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
+  if (!_mToken) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
 
   btn.disabled = true;
-  btn.textContent = '送信中…';
-  fetch(APPS_SCRIPT_API + '?action=requestemailchange&magic=' + encodeURIComponent(magic) + '&newemail=' + encodeURIComponent(newEmail))
+  btn.textContent = '更新中…';
+  fetch(APPS_SCRIPT_API + '?action=updateemail&t=' + encodeURIComponent(_mToken) + '&newemail=' + encodeURIComponent(newEmail))
     .then(function(r) { return r.json(); })
     .then(function(d) {
       if (d.success) {
-        _showSettingsMsg(msgEl, 'ok', '新しいメールアドレスに確認リンクを送信しました。<br>メールを確認してリンクをクリックしてください。');
-        btn.textContent = '送信しました';
+        _showSettingsMsg(msgEl, 'ok', 'メールアドレスを更新しました。');
+        btn.textContent = '更新しました';
+        _mEmail = newEmail;
+        var el = document.getElementById('currentEmailDisplay');
+        if (el) el.textContent = newEmail;
       } else if (d.error === 'already_used') {
         _showSettingsMsg(msgEl, 'err', 'そのメールアドレスはすでに登録されています。');
-        btn.disabled = false; btn.textContent = '確認メールを送信';
-      } else if (d.error === 'expired' || d.error === 'invalid_session') {
-        _showSettingsMsg(msgEl, 'err', _needLoginHtml);
-        btn.disabled = false; btn.textContent = '確認メールを送信';
+        btn.disabled = false; btn.textContent = '更新する';
       } else {
-        _showSettingsMsg(msgEl, 'err', '送信に失敗しました。しばらくしてからお試しください。');
-        btn.disabled = false; btn.textContent = '確認メールを送信';
+        _showSettingsMsg(msgEl, 'err', '更新に失敗しました。しばらくしてからお試しください。');
+        btn.disabled = false; btn.textContent = '更新する';
       }
     })
     .catch(function() {
       _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
-      btn.disabled = false; btn.textContent = '確認メールを送信';
+      btn.disabled = false; btn.textContent = '更新する';
     });
 }
 
@@ -1324,12 +1363,11 @@ function requestAddressChange() {
   var btn      = document.getElementById('addressChangeBtn');
 
   if (!address) { _showSettingsMsg(msgEl, 'err', '住所を入力してください。'); return; }
-  var magic = localStorage.getItem('sc_magic');
-  if (!magic) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
+  if (!_mToken) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
 
   btn.disabled = true;
   btn.textContent = '更新中…';
-  fetch(APPS_SCRIPT_API + '?action=changeaddress&magic=' + encodeURIComponent(magic)
+  fetch(APPS_SCRIPT_API + '?action=updateaddress&t=' + encodeURIComponent(_mToken)
     + '&postal=' + encodeURIComponent(postal)
     + '&address=' + encodeURIComponent(address))
     .then(function(r) { return r.json(); })
@@ -1337,9 +1375,9 @@ function requestAddressChange() {
       if (d.success) {
         _showSettingsMsg(msgEl, 'ok', '住所を更新しました。');
         btn.textContent = '更新しました';
-      } else if (d.error === 'expired' || d.error === 'invalid_session') {
-        _showSettingsMsg(msgEl, 'err', _needLoginHtml);
-        btn.disabled = false; btn.textContent = '住所を更新する';
+        _mAddress = address;
+        var el = document.getElementById('currentAddressDisplay');
+        if (el) el.textContent = (postal ? postal + ' ' : '') + address;
       } else {
         _showSettingsMsg(msgEl, 'err', '更新に失敗しました。しばらくしてからお試しください。');
         btn.disabled = false; btn.textContent = '住所を更新する';
@@ -1348,6 +1386,56 @@ function requestAddressChange() {
     .catch(function() {
       _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
       btn.disabled = false; btn.textContent = '住所を更新する';
+    });
+}
+
+// ─── 更新申請モーダル ───
+function openRenewModal() {
+  document.getElementById('renewModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeRenewModal() {
+  document.getElementById('renewModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+var _renewPhotoB64  = '';
+var _renewPhotoName = '';
+
+function handleRenewPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  var file = input.files[0];
+  _renewPhotoName = file.name;
+  document.getElementById('renewPhotoName').textContent = file.name;
+  document.getElementById('renewPhotoLabel').style.borderColor = 'var(--accent)';
+  var reader = new FileReader();
+  reader.onload = function(ev) { _renewPhotoB64 = (ev.target.result || '').split(',')[1] || ''; };
+  reader.readAsDataURL(file);
+}
+
+function submitRenewApply() {
+  var btn   = document.getElementById('renewSubmitBtn');
+  var msgEl = document.getElementById('renewMsg');
+  if (!_mToken) { _showSettingsMsg(msgEl, 'err', 'カードURLからアクセスし直してください。'); return; }
+  btn.disabled = true; btn.style.opacity = '.6'; btn.textContent = '送信中…';
+  var body = 'action=submitrenewbytoken'
+    + '&t='         + encodeURIComponent(_mToken)
+    + '&photoData=' + encodeURIComponent(_renewPhotoB64)
+    + '&photoName=' + encodeURIComponent(_renewPhotoName || 'photo.jpg');
+  fetch(APPS_SCRIPT_API, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.ok) {
+        _showSettingsMsg(msgEl, 'ok', '更新申請を受け付けました。審査後にメールでご連絡いたします。');
+        btn.textContent = '申請済み';
+      } else {
+        _showSettingsMsg(msgEl, 'err', d.error || '申請に失敗しました。');
+        btn.disabled = false; btn.style.opacity = '1'; btn.textContent = '申請する（¥10,000）';
+      }
+    })
+    .catch(function() {
+      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
+      btn.disabled = false; btn.style.opacity = '1'; btn.textContent = '申請する（¥10,000）';
     });
 }
 
@@ -1377,6 +1465,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (token) {
     // NFCタップ or 直リンク → カードトークンで表示（ログイン不要）
+    _mToken = token;
     loadByToken(token);
     return;
   }
