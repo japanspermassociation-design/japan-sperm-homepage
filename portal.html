@@ -219,7 +219,7 @@
         </p>
         <button class="lbtn lbtn-outline" id="forgotToggleBtn" style="font-size:13px;padding:11px;margin-bottom:0" onclick="toggleForgot()">会員番号で照会する</button>
         <div id="forgotForm" style="display:none;margin-top:14px">
-          <input type="text" class="inp" id="forgotNo" placeholder="会員番号（例：202600777）" inputmode="numeric">
+          <input type="text" class="inp" id="forgotNo" placeholder="会員番号（例：202500001）" inputmode="numeric">
           <button class="lbtn" id="forgotSendBtn" style="font-size:14px;padding:13px" onclick="sendForgotEmail()">ログインリンクを送信</button>
           <div class="lmsg" id="forgotMsg"></div>
         </div>
@@ -279,7 +279,7 @@
     <div class="field">
       <label>生年月日<span class="req">*</span></label>
       <div class="dob-selects">
-        <select id="a-dob-y" class="dob-y"><option value="">年</option><option>2007</option><option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option><option>1989</option><option>1988</option><option>1987</option><option>1986</option><option>1985</option><option>1984</option><option>1983</option><option>1982</option><option>1981</option><option>1980</option><option>1979</option><option>1978</option><option>1977</option><option>1976</option><option>1975</option><option>1974</option><option>1973</option><option>1972</option><option>1971</option><option>1970</option><option>1969</option><option>1968</option><option>1967</option><option>1966</option><option>1965</option><option>1964</option><option>1963</option><option>1962</option><option>1961</option><option>1960</option><option>1959</option><option>1958</option><option>1957</option><option>1956</option><option>1955</option><option>1954</option><option>1953</option><option>1952</option><option>1951</option><option>1950</option><option>1949</option><option>1948</option><option>1947</option><option>1946</option><option>1945</option><option>1944</option><option>1943</option><option>1942</option><option>1941</option><option>1940</option></select>
+        <select id="a-dob-y" class="dob-y"><option value="">年</option></select>
         <select id="a-dob-m"><option value="">月</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>
         <select id="a-dob-d"><option value="">日</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
       </div>
@@ -574,6 +574,7 @@ function sendMagicEmail() {
     btn.disabled = false;
     if (d.ok || d.success) { showLMsg('msg','success','ログインリンクを ' + em + ' に送信しました。\nメールをご確認ください（迷惑メールフォルダもご確認ください）。'); btn.textContent = '送信しました'; }
     else if (d.error==='not_found') { showLMsg('msg','error','このメールアドレスは登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
+    else if (d.error==='no_card_yet') { showLMsg('msg','error','カードはまだ発行されていません。審査結果はメールでお知らせします。'); btn.textContent = 'ログインリンクを送信'; }
     else if (d.error==='rate_limit') { showLMsg('msg','error','短時間に何度もリクエストされました。10分後に再度お試しください。'); btn.textContent = 'ログインリンクを送信'; }
     else { showLMsg('msg','error','送信に失敗しました。しばらくしてからお試しください。'); btn.textContent = 'ログインリンクを送信'; }
   }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('msg','error','通信エラーが発生しました。'); });
@@ -589,6 +590,7 @@ function sendMagicNo() {
     btn.disabled = false;
     if (d.ok || d.success) { showLMsg('noMsg','success','登録メールアドレスにログインリンクを送信しました。'); btn.textContent = '送信しました'; }
     else if (d.error==='not_found') { showLMsg('noMsg','error','この会員番号は登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
+    else if (d.error==='no_card_yet') { showLMsg('noMsg','error','カードはまだ発行されていません。審査結果はメールでお知らせします。'); btn.textContent = 'ログインリンクを送信'; }
     else if (d.error==='rate_limit') { showLMsg('noMsg','error','短時間に何度もリクエストされました。10分後にお試しください。'); btn.textContent = 'ログインリンクを送信'; }
     else { showLMsg('noMsg','error','送信に失敗しました。'); btn.textContent = 'ログインリンクを送信'; }
   }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('noMsg','error','通信エラーが発生しました。'); });
@@ -625,6 +627,7 @@ function sendForgotEmail() {
     btn.disabled = false;
     if (d.ok || d.success) { showLMsg('forgotMsg','success','登録メールアドレスにログインリンクを送信しました。'); btn.textContent = '送信しました'; }
     else if (d.error==='not_found') { showLMsg('forgotMsg','error','この会員番号は登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
+    else if (d.error==='no_card_yet') { showLMsg('forgotMsg','error','カードはまだ発行されていません。審査結果はメールでお知らせします。'); btn.textContent = 'ログインリンクを送信'; }
     else { showLMsg('forgotMsg','error','送信に失敗しました。'); btn.textContent = 'ログインリンクを送信'; }
   }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('forgotMsg','error','通信エラーが発生しました。'); });
 }
@@ -674,13 +677,9 @@ function loadMyPage(email) {
     loading(false);
     if (!r.ok || !r.member) { sessionStorage.removeItem('sc_em'); show('s-top'); return; }
     var m = r.member;
-    sessionStorage.setItem('sc_em', email);
-    // カード発行済み → GASカードページへリダイレクト
     if (m.cardUrl) { location.href = m.cardUrl; return; }
-    // 期限切れ → 更新フォームを表示
-    if (m.status === '期限切れ') { show('s-renew'); return; }
-    // それ以外（審査中・支払い待ち・発送待ち）→ 待機画面
-    show('s-waiting');
+    sessionStorage.removeItem('sc_em');
+    show('s-top');
   }).catch(function(){ loading(false); toast('データ取得エラー'); });
 }
 function logout() {
@@ -744,6 +743,17 @@ async function submitApply() {
     } else { toast('エラー: ' + (r.error||'申請失敗')); }
   } catch(e) { loading(false); toast('通信エラーが発生しました'); }
 }
+
+// ===== 生年月日 年の動的生成（18歳未満不可・上限なし） =====
+(function(){
+  var sel = document.getElementById('a-dob-y');
+  var maxY = new Date().getFullYear() - 18;
+  for (var y = maxY; y >= 1930; y--) {
+    var o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    sel.appendChild(o);
+  }
+})();
 
 // ===== 更新申請 =====
 async function submitRenew() {
