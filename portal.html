@@ -106,7 +106,7 @@
     .check-lbl input{width:18px;height:18px;accent-color:var(--accent)}
 
     /* ── 会員証カード ── */
-    .memcard{background:linear-gradient(135deg,var(--primary) 0%,#1a4a7a 55%,#0f6b5a 100%);border-radius:16px;padding:24px 20px;color:#fff;position:relative;overflow:hidden;margin:14px 14px 4px}
+    .memcard{background:linear-gradient(135deg,#071f3d 0%,#1a448a 50%,#0e7a6a 100%);border-radius:16px;padding:24px 20px;color:#fff;position:relative;overflow:hidden;margin:14px 14px 4px;box-shadow:0 6px 28px rgba(7,31,61,.35)}
     .memcard::before{content:'';position:absolute;top:-50px;right:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.05)}
     .mc-org{font-size:10px;opacity:.55;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
     .mc-title{font-family:'Inter',sans-serif;font-size:20px;font-weight:900;letter-spacing:.14em;margin-bottom:16px}
@@ -146,8 +146,23 @@
     #loading{position:fixed;inset:0;background:rgba(255,255,255,.88);display:none;align-items:center;justify-content:center;z-index:9998;flex-direction:column;gap:12px}
     #loading.show{display:flex}
     .spinner{width:40px;height:40px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes spin{to{transform:rotate(360deg)}
+    }
     .loading-msg{font-size:13px;color:var(--text2);font-weight:600}
+
+    /* ── 数値スピナー非表示 ── */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+    input[type=number]{-moz-appearance:textfield}
+
+    /* ── 生年月日セレクト ── */
+    .dob-selects{display:flex;gap:8px}
+    .dob-selects select{flex:1;padding:12px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:'Noto Sans JP',sans-serif;color:var(--text);background:#fff;outline:none;-webkit-appearance:none;transition:.15s}
+    .dob-selects select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(155,135,214,.12)}
+    .dob-selects .dob-y{flex:1.6}
+
+    /* ── 協会名トグル ── */
+    #org-toggle-btn{background:none;border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);border-radius:6px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;margin-left:6px;vertical-align:middle}
   </style>
 </head>
 <body>
@@ -200,12 +215,11 @@
 
         <p class="nfc-note" style="margin-bottom:10px">
           <strong>メールアドレスをお忘れの方</strong><br>
-          会員番号と氏名で照会できます。
+          会員番号でログインリンクを送信できます。
         </p>
         <button class="lbtn lbtn-outline" id="forgotToggleBtn" style="font-size:13px;padding:11px;margin-bottom:0" onclick="toggleForgot()">会員番号で照会する</button>
         <div id="forgotForm" style="display:none;margin-top:14px">
           <input type="text" class="inp" id="forgotNo" placeholder="会員番号（例：202600777）" inputmode="numeric">
-          <input type="text" class="inp" id="forgotName" placeholder="氏名（フルネーム）">
           <button class="lbtn" id="forgotSendBtn" style="font-size:14px;padding:13px" onclick="sendForgotEmail()">ログインリンクを送信</button>
           <div class="lmsg" id="forgotMsg"></div>
         </div>
@@ -264,7 +278,11 @@
     </div>
     <div class="field">
       <label>生年月日<span class="req">*</span></label>
-      <input type="date" id="a-dob" max="2007-01-01">
+      <div class="dob-selects">
+        <select id="a-dob-y" class="dob-y"><option value="">年</option><option>2007</option><option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option><option>1989</option><option>1988</option><option>1987</option><option>1986</option><option>1985</option><option>1984</option><option>1983</option><option>1982</option><option>1981</option><option>1980</option><option>1979</option><option>1978</option><option>1977</option><option>1976</option><option>1975</option><option>1974</option><option>1973</option><option>1972</option><option>1971</option><option>1970</option><option>1969</option><option>1968</option><option>1967</option><option>1966</option><option>1965</option><option>1964</option><option>1963</option><option>1962</option><option>1961</option><option>1960</option><option>1959</option><option>1958</option><option>1957</option><option>1956</option><option>1955</option><option>1954</option><option>1953</option><option>1952</option><option>1951</option><option>1950</option><option>1949</option><option>1948</option><option>1947</option><option>1946</option><option>1945</option><option>1944</option><option>1943</option><option>1942</option><option>1941</option><option>1940</option></select>
+        <select id="a-dob-m"><option value="">月</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>
+        <select id="a-dob-d"><option value="">日</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
+      </div>
     </div>
     <div class="field">
       <label>メールアドレス<span class="req">*</span></label>
@@ -300,26 +318,28 @@
     </div>
 
     <!-- 精液検査データ -->
-    <div class="sec-lbl">精液検査データ（任意）</div>
+    <div class="sec-lbl">精液検査データ（必須）<span class="req">*</span></div>
     <div class="notice" style="font-size:12px">WHO 2021年基準（第5パーセンタイル）：精液量 1.4mL以上 ／ 精子濃度 1,600万/mL以上 ／ 総精子数 3,900万以上 ／ 正常形態率 4%以上</div>
     <div class="sperm-grid">
       <div class="sperm-cell">
-        <label>精液量</label>
+        <label>精液量<span class="req">*</span></label>
         <input type="number" id="a-vol" placeholder="例: 1.4" step="0.1" min="0">
         <div class="unit">mL</div>
       </div>
       <div class="sperm-cell">
-        <label>精子濃度</label>
+        <label>精子濃度<span class="req">*</span></label>
         <input type="number" id="a-conc" placeholder="例: 1600" step="0.1" min="0">
         <div class="unit">万/mL</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:3px">1億2千万→「12000」と入力</div>
       </div>
       <div class="sperm-cell">
-        <label>総精子数</label>
+        <label>総精子数<span class="req">*</span></label>
         <input type="number" id="a-total" placeholder="例: 3900" step="0.1" min="0">
         <div class="unit">万</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:3px">1億2千万→「12000」と入力</div>
       </div>
       <div class="sperm-cell">
-        <label>正常形態率</label>
+        <label>正常形態率<span class="req">*</span></label>
         <input type="number" id="a-morph" placeholder="例: 4" step="0.1" min="0">
         <div class="unit">%</div>
       </div>
@@ -356,34 +376,13 @@
   </div>
 </div>
 
-<!-- ===== マイページ ===== -->
-<div id="s-mypage" class="screen">
-  <div class="memcard">
-    <div class="mc-org">一般社団法人 日本精子協会</div>
-    <div class="mc-title">SEED CARD</div>
-    <div class="mc-name" id="mc-name">——</div>
-    <div class="mc-no"   id="mc-no">No. ——</div>
-    <div class="mc-exp">有効期限<b id="mc-exp">——</b></div>
-  </div>
-  <div class="card" style="margin-top:4px">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <span style="font-weight:700;font-size:14px">ステータス</span>
-      <span class="badge b-pend" id="mp-badge">——</span>
-    </div>
-    <div id="mp-msg" style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:6px"></div>
-    <div id="mp-warn" class="notice warn" style="display:none;margin-bottom:0">申請から<b>30日以内</b>にお手続きがない場合、申請は自動的に削除されます。</div>
-  </div>
-  <div class="card" id="renew-cta" style="display:none">
-    <div class="card-hd">更新申請</div>
-    <div class="notice warn">有効期限が近づいています。更新申請を行ってください。</div>
-    <button class="btn green" onclick="show('s-renew')">更新申請をする →</button>
-  </div>
-  <div class="card">
-    <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.05em;margin-bottom:2px">登録情報</div>
-    <div id="mp-info"></div>
-  </div>
-  <div style="padding:0 14px 20px">
-    <button class="btn outline" onclick="logout()" style="font-size:13px">ログアウト</button>
+<!-- ===== 審査中待機 ===== -->
+<div id="s-waiting" class="screen">
+  <div style="text-align:center;padding:80px 24px 40px">
+    <div style="font-size:52px;margin-bottom:18px">📬</div>
+    <div style="font-size:18px;font-weight:700;color:var(--primary);margin-bottom:10px">現在審査中です</div>
+    <div style="font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:32px">審査結果はメールでお知らせします。<br>しばらくお待ちください。</div>
+    <button class="btn outline" onclick="logout()" style="font-size:13px;max-width:200px;margin:0 auto">ログアウト</button>
   </div>
 </div>
 
@@ -403,6 +402,7 @@
       <input type="file" id="fi-renew" accept="image/*" onchange="onFileChange('renew')">
     </div>
     <button class="btn green" onclick="submitRenew()" style="margin-top:8px">更新申請する</button>
+    <button class="btn outline" onclick="logout()" style="margin-top:10px;font-size:13px">ログアウト</button>
   </div>
 </div>
 
@@ -422,7 +422,7 @@
 var GAS = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
 
 // ===== ROUTING =====
-var backMap = {'s-apply':'s-top','s-mypage':'s-top','s-renew':'s-mypage','s-done':'s-top'};
+var backMap = {'s-apply':'s-top','s-waiting':'s-top','s-renew':'s-top','s-done':'s-top'};
 function show(id) {
   document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
@@ -594,6 +594,14 @@ function sendMagicNo() {
   }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('noMsg','error','通信エラーが発生しました。'); });
 }
 
+function toggleOrgText() {
+  var el = document.getElementById('mc-org-text');
+  var btn = document.getElementById('org-toggle-btn');
+  var visible = el.style.display !== 'none';
+  el.style.display = visible ? 'none' : 'block';
+  btn.textContent = visible ? '協会名' : '非表示';
+}
+
 function toggleLoginForm() {
   var w = document.getElementById('loginFormWrap');
   var btn = document.querySelector('.btn-login-top');
@@ -610,14 +618,13 @@ function toggleForgot() {
 }
 function sendForgotEmail() {
   var no = document.getElementById('forgotNo').value.trim().replace(/^0+/,'');
-  var name = document.getElementById('forgotName').value.trim();
-  if (!no || !name) { showLMsg('forgotMsg','error','会員番号と氏名を両方入力してください。'); return; }
+  if (!no) { showLMsg('forgotMsg','error','会員番号を入力してください。'); return; }
   var btn = document.getElementById('forgotSendBtn');
   btn.disabled = true; btn.textContent = '照会中…'; clearLMsg('forgotMsg');
-  get({ action:'lookupbymember', memberNo:no, name:name }).then(function(d){
+  get({ action:'sendmagicbymemberno', memberNo:no }).then(function(d){
     btn.disabled = false;
     if (d.ok || d.success) { showLMsg('forgotMsg','success','登録メールアドレスにログインリンクを送信しました。'); btn.textContent = '送信しました'; }
-    else if (d.error==='not_found') { showLMsg('forgotMsg','error','会員番号または氏名が一致しません。'); btn.textContent = 'ログインリンクを送信'; }
+    else if (d.error==='not_found') { showLMsg('forgotMsg','error','この会員番号は登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
     else { showLMsg('forgotMsg','error','送信に失敗しました。'); btn.textContent = 'ログインリンクを送信'; }
   }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('forgotMsg','error','通信エラーが発生しました。'); });
 }
@@ -665,30 +672,15 @@ function loadMyPage(email) {
   loading(true, '読み込み中...');
   get({ action:'getmemberbyemail', email:email }).then(function(r){
     loading(false);
-    if (!r.ok || !r.member) { show('s-top'); return; }
+    if (!r.ok || !r.member) { sessionStorage.removeItem('sc_em'); show('s-top'); return; }
     var m = r.member;
     sessionStorage.setItem('sc_em', email);
-    document.getElementById('mc-name').textContent = m.nameKanji || '——';
-    document.getElementById('mc-no').textContent   = 'No. ' + (m.memberNo || '——');
-    document.getElementById('mc-exp').textContent  = m.expireDate || '——';
-    var showWarn = (m.status === '審査中' || m.status === '支払い待ち');
-    document.getElementById('mp-warn').style.display = showWarn ? '' : 'none';
-    var sc = { '審査中':['b-pend','申請を受け付けました。現在審査中です。結果はメールでお知らせします。'],
-               '支払い待ち':['b-pend','審査に通過しました。入金案内メールをご確認のうえお手続きください。'],
-               '発送待ち':['b-pend','お支払いを確認しました。カードを準備・発送します。'],
-               '有効':['b-ok','カードは有効です。'],
-               '更新審査中':['b-pend','更新申請を受け付けました。審査中です。'],
-               '期限切れ':['b-ng','カードの有効期限が切れています。更新申請をしてください。'] };
-    var cfg = sc[m.status] || ['b-pend', m.status||''];
-    var badge = document.getElementById('mp-badge');
-    badge.className = 'badge ' + cfg[0]; badge.textContent = m.status || '——';
-    document.getElementById('mp-msg').textContent = cfg[1];
-    document.getElementById('renew-cta').style.display = (m.status==='期限切れ'||m.status==='有効') ? '' : 'none';
-    var rows = [['フリガナ',m.nameKana],['メール',email],['電話',m.tel],['住所',m.address]];
-    document.getElementById('mp-info').innerHTML = rows.filter(function(r){ return r[1]; }).map(function(r){
-      return '<div class="irow"><span class="ilbl">'+esc(r[0])+'</span><span class="ival">'+esc(r[1])+'</span></div>';
-    }).join('');
-    show('s-mypage');
+    // カード発行済み → GASカードページへリダイレクト
+    if (m.cardUrl) { location.href = m.cardUrl; return; }
+    // 期限切れ → 更新フォームを表示
+    if (m.status === '期限切れ') { show('s-renew'); return; }
+    // それ以外（審査中・支払い待ち・発送待ち）→ 待機画面
+    show('s-waiting');
   }).catch(function(){ loading(false); toast('データ取得エラー'); });
 }
 function logout() {
@@ -705,7 +697,10 @@ async function submitApply() {
   var ngSei = document.getElementById('a-ng-sei').value.trim();
   var ngMei = document.getElementById('a-ng-mei').value.trim();
   var ng    = ngSei + (ngMei ? '　' + ngMei : '');
-  var dob = document.getElementById('a-dob').value;
+  var dobY = document.getElementById('a-dob-y').value;
+  var dobM = document.getElementById('a-dob-m').value;
+  var dobD = document.getElementById('a-dob-d').value;
+  var dob = (dobY && dobM && dobD) ? dobY + '-' + String(dobM).padStart(2,'0') + '-' + String(dobD).padStart(2,'0') : '';
   var em  = document.getElementById('a-em').value.trim();
   var tel = document.getElementById('a-tel').value.trim();
   var zip = document.getElementById('a-zip').value.trim();
@@ -725,6 +720,7 @@ async function submitApply() {
   if (!em || !em.includes('@')){ toast('メールアドレスを入力してください'); return; }
   if (!tel)                   { toast('電話番号を入力してください'); return; }
   if (!ad1)                   { toast('住所を入力してください'); return; }
+  if (!vol || !conc || !tot || !morph) { toast('精液検査データをすべて入力してください'); return; }
   if (!file)                  { toast('検査証の写真を選択してください'); return; }
   if (!agree)                 { toast('プライバシーポリシーへの同意が必要です'); return; }
 
