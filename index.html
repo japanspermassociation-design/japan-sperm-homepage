@@ -561,10 +561,18 @@ body{
   <div class="card-caption" id="orgCaption" style="display:none">一般社団法人 日本精子協会</div>
 
   <!-- カードダウンロードボタン -->
-  <div style="text-align:center;margin-top:14px;margin-bottom:4px">
-    <button class="dl-btn" onclick="downloadCard()">
+  <div style="text-align:center;margin-top:14px;margin-bottom:4px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
+    <button class="dl-btn" onclick="downloadCard('square')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      カード画像を保存
+      正方形
+    </button>
+    <button class="dl-btn" onclick="downloadCard('portrait')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+      縦長
+    </button>
+    <button class="dl-btn" onclick="downloadCard('landscape')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+      横長
     </button>
   </div>
 
@@ -710,7 +718,7 @@ body{
     </div>
 
     <!-- 画像としてシェア -->
-    <a href="#" class="update-card" onclick="downloadCard();return false;" style="margin-bottom:10px">
+    <a href="#" class="update-card" onclick="downloadCard('square');return false;" style="margin-bottom:10px">
       <div class="icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -828,6 +836,33 @@ body{
       <div style="font-size:13px;color:var(--text3);line-height:1.75;margin-bottom:22px">
         新しい精液検査証をアップロードしてください。審査通過後、更新料（¥10,000）のお支払い案内をメールでお送りします。
       </div>
+      <!-- 精液検査データ -->
+      <div style="margin-bottom:18px">
+        <label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">精液検査データ（1ヶ月以内）</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div>
+            <div style="font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.04em;margin-bottom:4px">精液量（mL）</div>
+            <input type="number" id="renewVol" step="0.1" min="0" placeholder="例：3.5"
+              style="width:100%;padding:11px 12px;border:1.5px solid #e5e5ea;border-radius:8px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box">
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.04em;margin-bottom:4px">精子濃度（万/mL）</div>
+            <input type="number" id="renewConc" step="1" min="0" placeholder="例：3000"
+              style="width:100%;padding:11px 12px;border:1.5px solid #e5e5ea;border-radius:8px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box">
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.04em;margin-bottom:4px">総精子数（万）</div>
+            <input type="number" id="renewTotal" step="1" min="0" placeholder="例：9000"
+              style="width:100%;padding:11px 12px;border:1.5px solid #e5e5ea;border-radius:8px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box">
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.04em;margin-bottom:4px">正常形態率（%）</div>
+            <input type="number" id="renewMorph" step="1" min="0" placeholder="例：12"
+              style="width:100%;padding:11px 12px;border:1.5px solid #e5e5ea;border-radius:8px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box">
+          </div>
+        </div>
+      </div>
+
       <div style="margin-bottom:18px">
         <label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px">精液検査証（写真）</label>
         <label id="renewPhotoLabel" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px dashed #d1d1d6;border-radius:12px;padding:28px 16px;cursor:pointer;transition:border-color .15s;text-align:center">
@@ -1233,15 +1268,20 @@ function _cardRoundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
-function downloadCard() {
+function downloadCard(format) {
   var svgEl = document.querySelector('.card-main svg');
   if (!svgEl) { showToast('カードが読み込まれていません'); return; }
 
-  // 正方形キャンバス（Instagram/X対応）
-  var CW = 1080, CH = 1080;
+  // フォーマット別キャンバスサイズ
+  format = format || 'square';
+  var CW, CH, fname;
+  if (format === 'portrait')       { CW = 1080; CH = 1920; fname = 'seedcard_story.png'; }
+  else if (format === 'landscape') { CW = 1920; CH = 1080; fname = 'seedcard_wide.png'; }
+  else                             { CW = 1080; CH = 1080; fname = 'seedcard.png'; }
+
   var cardW = 820, cardH = Math.round(820 * 214 / 340);
   var cardX = (CW - cardW) / 2;
-  var cardY = (CH - cardH) / 2 - 30;
+  var cardY = (CH - cardH) / 2; // 正確に中央
 
   var svgStr = new XMLSerializer().serializeToString(svgEl);
   if (svgStr.indexOf('xmlns=') < 0) svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
@@ -1287,14 +1327,14 @@ function downloadCard() {
     }
 
     cv.toBlob(function(pngBlob) {
-      var file = new File([pngBlob], 'seedcard.png', { type: 'image/png' });
+      var file = new File([pngBlob], fname, { type: 'image/png' });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         navigator.share({ files: [file], title: 'SEED CARD' }).catch(function() {});
         return;
       }
       var dlUrl = URL.createObjectURL(pngBlob);
       var a = document.createElement('a');
-      a.download = 'seedcard.png';
+      a.download = fname;
       a.href = dlUrl;
       a.click();
       setTimeout(function() { URL.revokeObjectURL(dlUrl); }, 1000);
@@ -1418,10 +1458,18 @@ function submitRenewApply() {
   var msgEl = document.getElementById('renewMsg');
   if (!_mToken) { _showSettingsMsg(msgEl, 'err', 'カードURLからアクセスし直してください。'); return; }
   btn.disabled = true; btn.style.opacity = '.6'; btn.textContent = '送信中…';
+  var vol   = document.getElementById('renewVol')   ? document.getElementById('renewVol').value   : '';
+  var conc  = document.getElementById('renewConc')  ? document.getElementById('renewConc').value  : '';
+  var total = document.getElementById('renewTotal') ? document.getElementById('renewTotal').value : '';
+  var morph = document.getElementById('renewMorph') ? document.getElementById('renewMorph').value : '';
   var body = 'action=submitrenewbytoken'
-    + '&t='         + encodeURIComponent(_mToken)
-    + '&photoData=' + encodeURIComponent(_renewPhotoB64)
-    + '&photoName=' + encodeURIComponent(_renewPhotoName || 'photo.jpg');
+    + '&t='           + encodeURIComponent(_mToken)
+    + '&volume='      + encodeURIComponent(vol)
+    + '&concentration='+ encodeURIComponent(conc)
+    + '&total='       + encodeURIComponent(total)
+    + '&morphology='  + encodeURIComponent(morph)
+    + '&photoData='   + encodeURIComponent(_renewPhotoB64)
+    + '&photoName='   + encodeURIComponent(_renewPhotoName || 'photo.jpg');
   fetch(APPS_SCRIPT_API, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body })
     .then(function(r) { return r.json(); })
     .then(function(d) {
