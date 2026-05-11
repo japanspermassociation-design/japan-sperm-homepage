@@ -347,22 +347,25 @@ body{
 .footer a{color:var(--accent);text-decoration:none;font-weight:500}
 .footer .sep{margin:0 10px;opacity:.5}
 
-/* ─── カードダウンロードボタン ─── */
-.dl-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 20px;
-  background:transparent;
-  border:1px solid var(--border);
-  border-radius:99px;
-  font-size:12px;font-weight:500;
-  color:var(--text3);
-  cursor:pointer;
-  font-family:var(--jp);
-  transition:background .15s,color .15s;
+/* ─── カードダウンロード ─── */
+.dl-chip{
+  display:inline-flex;align-items:center;
+  padding:7px 16px;border-radius:99px;
+  font-size:12px;font-weight:500;font-family:var(--jp);
+  border:1.5px solid var(--border);
+  background:transparent;color:var(--text3);
+  cursor:pointer;transition:all .18s;
+  -webkit-tap-highlight-color:transparent;white-space:nowrap;
+}
+.dl-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.dl-chip:active{opacity:.75}
+.dl-save-btn{
+  flex:1;padding:13px 8px;border:none;border-radius:12px;
+  font-size:13px;font-weight:600;font-family:var(--jp);
+  cursor:pointer;transition:opacity .15s;
   -webkit-tap-highlight-color:transparent;
 }
-.dl-btn:active{background:#f5f5f7;color:var(--text)}
-.dl-btn svg{width:13px;height:13px;flex-shrink:0}
+.dl-save-btn:active{opacity:.75}
 
 /* ─── トースト ─── */
 .toast{
@@ -560,20 +563,48 @@ body{
   <!-- 協会名キャプション（トグルで表示） -->
   <div class="card-caption" id="orgCaption" style="display:none">一般社団法人 日本精子協会</div>
 
-  <!-- カードダウンロードボタン -->
-  <div style="text-align:center;margin-top:14px;margin-bottom:4px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
-    <button class="dl-btn" onclick="downloadCard('square')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      正方形
-    </button>
-    <button class="dl-btn" onclick="downloadCard('portrait')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
-      縦長
-    </button>
-    <button class="dl-btn" onclick="downloadCard('landscape')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
-      横長
-    </button>
+  <!-- カード画像を保存 -->
+  <div class="section" style="margin-top:16px">
+    <div class="section-header">
+      <div class="section-h">カード画像を保存</div>
+      <div class="section-sub">SNSやプロフィールに使えるカード画像</div>
+    </div>
+    <div class="bento" style="padding:20px 18px 18px">
+
+      <!-- 背景色 -->
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.08em;margin-bottom:8px">背景</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <button class="dl-chip on" id="dlBgGrad"  onclick="setDlBg('grad',this)"  >グラデーション</button>
+          <button class="dl-chip"    id="dlBgWhite" onclick="setDlBg('white',this)" >ホワイト</button>
+          <button class="dl-chip"    id="dlBgBlack" onclick="setDlBg('black',this)" >ブラック</button>
+          <button class="dl-chip"    id="dlBgTrans" onclick="setDlBg('trans',this)" >透明（PNG）</button>
+        </div>
+      </div>
+
+      <!-- サイズ -->
+      <div style="margin-bottom:18px">
+        <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.08em;margin-bottom:8px">サイズ</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <button class="dl-chip on" id="dlFmtSq"   onclick="setDlFmt('square',this)"  >正方形</button>
+          <button class="dl-chip"    id="dlFmtPo"   onclick="setDlFmt('portrait',this)">縦長（ストーリー）</button>
+          <button class="dl-chip"    id="dlFmtLa"   onclick="setDlFmt('landscape',this)">横長</button>
+        </div>
+      </div>
+
+      <!-- 保存ボタン -->
+      <div style="display:flex;gap:10px">
+        <button class="dl-save-btn" onclick="downloadCard('front')"
+          style="background:linear-gradient(135deg,#c8a8f0,#7ec8f8);color:#fff">
+          表面を保存
+        </button>
+        <button class="dl-save-btn" onclick="downloadCard('back')"
+          style="background:#fff;color:var(--text2);border:1.5px solid var(--border)">
+          裏面を保存
+        </button>
+      </div>
+
+    </div>
   </div>
 
   <!-- ① 認定情報 -->
@@ -718,7 +749,7 @@ body{
     </div>
 
     <!-- 画像としてシェア -->
-    <a href="#" class="update-card" onclick="downloadCard('square');return false;" style="margin-bottom:10px">
+    <a href="#" class="update-card" onclick="downloadCard('front');return false;" style="margin-bottom:10px">
       <div class="icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -981,7 +1012,7 @@ function copyLink(e){
 }
 
 // ─── Apps Script API URL（Netlifyからデータ取得に使用） ───
-var APPS_SCRIPT_API = 'https://script.google.com/macros/s/AKfycbw21hmuJjLc26WqkgrwnzGtzmpYlaLJf-KjNCtRx8JdM8enphDrwAvr_PbgEkoz3h2t/exec';
+var APPS_SCRIPT_API = 'https://script.google.com/macros/s/AKfycbzWI6EoCkvFV1pfSOf18aewU4FNewrXSPSRFv0sBGk0uThh8fSYsA1_6Z4hoURn5Oqr/exec';
 
 // apply()が使う表示用変数
 var _mName    = '';
@@ -990,6 +1021,19 @@ var _mNoStr   = '';
 var _mEmail   = '';
 var _mAddress = '';
 var _mToken   = '';
+var _dlBg  = 'grad';    // 'grad' | 'white' | 'black' | 'trans'
+var _dlFmt = 'square';  // 'square' | 'portrait' | 'landscape'
+
+function setDlBg(val, el) {
+  _dlBg = val;
+  document.querySelectorAll('#dlBgGrad,#dlBgWhite,#dlBgBlack,#dlBgTrans').forEach(function(b){ b.classList.remove('on'); });
+  el.classList.add('on');
+}
+function setDlFmt(val, el) {
+  _dlFmt = val;
+  document.querySelectorAll('#dlFmtSq,#dlFmtPo,#dlFmtLa').forEach(function(b){ b.classList.remove('on'); });
+  el.classList.add('on');
+}
 
 function initFromMemberData(m) {
   if (!m) { return; }
@@ -1268,20 +1312,60 @@ function _cardRoundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
-function downloadCard(format) {
-  var svgEl = document.querySelector('.card-main svg');
-  if (!svgEl) { showToast('カードが読み込まれていません'); return; }
+function _dlCanvasSize() {
+  var fmt = _dlFmt || 'square';
+  if (fmt === 'portrait')  return { w:1080, h:1920, suffix:'_story' };
+  if (fmt === 'landscape') return { w:1920, h:1080, suffix:'_wide' };
+  return { w:1080, h:1080, suffix:'' };
+}
 
-  // フォーマット別キャンバスサイズ
-  format = format || 'square';
-  var CW, CH, fname;
-  if (format === 'portrait')       { CW = 1080; CH = 1920; fname = 'seedcard_story.png'; }
-  else if (format === 'landscape') { CW = 1920; CH = 1080; fname = 'seedcard_wide.png'; }
-  else                             { CW = 1080; CH = 1080; fname = 'seedcard.png'; }
+function _dlFillBg(ctx, CW, CH) {
+  var bg = _dlBg || 'grad';
+  if (bg === 'white') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,CW,CH); }
+  else if (bg === 'black') { ctx.fillStyle = '#000000'; ctx.fillRect(0,0,CW,CH); }
+  else if (bg === 'trans') { /* transparent — do nothing */ }
+  else {
+    var g = ctx.createLinearGradient(0, 0, CW, CH);
+    g.addColorStop(0, '#c8a8f0'); g.addColorStop(1, '#7ec8f8');
+    ctx.fillStyle = g; ctx.fillRect(0,0,CW,CH);
+  }
+}
 
+function _dlSave(cv, fname) {
+  cv.toBlob(function(pngBlob) {
+    var file = new File([pngBlob], fname, { type:'image/png' });
+    if (navigator.canShare && navigator.canShare({ files:[file] })) {
+      navigator.share({ files:[file], title:'SEED CARD' }).catch(function(){});
+      return;
+    }
+    var dlUrl = URL.createObjectURL(pngBlob);
+    var a = document.createElement('a');
+    a.download = fname; a.href = dlUrl; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(dlUrl); }, 1000);
+    showToast('カード画像を保存しました');
+  }, 'image/png');
+}
+
+function downloadCard(side) {
+  var sz   = _dlCanvasSize();
+  var CW   = sz.w, CH = sz.h;
   var cardW = 820, cardH = Math.round(820 * 214 / 340);
   var cardX = (CW - cardW) / 2;
-  var cardY = (CH - cardH) / 2; // 正確に中央
+  var cardY = (CH - cardH) / 2;
+
+  if (side === 'back') {
+    var cv = document.createElement('canvas');
+    cv.width = CW; cv.height = CH;
+    var ctx = cv.getContext('2d');
+    _dlFillBg(ctx, CW, CH);
+    _drawCardBack(ctx, cardX, cardY, cardW, cardH);
+    _dlSave(cv, 'seedcard_back' + sz.suffix + '.png');
+    return;
+  }
+
+  // 表面
+  var svgEl = document.querySelector('.card-main svg');
+  if (!svgEl) { showToast('カードが読み込まれていません'); return; }
 
   var svgStr = new XMLSerializer().serializeToString(svgEl);
   if (svgStr.indexOf('xmlns=') < 0) svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
@@ -1289,7 +1373,7 @@ function downloadCard(format) {
     return '<svg' + attrs.replace(/\s*(?:width|height)="[^"]*"/g, '') + ' width="' + cardW + '" height="' + cardH + '">';
   });
 
-  var svgBlob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  var svgBlob = new Blob([svgStr], { type:'image/svg+xml;charset=utf-8' });
   var svgUrl  = URL.createObjectURL(svgBlob);
   var img = new Image();
   img.onload = function() {
@@ -1297,12 +1381,7 @@ function downloadCard(format) {
     cv.width = CW; cv.height = CH;
     var ctx = cv.getContext('2d');
 
-    // 背景グラデーション（SEED CARDグラデーション）
-    var bg = ctx.createLinearGradient(0, 0, CW, CH);
-    bg.addColorStop(0, '#c8a8f0');
-    bg.addColorStop(1, '#7ec8f8');
-    ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, CW, CH);
+    _dlFillBg(ctx, CW, CH);
 
     // カード影
     ctx.save();
@@ -1314,35 +1393,100 @@ function downloadCard(format) {
     ctx.fill();
     ctx.restore();
 
-    // カード本体
     ctx.drawImage(img, cardX, cardY, cardW, cardH);
     URL.revokeObjectURL(svgUrl);
 
-    // 下部テキスト（協会名トグルがONのときのみ）
-    if(state.org){
+    if (state.org) {
       ctx.fillStyle = 'rgba(134,134,139,0.7)';
       ctx.font = '400 26px Helvetica Neue, Arial, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('一般社団法人 日本精子協会', CW / 2, cardY + cardH + 68);
     }
 
-    cv.toBlob(function(pngBlob) {
-      var file = new File([pngBlob], fname, { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: 'SEED CARD' }).catch(function() {});
-        return;
-      }
-      var dlUrl = URL.createObjectURL(pngBlob);
-      var a = document.createElement('a');
-      a.download = fname;
-      a.href = dlUrl;
-      a.click();
-      setTimeout(function() { URL.revokeObjectURL(dlUrl); }, 1000);
-      showToast('カード画像を保存しました');
-    }, 'image/png');
+    _dlSave(cv, 'seedcard' + sz.suffix + '.png');
   };
   img.onerror = function() { URL.revokeObjectURL(svgUrl); showToast('画像の生成に失敗しました'); };
   img.src = svgUrl;
+}
+
+function _drawCardBack(ctx, x, y, w, h) {
+  var r = 26;
+  // カード背景
+  ctx.save();
+  ctx.shadowColor = 'rgba(155,135,214,0.22)';
+  ctx.shadowBlur  = 60;
+  ctx.shadowOffsetY = 20;
+  _cardRoundRect(ctx, x, y, w, h, r);
+  var bg = ctx.createLinearGradient(x, y, x+w, y+h);
+  bg.addColorStop(0, '#f7f3ff');
+  bg.addColorStop(1, '#eaf6ff');
+  ctx.fillStyle = bg;
+  ctx.fill();
+  ctx.restore();
+
+  // 枠線
+  ctx.save();
+  _cardRoundRect(ctx, x, y, w, h, r);
+  ctx.strokeStyle = 'rgba(155,135,214,0.18)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.restore();
+
+  var cx = x + w/2;
+
+  // ロゴ文字
+  ctx.save();
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#9b87d6';
+  ctx.font = '700 28px Helvetica Neue, Arial, sans-serif';
+  ctx.letterSpacing = '6px';
+  ctx.fillText('SEED CARD', cx, y + h * 0.22);
+  ctx.restore();
+
+  // 磁気ストライプ風帯
+  var stripeY = y + h * 0.34;
+  var stripeH = h * 0.13;
+  ctx.save();
+  ctx.fillStyle = 'rgba(155,135,214,0.13)';
+  ctx.fillRect(x, stripeY, w, stripeH);
+  ctx.restore();
+
+  // 署名欄
+  var sigY = y + h * 0.56;
+  var sigH = h * 0.12;
+  var sigX = x + w * 0.06;
+  var sigW = w * 0.88 * 0.55;
+  ctx.save();
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  _cardRoundRect(ctx, sigX, sigY, sigW, sigH, 6);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(155,135,214,0.2)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.fillStyle = '#9b87d6';
+  ctx.font = '500 14px Helvetica Neue, Arial, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('SIGNATURE', sigX + 12, sigY + sigH * 0.38);
+  ctx.restore();
+
+  // 会員名・番号
+  ctx.save();
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#3a3a3c';
+  ctx.font = '600 20px Helvetica Neue, Arial, sans-serif';
+  ctx.fillText(_mRomaji || _mName, x + w*0.06, y + h * 0.8);
+  ctx.fillStyle = '#9b87d6';
+  ctx.font = '500 13px Helvetica Neue, Arial, sans-serif';
+  ctx.fillText(_mNoStr, x + w*0.06, y + h * 0.88);
+  ctx.restore();
+
+  // 協会名（右下）
+  ctx.save();
+  ctx.textAlign = 'right';
+  ctx.fillStyle = 'rgba(134,134,139,0.55)';
+  ctx.font = '400 11px Helvetica Neue, Arial, sans-serif';
+  ctx.fillText('一般社団法人 日本精子協会', x + w - w*0.06, y + h * 0.88);
+  ctx.restore();
 }
 
 function logout() {
@@ -1395,147 +1539,3 @@ function requestEmailChange() {
     });
 }
 
-// ─── 発送先住所変更 ───
-function requestAddressChange() {
-  var postal   = document.getElementById('newPostalInput').value.trim().replace(/[-－ー]/g, '');
-  var address  = document.getElementById('newAddressInput').value.trim();
-  var msgEl    = document.getElementById('addressChangeMsg');
-  var btn      = document.getElementById('addressChangeBtn');
-
-  if (!address) { _showSettingsMsg(msgEl, 'err', '住所を入力してください。'); return; }
-  if (!_mToken) { _showSettingsMsg(msgEl, 'err', _needLoginHtml); return; }
-
-  btn.disabled = true;
-  btn.textContent = '更新中…';
-  fetch(APPS_SCRIPT_API + '?action=updateaddress&t=' + encodeURIComponent(_mToken)
-    + '&postal=' + encodeURIComponent(postal)
-    + '&address=' + encodeURIComponent(address))
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.success) {
-        _showSettingsMsg(msgEl, 'ok', '住所を更新しました。');
-        btn.textContent = '更新しました';
-        _mAddress = address;
-        var el = document.getElementById('currentAddressDisplay');
-        if (el) el.textContent = (postal ? postal + ' ' : '') + address;
-      } else {
-        _showSettingsMsg(msgEl, 'err', '更新に失敗しました。しばらくしてからお試しください。');
-        btn.disabled = false; btn.textContent = '住所を更新する';
-      }
-    })
-    .catch(function() {
-      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
-      btn.disabled = false; btn.textContent = '住所を更新する';
-    });
-}
-
-// ─── 更新申請モーダル ───
-function openRenewModal() {
-  document.getElementById('renewModal').style.display = 'block';
-  document.body.style.overflow = 'hidden';
-}
-function closeRenewModal() {
-  document.getElementById('renewModal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-var _renewPhotoB64  = '';
-var _renewPhotoName = '';
-
-function handleRenewPhoto(input) {
-  if (!input.files || !input.files[0]) return;
-  var file = input.files[0];
-  _renewPhotoName = file.name;
-  document.getElementById('renewPhotoName').textContent = file.name;
-  document.getElementById('renewPhotoLabel').style.borderColor = 'var(--accent)';
-  var reader = new FileReader();
-  reader.onload = function(ev) { _renewPhotoB64 = (ev.target.result || '').split(',')[1] || ''; };
-  reader.readAsDataURL(file);
-}
-
-function submitRenewApply() {
-  var btn   = document.getElementById('renewSubmitBtn');
-  var msgEl = document.getElementById('renewMsg');
-  if (!_mToken) { _showSettingsMsg(msgEl, 'err', 'カードURLからアクセスし直してください。'); return; }
-  btn.disabled = true; btn.style.opacity = '.6'; btn.textContent = '送信中…';
-  var vol   = document.getElementById('renewVol')   ? document.getElementById('renewVol').value   : '';
-  var conc  = document.getElementById('renewConc')  ? document.getElementById('renewConc').value  : '';
-  var total = document.getElementById('renewTotal') ? document.getElementById('renewTotal').value : '';
-  var morph = document.getElementById('renewMorph') ? document.getElementById('renewMorph').value : '';
-  var body = 'action=submitrenewbytoken'
-    + '&t='           + encodeURIComponent(_mToken)
-    + '&volume='      + encodeURIComponent(vol)
-    + '&concentration='+ encodeURIComponent(conc)
-    + '&total='       + encodeURIComponent(total)
-    + '&morphology='  + encodeURIComponent(morph)
-    + '&photoData='   + encodeURIComponent(_renewPhotoB64)
-    + '&photoName='   + encodeURIComponent(_renewPhotoName || 'photo.jpg');
-  fetch(APPS_SCRIPT_API, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body })
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.ok) {
-        _showSettingsMsg(msgEl, 'ok', '更新申請を受け付けました。審査後にメールでご連絡いたします。');
-        btn.textContent = '申請済み';
-      } else {
-        _showSettingsMsg(msgEl, 'err', d.error || '申請に失敗しました。');
-        btn.disabled = false; btn.style.opacity = '1'; btn.textContent = '申請する（¥10,000）';
-      }
-    })
-    .catch(function() {
-      _showSettingsMsg(msgEl, 'err', '通信エラーが発生しました。');
-      btn.disabled = false; btn.style.opacity = '1'; btn.textContent = '申請する（¥10,000）';
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  var params = new URLSearchParams(window.location.search);
-  var token  = params.get('t') || '';
-  var magic  = params.get('magic') || '';
-
-  // メールアドレス変更確認リンク
-  var emailChange = params.get('emailchange') || '';
-  if (emailChange) {
-    history.replaceState(null, '', '/');
-    fetch(APPS_SCRIPT_API + '?action=confirmemailchange&token=' + encodeURIComponent(emailChange))
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        if (d.success) {
-          localStorage.removeItem('sc_magic');
-          alert('メールアドレスを ' + d.newEmail + ' に変更しました。\n再ログインしてください。');
-          window.location.replace('/portal.html');
-        } else {
-          alert('変更リンクが無効または期限切れです。再度お試しください。');
-          window.location.replace('/');
-        }
-      });
-    return;
-  }
-
-  if (token) {
-    // NFCタップ or 直リンク → カードトークンで表示（ログイン不要）
-    _mToken = token;
-    loadByToken(token);
-    return;
-  }
-
-  if (magic) {
-    // マジックリンクメールから来た場合
-    history.replaceState(null, '', '/');
-    loadByMagic(magic);
-    return;
-  }
-
-  // localStorageにセッションが残っていれば再利用
-  var saved = localStorage.getItem('sc_magic');
-  if (saved) {
-    loadByMagic(saved);
-    return;
-  }
-
-  // 未ログイン → ログインページへ
-  window.location.replace('/portal.html');
-});
-</script>
-
-</body>
-</html>
