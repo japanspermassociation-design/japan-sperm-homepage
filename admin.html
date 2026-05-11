@@ -627,8 +627,8 @@ function photoBlock(url){
 function spermGrid(r){
   return '<div class="sperm-grid">'
     +si('精液量',   r.volume,        'mL',   WHO.volume)
-    +si('精子濃度', r.concentration, '万/mL', '1,600')
-    +si('総精子数', r.total,         '万',    '3,900')
+    +si('精子濃度', r.concentration, '万/mL', 1600)
+    +si('総精子数', r.total,         '万',    3900)
     +si('正常形態率',r.morphology,   '%',    WHO.morphology)
   +'</div>';
 }
