@@ -619,17 +619,16 @@ function toggleForgot() {
   document.getElementById('forgotToggleBtn').textContent = open ? '会員番号で照会する' : '閉じる';
 }
 function sendForgotEmail() {
-  var no = document.getElementById('forgotNo').value.trim().replace(/^0+/,'');
+  var no = document.getElementById('forgotNo').value.trim().replace(/[^0-9]/g,'');
   if (!no) { showLMsg('forgotMsg','error','会員番号を入力してください。'); return; }
   var btn = document.getElementById('forgotSendBtn');
   btn.disabled = true; btn.textContent = '照会中…'; clearLMsg('forgotMsg');
-  get({ action:'sendmagicbymemberno', memberNo:no }).then(function(d){
+  get({ action:'notifyregisteredemail', memberNo:no }).then(function(d){
     btn.disabled = false;
-    if (d.ok || d.success) { showLMsg('forgotMsg','success','登録メールアドレスにログインリンクを送信しました。'); btn.textContent = '送信しました'; }
-    else if (d.error==='not_found') { showLMsg('forgotMsg','error','この会員番号は登録されていません。'); btn.textContent = 'ログインリンクを送信'; }
-    else if (d.error==='no_card_yet') { showLMsg('forgotMsg','error','カードはまだ発行されていません。審査結果はメールでお知らせします。'); btn.textContent = 'ログインリンクを送信'; }
-    else { showLMsg('forgotMsg','error','送信に失敗しました。'); btn.textContent = 'ログインリンクを送信'; }
-  }).catch(function(){ btn.disabled=false; btn.textContent='ログインリンクを送信'; showLMsg('forgotMsg','error','通信エラーが発生しました。'); });
+    if (d.ok) { showLMsg('forgotMsg','success','登録されているメールアドレス宛に確認メールを送信しました。受信トレイをご確認ください。'); btn.textContent = '送信しました'; }
+    else if (d.error==='not_found') { showLMsg('forgotMsg','error','この会員番号は登録されていません。'); btn.textContent = '確認メールを送信'; }
+    else { showLMsg('forgotMsg','error','送信に失敗しました。しばらくしてからお試しください。'); btn.textContent = '確認メールを送信'; }
+  }).catch(function(){ btn.disabled=false; btn.textContent='確認メールを送信'; showLMsg('forgotMsg','error','通信エラーが発生しました。'); });
 }
 
 function toggleForgotNo() {
